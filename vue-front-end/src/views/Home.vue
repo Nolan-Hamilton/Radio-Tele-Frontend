@@ -35,8 +35,10 @@
           </v-card-title>
         </v-card>
         <!-- Added Live Image of Radio Telescope -->
-        <div class="headline">Radio Telescope Live Image</div>
-        <v-img src="..\public\YCAS2018b_nobackground.png" height="600px" contain="true"></v-img> <!-- use the "contin" property to avoid cropping img -->
+        <v-card>
+          <div class="headline">Radio Telescope Live Image</div>
+          <v-img src="..\public\YCAS2018b_nobackground.png" height="600px" contain="true"></v-img> <!-- use the "contin" property to avoid cropping img -->
+        </v-card>
     </v-parallax>
 </div>
 </template>
