@@ -34,9 +34,9 @@
             </div>
           </v-card-title>
         </v-card>
-        <div class="align-middle">
-            <v-img src="..\public\YCAS2018b_nobackground.png" height="100px" width="100px" position="center" class="card-img-middle"></v-img>
-        </div>
+        <!-- Added Live Image of Radio Telescope -->
+        <div class="headline">Radio Telescope Live Image</div>
+        <v-img src="..\public\YCAS2018b_nobackground.png" height="600px" contain="true"></v-img> <!-- use the "contin" property to avoid cropping img -->
     </v-parallax>
 </div>
 </template>
