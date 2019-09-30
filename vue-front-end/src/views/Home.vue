@@ -34,10 +34,10 @@
             </div>
           </v-card-title>
         </v-card>
+        <div class="align-middle">
+            <v-img src="..\public\YCAS2018b_nobackground.png" height="100px" width="100px" position="center" class="card-img-middle"></v-img>
+        </div>
     </v-parallax>
-    <div class="align-middle">
-        <v-img src="..\public\YCAS2018b_nobackground.png" height="100px" width="100px" position="center" class="card-img-middle"></v-img>
-    </div>
 </div>
 </template>
 
