@@ -351,7 +351,7 @@ export default {
           isPublic: !this.appointmentObj.privacy.value,
           hours: this.appointmentObj.rightAscension.hours,
           minutes: this.appointmentObj.rightAscension.minutes,
-          seconds: 0, // this.appointmentObj.rightAscension.seconds,
+          // seconds: 0, // this.appointmentObj.rightAscension.seconds,
           declination: this.appointmentObj.declination.value
         });
       } else if (this.appointmentObj.type === "Celestial Body") {
@@ -500,7 +500,7 @@ export default {
             return(
                 this.appointmentObj.rightAscension.hours &&
                 this.appointmentObj.rightAscension.minutes &&
-                0 && // this.appointmentObj.rightAscension.seconds &&
+                // 0 && // this.appointmentObj.rightAscension.seconds &&
                 this.appointmentObj.declination.value &&
                 this.appointmentObj.start.value &&
                 this.appointmentObj.end.value 
@@ -515,12 +515,12 @@ export default {
             return(
                 this.appointmentObj.coordinate1.hours &&
                 this.appointmentObj.coordinate1.minutes &&
-                0 && // this.appointmentObj.coordinate1.seconds &&
+                // 0 && // this.appointmentObj.coordinate1.seconds &&
                 this.appointmentObj.coordinate1.declination &&
 
                 this.appointmentObj.coordinate2.hours &&
                 this.appointmentObj.coordinate2.minutes &&
-                0 && // this.appointmentObj.coordinate2.seconds &&
+                // 0 && // this.appointmentObj.coordinate2.seconds &&
                 this.appointmentObj.coordinate2.declination &&
 
                 this.appointmentObj.start.value &&

@@ -562,7 +562,7 @@ export default {
                 isPublic: !this.form.isPrivate.value,
                 hours: this.form.rightAscension.hours,
                 minutes: this.form.rightAscension.minutes,
-                seconds: 0, // this.form.rightAscension.seconds,
+                // seconds: 0, // this.form.rightAscension.seconds,
                 declination: this.form.declination.value,
                 celestialBodyId: this.selectedBody,
                 azimuth: this.form.azimuth.value,
@@ -704,7 +704,7 @@ export default {
                     this.endDate &&
                     this.form.rightAscension.hours,
                     this.form.rightAscension.minutes,
-                    0, // this.form.rightAscension.seconds,
+                    // 0, // this.form.rightAscension.seconds,
                     this.form.declination.value
                 )
             }
@@ -723,12 +723,12 @@ export default {
                 return (
                     this.form.firstCoordinate.hours,
                     this.form.firstCoordinate.minutes,
-                    0, // this.form.firstCoordinate.seconds,
+                    // 0, // this.form.firstCoordinate.seconds,
                     this.form.firstCoordinate.rightAscension,
                     this.form.firstCoordinate.declination,
                     this.form.secondCoordinate.hours,
                     this.form.secondCoordinate.minutes,
-                    0, // this.form.secondCoordinate.seconds,
+                    // 0, // this.form.secondCoordinate.seconds,
                     this.form.secondCoordinate.rightAscension,
                     this.form.secondCoordinate.declination
                 )
