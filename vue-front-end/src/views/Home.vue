@@ -38,9 +38,7 @@
             Radio Telescope Live Image
           </v-card-text>
           <v-img src="..\public\YCAS2018b_nobackground.png" height="600px" contain="true"></v-img> <!-- use the "contin" property to avoid cropping img -->
-          <v-card-action>
-            <v-btn v-on:click="updateImage" outlined>Update</v-btn>
-          </v-card-action>
+          <v-btn v-on:click="updateImage" outlined>Update</v-btn>
         </v-card>
     </v-parallax>
 </div>
