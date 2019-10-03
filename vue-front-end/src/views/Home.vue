@@ -39,7 +39,7 @@
           </v-card-text>
           <v-img src="..\public\YCAS2018b_nobackground.png" height="600px" contain="true"></v-img> <!-- use the "contin" property to avoid cropping img -->
           <v-card-action>
-            <v-btn outlined>Update</v-btn>
+            <v-btn v-on:click="updateImage" outlined>Update</v-btn>
           </v-card-action>
         </v-card>
     </v-parallax>
@@ -95,7 +95,12 @@ export default {
         }).then(response => {
             router.push('/')
         });
-      }
+      },
+      updateImage() {
+        //Retieve the must up-to-date-image of the radiotelescope.
+        console.log("Updating RT Image!");
+        
+      } 
   },
   mounted() {
     // Handle the log in when the DOM is loaded
