@@ -37,8 +37,10 @@
           <v-card-text class="headline">
             Radio Telescope Live Image
           </v-card-text>
-          <v-img src="..\public\YCAS2018b_nobackground.png" height="600px" contain="true"></v-img> <!-- use the "contin" property to avoid cropping img -->
-          <v-btn v-on:click="updateImage" outlined>Update</v-btn>
+          <!--use the "contin" property to avoid cropping img-->
+          <!-- <v-img id="RadioTeleImage" v-bind:src="updateImage()" height="600px" contain="true"></v-img>  -->
+          <div id="imageDiv"></div>
+          <v-btn v-on:click="updateImage()" outlined>Update</v-btn>
         </v-card>
     </v-parallax>
 </div>
@@ -94,16 +96,37 @@ export default {
             router.push('/')
         });
       },
-      updateImage() {
-        //Retieve the must up-to-date-image of the radiotelescope.
+      updateImage() { // You need to run 'src/assets/RTImageGenerator.bat' script!
+        //Retieve the most up-to-date image of the radiotelescope.
         console.log("Updating RT Image!");
-        
-      } 
+
+        var timestring = Date.now();
+        var today = new Date();
+        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        var time = today.getHours() + "-" + today.getMinutes() + "-" + today.getSeconds();
+        var fileName = "ImageOutput-" + time + ".png";
+        var filepath = "src/assets/" + fileName;
+        console.log(filepath);
+
+        if (document.getElementById('imageDiv').childElementCount == 0){
+          console.log("No Children...");
+          var img = document.createElement("IMG");
+          img.src = filepath;
+          document.getElementById('imageDiv').appendChild(img);
+        }else{
+          console.log("Replacing existing image...")
+          document.getElementById('imageDiv').firstElementChild.remove();
+          var img = document.createElement("IMG");
+          img.src = filepath;
+          document.getElementById('imageDiv').appendChild(img);
+        }
+      }
   },
   mounted() {
     // Handle the log in when the DOM is loaded
     this.handleLoggedIn();
-    this.$store.commit("updateInfo", {page: "Home", info: "Welcome to the York County Astronomical Society\n Radio Telescope application!"})
+    this.$store.commit("updateInfo", {page: "Home", info: "Welcome to the York County Astronomical Society\n Radio Telescope application!"});
+    this.updateImage();   // Load the initial image of RT
   }
 };
 </script>
