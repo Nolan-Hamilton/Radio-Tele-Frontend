@@ -37,9 +37,8 @@
           <v-card-text class="headline">
             Radio Telescope Live Image
           </v-card-text>
-          <!--use the "contin" property to avoid cropping img-->
-          <!-- <v-img id="RadioTeleImage" v-bind:src="updateImage()" height="600px" contain="true"></v-img>  -->
-          <div id="imageDiv"></div>
+          <!--use the "contain" property to avoid cropping img-->
+          <v-img id="RadioTeleImage" v-bind:src="imageSrc" height="600px" contain="true"></v-img> 
           <v-btn v-on:click="updateImage()" outlined>Update</v-btn>
         </v-card>
     </v-parallax>
@@ -57,7 +56,8 @@ export default {
   name: "Home",
   data() {
     return {
-      show: false
+      show: false,
+      imageSrc: ''
     };
   },
   components: {
@@ -100,26 +100,12 @@ export default {
         //Retieve the most up-to-date image of the radiotelescope.
         console.log("Updating RT Image!");
 
-        var timestring = Date.now();
         var today = new Date();
-        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
         var time = today.getHours() + "-" + today.getMinutes() + "-" + today.getSeconds();
         var fileName = "ImageOutput-" + time + ".png";
         var filepath = "src/assets/" + fileName;
         console.log(filepath);
-
-        if (document.getElementById('imageDiv').childElementCount == 0){
-          console.log("No Children...");
-          var img = document.createElement("IMG");
-          img.src = filepath;
-          document.getElementById('imageDiv').appendChild(img);
-        }else{
-          console.log("Replacing existing image...")
-          document.getElementById('imageDiv').firstElementChild.remove();
-          var img = document.createElement("IMG");
-          img.src = filepath;
-          document.getElementById('imageDiv').appendChild(img);
-        }
+        this.imageSrc = filepath;
       }
   },
   mounted() {
