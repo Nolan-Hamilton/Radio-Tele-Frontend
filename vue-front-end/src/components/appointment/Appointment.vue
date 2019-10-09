@@ -710,17 +710,29 @@ export default {
             }
             else if(this.type == 'Celestial Body') {
                 return (
+                    this.startTime &&
+                    this.endTime &&
+                    this.startDate &&
+                    this.endDate &&
                     this.selectedBody
                 )
             }
             else if(this.type == 'Drift Scan') {
                 return (
+                    this.startTime &&
+                    this.endTime &&
+                    this.startDate &&
+                    this.endDate &&
                     this.form.elevation.value,
                     this.form.azimuth.value
                 )
             }
             else if(this.type == 'Raster Scan') {
                 return (
+                    this.startTime &&
+                    this.endTime &&
+                    this.startDate &&
+                    this.endDate &&
                     this.form.firstCoordinate.hours,
                     this.form.firstCoordinate.minutes,
                     // 0, // this.form.firstCoordinate.seconds,
