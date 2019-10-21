@@ -12,6 +12,7 @@ import Home from './views/Home'
 import RFData from './views/Appointment/RFData'
 import ResetPassword from './views/User/ResetPassword'
 import UnderConstruction from './views/UnderConstruction'
+import SkyviewConstruction from './views/SkyviewConstruction'
 import CompletedAppointments from './views/Appointment/CompletedAppointments'
 import FutureAppointments from './views/Appointment/FutureAppointments'
 import UpdateEmail from './views/User/UpdateEmail'
@@ -93,6 +94,11 @@ const router = new Router({
       path: '/underConstruction',
       name: 'underConstruction',
       component: UnderConstruction  
+    },
+    {
+      path: '/SkyviewConstruction',
+      name: 'SkyviewConstruction',
+      component: SkyviewConstruction  
     },
     {
       path: '/users/:userId/appointments/completed',
