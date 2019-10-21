@@ -44,7 +44,7 @@
                         width="175"
                         ></v-time-picker>
                     </v-flex> 
-                    <v-flex xs12 sm3 v-if="type === 'Point'">
+                    <v-flex xs12 sm4 v-if="type === 'Point'">
                         <v-text-field
                         v-model="form.rightAscension.hours"
                         :rules="[rules.rightAscHours]"
@@ -62,7 +62,7 @@
                      <!--
                         Same as Right Ascension Hours, except checks for minutes error handling
                     -->
-                    <v-flex xs12 sm3 v-if="type === 'Point'">
+                    <v-flex xs12 sm4 v-if="type === 'Point'">
                         <v-text-field
                         v-model="form.rightAscension.minutes"
                         :rules="[rules.rightAscMinutes]"
@@ -77,7 +77,7 @@
                         required
                         ></v-text-field>
                      </v-flex>
-                    <v-flex xs12 sm3 v-if="type === 'Point'">
+                    <v-flex xs12 sm4 v-if="type === 'Point'">
                         <v-text-field
                         v-model="form.declination.value"
                         :rules="[rules.numRequired]"
