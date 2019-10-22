@@ -170,5 +170,8 @@ export default {
     },
     feedback(data) {
       return axios.post(baseUrl + "feedback", data, Headers.retrieveHeaders());
+    },
+    visualize() {
+      return axios.get("https://localhost:5001/api/skyview");
     }
 }

@@ -399,6 +399,8 @@
                     <!-- Cancel resets form and closes Modal -->
                     <v-btn flat @click="resetForm">Cancel</v-btn>
                     <v-spacer></v-spacer>
+                    <v-btn flat @click="visualize">Visualize</v-btn>
+                    <v-spacer></v-spacer>
                     <!-- Submit sends the form to backend to be verified -->
                     <v-btn
                     :disabled="!formIsValid"
@@ -473,6 +475,8 @@ export default {
             startTime: '',
             endDate: '',
             endTime: '',
+            showImage: 'no',
+            imageSrc: 'https://ak8.picdn.net/shutterstock/videos/13288688/thumb/1.jpg',
 
             // Variables to keep track of chosen Appointment type
             type: 'Point',
@@ -540,6 +544,29 @@ export default {
             this.clearErrors();
             this.$emit('close-modal');
         },
+        // shows the skyview
+        visualize() {
+            this.showImage = "yes";
+            ApiDriver.visualize();
+
+            var today = new Date();
+            var time = today.getFullYear() + "-" + (today.getMonth()+1) + "-" +  (today.getDay()+20) + "-" + today.getHours() + "-" + today.getMinutes();
+
+            // this.imageSrc0 = "src/assets/skyview/SkyViewAPI/SkyViewAPI/bin/Debug/netcoreapp3.0/images/skyview-2019-10-22-" + 0 + "-" + 0 +"-0-0-0-0-0.png";
+            this.imageSrc = "src/assets/skyview/SkyViewAPI/SkyViewAPI/bin/Debug/netcoreapp3.0/images/skyview-" + time + "--76-40-395-0-0.png";
+
+            // TODO: pull image from API
+            /*
+            $.ajax({
+                type: 'POST',
+                url: 'C:/Users/Marie Kiley/Documents/RT-Workspace/SkyviewAPIWork/AAAPI/AAAPI/bin/Debug/netcoreapp3.0/AAAPI.dll/SaveImage',
+                data: JSON.stringify(),
+                success: function(data) {
+                    onSuccess(data);
+                }
+            });
+            */
+        }, 
         // Method to submit to back end
         submit() {
             // Clears the errors first to make sure that if backend sends back any errors we only display the current errors

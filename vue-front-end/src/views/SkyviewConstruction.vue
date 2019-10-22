@@ -127,8 +127,8 @@
                     >Schedule</v-btn>
                 </v-card-actions>
             </v-form>
-            <img class="image-style" v-bind:src="imageSrc0" v-if="showImage === 'yes'"> 
-            <img class="image-style" v-bind:src="imageSrc1" v-if="showImage === 'yes'">
+            <!-- <img class="image-style" v-bind:src="imageSrc0" v-if="showImage === 'yes'"> -->
+            <img class="image-style" v-bind:src="imageSrc" v-if="showImage === 'yes'">
         </v-card>
     </v-app>
 </template>
@@ -141,6 +141,7 @@ import CurrentUserValidation from '../utils/CurrentUserValidation'
 import router from '../router';
 import CustomErrorHandler from '../utils/CustomErrorHandler.js';
 import NavigationBar from "../components/utility/NavigationBar.vue";
+import Axios from 'axios'
 export default {
     title: "Radio Telescope 1.1.0",
     name: "TestPage",
@@ -167,8 +168,8 @@ export default {
             endDate: '',
             endTime: '',
             showImage: 'no',
-            imageSrc0: 'https://ak8.picdn.net/shutterstock/videos/13288688/thumb/1.jpg',
-            imageSrc1: 'https://ak8.picdn.net/shutterstock/videos/13288688/thumb/1.jpg',
+            // imageSrc0: 'https://ak8.picdn.net/shutterstock/videos/13288688/thumb/1.jpg',
+            imageSrc: 'https://ak8.picdn.net/shutterstock/videos/13288688/thumb/1.jpg',
 
             // Variables to keep track of chosen Appointment type
             type: 'Point',
@@ -214,8 +215,13 @@ export default {
         },
         visualize() {
             this.showImage = "yes";
-            this.imageSrc0 = "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg";
-            this.imageSrc1 = "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg";
+            ApiDriver.visualize();
+
+            var today = new Date();
+            var time = today.getFullYear() + "-" + (today.getMonth()+1) + "-" +  (today.getDay()+20) + "-" + today.getHours() + "-" + today.getMinutes();
+
+            // this.imageSrc0 = "src/assets/skyview/SkyViewAPI/SkyViewAPI/bin/Debug/netcoreapp3.0/images/skyview-2019-10-22-" + 0 + "-" + 0 +"-0-0-0-0-0.png";
+            this.imageSrc = "src/assets/skyview/SkyViewAPI/SkyViewAPI/bin/Debug/netcoreapp3.0/images/skyview-" + time + "--76-40-395-0-0.png";
 
             // TODO: pull image from API
             /*
