@@ -33,6 +33,13 @@
               </v-card-text>
             </div>
           </v-card-title>
+          <!-- Added Live Image of Radio Telescope -->
+          <v-card-text class="headline">
+            Radio Telescope Live Image
+          </v-card-text>
+          <!--use the "contain" property to avoid cropping img-->
+          <v-img id="RadioTeleImage" v-bind:src="imageSrc" :height="imgHeight" @error="collapseImg()" contain="true"></v-img> 
+          <v-btn v-on:click="updateImage()" outlined>Update</v-btn>
         </v-card>
     </v-parallax>
 </div>
@@ -49,7 +56,9 @@ export default {
   name: "Home",
   data() {
     return {
-      show: false
+      show: false,
+      imageSrc: '',
+      imgHeight: '600px'
     };
   },
   components: {
@@ -87,12 +96,27 @@ export default {
         }).then(response => {
             router.push('/')
         });
+      },
+      updateImage() { // You need to run 'src/assets/RTImageGenerator.bat' script!
+        //Retieve the most up-to-date image of the radiotelescope.
+        console.log("Updating RT Image!");
+        this.imgHeight = "600px";
+        var today = new Date();
+        var time = today.getHours() + "-" + today.getMinutes() + "-" + today.getSeconds();
+        var fileName = "ImageOutput-" + time + ".png";
+        var filepath = "src/assets/" + fileName;
+        console.log(filepath);
+        this.imageSrc = filepath;
+      },
+      collapseImg() {
+        this.imgHeight = "0px";
       }
   },
   mounted() {
     // Handle the log in when the DOM is loaded
     this.handleLoggedIn();
-    this.$store.commit("updateInfo", {page: "Home", info: "Welcome to the York County Astronomical Society\n Radio Telescope application!"})
+    this.$store.commit("updateInfo", {page: "Home", info: "Welcome to the York County Astronomical Society\n Radio Telescope application!"});
+    this.updateImage();   // Load the initial image of RT
   }
 };
 </script>
