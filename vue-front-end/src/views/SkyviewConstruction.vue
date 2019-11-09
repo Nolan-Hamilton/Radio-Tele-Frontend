@@ -222,6 +222,7 @@ export default {
 
             // this.imageSrc0 = "src/assets/skyview/SkyViewAPI/SkyViewAPI/bin/Debug/netcoreapp3.0/images/skyview-2019-10-22-" + 0 + "-" + 0 +"-0-0-0-0-0.png";
             this.imageSrc = "src/assets/skyview/SkyViewAPI/SkyViewAPI/bin/Debug/netcoreapp3.0/images/skyview-" + time + "--76-40-395-0-0.png";
+                        //   src\assets\skyview\SkyViewAPI\SkyViewAPI\bin\Debug\netcoreapp3.0\images\
 
             // TODO: pull image from API
             /*
