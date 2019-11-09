@@ -38,7 +38,7 @@
             Radio Telescope Live Image
           </v-card-text>
           <!--use the "contain" property to avoid cropping img-->
-          <v-img id="RadioTeleImage" v-bind:src="imageSrc" height="600px" contain="true"></v-img> 
+          <v-img id="RadioTeleImage" v-bind:src="imageSrc" :height="imgHeight" @error="collapseImg()" contain="true"></v-img> 
           <v-btn v-on:click="updateImage()" outlined>Update</v-btn>
         </v-card>
     </v-parallax>
@@ -57,7 +57,8 @@ export default {
   data() {
     return {
       show: false,
-      imageSrc: ''
+      imageSrc: '',
+      imgHeight: '600px'
     };
   },
   components: {
@@ -99,13 +100,16 @@ export default {
       updateImage() { // You need to run 'src/assets/RTImageGenerator.bat' script!
         //Retieve the most up-to-date image of the radiotelescope.
         console.log("Updating RT Image!");
-
+        this.imgHeight = "600px";
         var today = new Date();
         var time = today.getHours() + "-" + today.getMinutes() + "-" + today.getSeconds();
         var fileName = "ImageOutput-" + time + ".png";
         var filepath = "src/assets/" + fileName;
         console.log(filepath);
         this.imageSrc = filepath;
+      },
+      collapseImg() {
+        this.imgHeight = "0px";
       }
   },
   mounted() {
