@@ -129,16 +129,16 @@ export default {
                 { text: 'Heat Index', sortable: false, value: 'heatIndex' }
             ],
             dbData: [
-                {   id: 1, timeStamp: "2019-10-30 13:00:00", windSpeed: "13", windDirection: "NW", tempF: "76", 
+                {   id: 1, timeStamp: "2019-11-9 13:00:00", windSpeed: "13", windDirection: "NW", tempF: "76", 
                     rainRate: "2.0", rainTotal: "2.0", rainDay: "3.0", pressure: "1.0" ,
                     dewPoint: "72", windChill: "68", heatIndex: "91"},
-                {   id: 2, timeStamp: "2019-10-26 10:30:00", windSpeed: "16", windDirection: "NE", tempF: "78", 
+                {   id: 2, timeStamp: "2019-11-07 10:30:00", windSpeed: "16", windDirection: "NE", tempF: "78", 
                     rainRate: "0.5", rainTotal: "0.9", rainDay: "1.1", pressure: "1.0" ,
                     dewPoint: "61", windChill: "64", heatIndex: "97"},
-                {   id: 3, timeStamp: "2019-10-12 17:00:00", windSpeed: "11", windDirection: "S", tempF: "81", 
+                {   id: 3, timeStamp: "2019-11-01 17:00:00", windSpeed: "11", windDirection: "S", tempF: "81", 
                     rainRate: "1.2", rainTotal: "1.5", rainDay: "2.0", pressure: "1.0" ,
                     dewPoint: "59", windChill: "66", heatIndex: "101"},
-                {   id: 4, timeStamp: "2019-09-18 10:31:00", windSpeed: "24", windDirection: "E", tempF: "75", 
+                {   id: 4, timeStamp: "2019-10-18 10:31:00", windSpeed: "24", windDirection: "E", tempF: "75", 
                     rainRate: "2.9", rainTotal: "3.0", rainDay: "2.0", pressure: "1.0" ,
                     dewPoint: "62", windChill: "44", heatIndex: "98"} 
             ],
