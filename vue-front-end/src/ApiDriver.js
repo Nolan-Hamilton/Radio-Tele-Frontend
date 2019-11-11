@@ -187,5 +187,19 @@ export default {
         "&latitude="+data.latitude+
         "&altitude="+data.altitude, 
       data, Headers.retrieveHeaders());
-    } // this is not how I should be doing it, I should use a Post request with the info in the data.
+    }, // this is not how I should be doing it, I should use a Post request with the info in the data.
+    visible(data) {
+      return axios.get("https://localhost:5001/horizoncheck"+
+        "?year="+data.year+
+        "&month="+data.month+
+        "&day="+data.day+
+        "&hour="+data.hour+
+        "&minute="+data.minute+
+        "&targetRA="+data.targetRA+
+        "&targetDec="+data.targetDec+
+        "&longitude="+data.longitude+
+        "&latitude="+data.latitude+
+        "&altitude="+data.altitude, 
+      data, Headers.retrieveHeaders());
+    }
 }

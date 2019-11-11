@@ -617,13 +617,137 @@ export default {
                 
             }
             else if(this.type == "Celestial Body") {
-                
+                let data0 = {
+                    year:   this.startDate.substring(0, 4), 
+                    month:  this.startDate.substring(5, 7), 
+                    day:    this.startDate.substring(8, 10), 
+                    hour:   this.startTime.substring(0, 2),
+                    minute: this.startTime.substring(3, 5),
+                    targetRA:   0, // TODO: make this the RA of the Celestial Body
+                    targetDec:  0, // TODO: make this the RA of the Celestial Body
+                    longitude: -76.704564,
+                    latitude:  40.024409,
+                    altitude: 395 // TODO: make longitude, latitude, and altitude dependant on the selected telescope.
+                };
+                var call0 = ApiDriver.visualize(data0);
+                // console.log(call);
+                call0
+                    .then(response => {
+                        console.log(response.data);
+                        this.imageSrc0 = "src/assets/RTAstronomicalAPI/images/"+response.data;
+                    })
+                    .catch(error => {console.log(error);});
+
+                let data1 = {
+                    year:   this.endDate.substring(0, 4), 
+                    month:  this.endDate.substring(5, 7), 
+                    day:    this.endDate.substring(8, 10), 
+                    hour:   this.endTime.substring(0, 2),
+                    minute: this.endTime.substring(3, 5),
+                    targetRA:   0, // TODO: make this the RA of the Celestial Body
+                    targetDec:  0, // TODO: make this the RA of the Celestial Body
+                    longitude: -76.704564,
+                    latitude:  40.024409,
+                    altitude: 395 // TODO: make longitude, latitude, and altitude dependant on the selected telescope.
+                };
+                var call1 = ApiDriver.visualize(data1);
+                // console.log(call);
+                call1
+                    .then(response => {
+                        console.log(response.data);
+                        this.imageSrc1 = "src/assets/RTAstronomicalAPI/images/"+response.data;
+                    })
+                    .catch(error => {console.log(error);});
             }
             else if(this.type == "Drift Scan") {
-                
+                let data0 = {
+                    year:   this.startDate.substring(0, 4), 
+                    month:  this.startDate.substring(5, 7), 
+                    day:    this.startDate.substring(8, 10), 
+                    hour:   this.startTime.substring(0, 2),
+                    minute: this.startTime.substring(3, 5),
+                    targetRA:   0, // TODO: make this accept azimuth instead
+                    targetDec:  0, // TODO: make this accept elevation instead
+                    longitude: -76.704564,
+                    latitude:  40.024409,
+                    altitude: 395 // TODO: make longitude, latitude, and altitude dependant on the selected telescope.
+                };
+                var call0 = ApiDriver.visualize(data0);
+                // console.log(call);
+                call0
+                    .then(response => {
+                        console.log(response.data);
+                        this.imageSrc0 = "src/assets/RTAstronomicalAPI/images/"+response.data;
+                    })
+                    .catch(error => {console.log(error);});
+
+                let data1 = {
+                    year:   this.endDate.substring(0, 4), 
+                    month:  this.endDate.substring(5, 7), 
+                    day:    this.endDate.substring(8, 10), 
+                    hour:   this.endTime.substring(0, 2),
+                    minute: this.endTime.substring(3, 5),
+                    targetRA:   0, // TODO: make this accept azimuth instead
+                    targetDec:  0, // TODO: make this accept elevation instead
+                    longitude: -76.704564,
+                    latitude:  40.024409,
+                    altitude: 395 // TODO: make longitude, latitude, and altitude dependant on the selected telescope.
+                };
+                var call1 = ApiDriver.visualize(data1);
+                // console.log(call);
+                call1
+                    .then(response => {
+                        console.log(response.data);
+                        this.imageSrc1 = "src/assets/RTAstronomicalAPI/images/"+response.data;
+                    })
+                    .catch(error => {console.log(error);});
             }
             else if(this.type == "Raster Scan") {
+                // console.log((this.form.firstCoordinate.hours * 15.0 + this.form.firstCoordinate.minutes * 0.25));
+                let data0 = {
+                    year:   this.startDate.substring(0, 4), 
+                    month:  this.startDate.substring(5, 7), 
+                    day:    this.startDate.substring(8, 10), 
+                    hour:   this.startTime.substring(0, 2),
+                    minute: this.startTime.substring(3, 5),
+                    targetRA:   (this.form.firstCoordinate.hours * 15.0 + this.form.firstCoordinate.minutes * 0.25),
+                    targetDec:  this.form.firstCoordinate.declination,
+                    longitude: -76.704564,
+                    latitude:  40.024409,
+                    altitude: 395 // TODO: make longitude, latitude, and altitude dependant on the selected telescope.
+                };
+                var call0 = ApiDriver.visualize(data0);
+                // console.log(call);
+                call0
+                    .then(response => {
+                        console.log(response.data);
+                        this.imageSrc0 = "src/assets/RTAstronomicalAPI/images/"+response.data;
+                    })
+                    .catch(error => {
+                        // console.log("HIT");
+                        console.log(error);
+                    });
 
+                let data1 = {
+                    year:   this.endDate.substring(0, 4), 
+                    month:  this.endDate.substring(5, 7), 
+                    day:    this.endDate.substring(8, 10), 
+                    hour:   this.endTime.substring(0, 2),
+                    minute: this.endTime.substring(3, 5),
+                    targetRA:   (this.form.firstCoordinate.hours * 15.0 + this.form.firstCoordinate.minutes * 0.25),
+                    targetDec:  this.form.firstCoordinate.declination,
+                    longitude: -76.704564,
+                    latitude:  40.024409,
+                    altitude: 395 // TODO: make longitude, latitude, and altitude dependant on the selected telescope.
+                };
+                var call1 = ApiDriver.visualize(data1);
+                // console.log(call);
+                call1
+                    .then(response => {
+                        console.log(response.data);
+                        this.imageSrc1 = "src/assets/RTAstronomicalAPI/images/"+response.data;
+                    })
+                    .catch(error => {console.log(error);});
             }
                 
         }, 
@@ -656,7 +780,7 @@ export default {
                 elevation: this.form.elevation.value,
                 coordinates: this.coordinates,
                 priority: 'PRIMARY' // TODO: make this a selectable option!
-            };
+            }; // does this have the capability for Raster Scans to be submitted?
                         
             // Call appropriate API CALL and send form in json format
             ApiDriver.Appointment.create(JSON.stringify(form), this.selectedType).then((response) => {
