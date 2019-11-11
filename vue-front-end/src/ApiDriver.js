@@ -1,8 +1,8 @@
 const axios = require('axios');
 import Headers from './utils/Headers';
 
-// let baseUrl = "http://api.ycpradiotelescope.com:8080/api/";
-let baseUrl = "http://localhost:8080/api/";
+let baseUrl = "http://api.ycpradiotelescope.com:8080/api/";
+// let baseUrl = "http://localhost:8080/api/";
 export default {
     //API endpoints go here
     CelestialBodies: {
@@ -154,7 +154,8 @@ export default {
     },
 
     login: function(data) {
-      return axios.post("http://localhost:8080/login?email=" + data.username.value + "&password=" + data.password.value, JSON.stringify(data))
+      // return axios.post("http://localhost:8080/login?email=" + data.username.value + "&password=" + data.password.value, JSON.stringify(data))
+      return axios.post("http://api.ycpradiotelescope.com:8080/login?email=" + data.username.value + "&password=" + data.password.value, JSON.stringify(data))
     },
     logout: function () {
       return axios.post(baseUrl + "logout", {}, Headers.retrieveHeaders())
@@ -171,7 +172,9 @@ export default {
     feedback(data) {
       return axios.post(baseUrl + "feedback", data, Headers.retrieveHeaders());
     },
-    visualize() {
-      return axios.get("https://localhost:5001/api/skyview");
+    visualize(data) { // fix this
+      // return axios.get("https://localhost:5001/api/skyview");
+      // API call needs year, month, day, minute, targetRA, and targetDec
+      return axios.get("https://localhost:5001/skyview?year="+data.year+"&month="+data.month+"&day="+data.day+"&hour="+data.hour+"&minute="+data.minute+"&targetRA="+data.targetRA+"&targetDec="+data.targetDec, data, Headers.retrieveHeaders());
     }
 }

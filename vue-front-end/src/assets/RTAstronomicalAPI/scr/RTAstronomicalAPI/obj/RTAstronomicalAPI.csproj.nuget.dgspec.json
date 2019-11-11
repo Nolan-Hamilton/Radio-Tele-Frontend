@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Marie Kiley\\Documents\\RT-Workspace\\RTAstronomicalAPI\\RTAstronomicalAPI\\RTAstronomicalAPI.csproj": {}
+    "C:\\Users\\Marie Kiley\\Documents\\RT-Workspace\\git\\Radio-Tele-Frontend\\vue-front-end\\src\\assets\\RTAstronomicalAPI\\scr\\RTAstronomicalAPI\\RTAstronomicalAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Marie Kiley\\Documents\\RT-Workspace\\RTAstronomicalAPI\\RTAstronomicalAPI\\RTAstronomicalAPI.csproj": {
+    "C:\\Users\\Marie Kiley\\Documents\\RT-Workspace\\git\\Radio-Tele-Frontend\\vue-front-end\\src\\assets\\RTAstronomicalAPI\\scr\\RTAstronomicalAPI\\RTAstronomicalAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Marie Kiley\\Documents\\RT-Workspace\\RTAstronomicalAPI\\RTAstronomicalAPI\\RTAstronomicalAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Marie Kiley\\Documents\\RT-Workspace\\git\\Radio-Tele-Frontend\\vue-front-end\\src\\assets\\RTAstronomicalAPI\\scr\\RTAstronomicalAPI\\RTAstronomicalAPI.csproj",
         "projectName": "RTAstronomicalAPI",
-        "projectPath": "C:\\Users\\Marie Kiley\\Documents\\RT-Workspace\\RTAstronomicalAPI\\RTAstronomicalAPI\\RTAstronomicalAPI.csproj",
+        "projectPath": "C:\\Users\\Marie Kiley\\Documents\\RT-Workspace\\git\\Radio-Tele-Frontend\\vue-front-end\\src\\assets\\RTAstronomicalAPI\\scr\\RTAstronomicalAPI\\RTAstronomicalAPI.csproj",
         "packagesPath": "C:\\Users\\Marie Kiley\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Marie Kiley\\Documents\\RT-Workspace\\RTAstronomicalAPI\\RTAstronomicalAPI\\obj\\",
+        "outputPath": "C:\\Users\\Marie Kiley\\Documents\\RT-Workspace\\git\\Radio-Tele-Frontend\\vue-front-end\\src\\assets\\RTAstronomicalAPI\\scr\\RTAstronomicalAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Marie Kiley\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -247,7 +247,7 @@
                         Conditionally display two sets of Coordinate fields
                         (Hours, Minutes, Seconds, Right Ascension, Declination)
                     -->
-                        <v-flex xs12 sm2 row v-if="type === 'Raster Scan'">
+                        <v-flex xs12 sm3 row v-if="type === 'Raster Scan'">
                         <v-text-field
                         v-model="form.firstCoordinate.hours"
                         :rules="[rules.rightAscHours]"
@@ -263,7 +263,7 @@
                         ></v-text-field>
                     </v-flex>
 
-                    <v-flex xs12 sm2 v-if="type === 'Raster Scan'">
+                    <v-flex xs12 sm3 v-if="type === 'Raster Scan'">
                         <v-text-field
                         v-model="form.firstCoordinate.minutes"
                         :rules="[rules.rightAscMinutes]"
@@ -313,7 +313,7 @@
 
                     <v-spacer></v-spacer>
 
-                    <v-flex xs12 sm2 v-if="type === 'Raster Scan'">
+                    <v-flex xs12 sm3 v-if="type === 'Raster Scan'">
                         <v-text-field
                         v-model="form.secondCoordinate.hours"
                         :rules="[rules.rightAscHours]"
@@ -329,7 +329,7 @@
                         ></v-text-field>
                     </v-flex>
 
-                    <v-flex xs12 sm2 v-if="type === 'Raster Scan'">
+                    <v-flex xs12 sm3 v-if="type === 'Raster Scan'">
                         <v-text-field
                         v-model="form.secondCoordinate.minutes"
                         :rules="[rules.rightAscMinutes]"
@@ -399,7 +399,12 @@
                     <!-- Cancel resets form and closes Modal -->
                     <v-btn flat @click="resetForm">Cancel</v-btn>
                     <v-spacer></v-spacer>
-                    <v-btn flat @click="visualize">Visualize</v-btn>
+                    <v-btn 
+                    :disabled="!formIsValid"
+                    flat 
+                    color="primary"
+                    @click="visualize"
+                    >Visualize</v-btn>
                     <v-spacer></v-spacer>
                     <!-- Submit sends the form to backend to be verified -->
                     <v-btn
@@ -410,6 +415,7 @@
                     >Schedule</v-btn>
                 </v-card-actions>
                 </v-form>
+                <img class="image-style" v-bind:src="imageSrc" v-if="showImage === 'yes'">
             </v-card>
     </v-dialog>
 </template>
@@ -543,29 +549,57 @@ export default {
             this.selectedBody = null;
             this.clearErrors();
             this.$emit('close-modal');
+            this.showImage = 'no';
         },
         // shows the skyview
         visualize() {
-            this.showImage = "yes";
-            ApiDriver.visualize();
+            // this.showImage = "yes"; // only show image when it's read
+            // ApiDriver.visualize(); // add params
+            // needs to account for each type
+            // image is from => vue-front-end\src\assets\RTAstronomicalAPI\images
+            this.showImage = 'yes';
+            if(this.startDate == '') {
+                this.startDate = '2019-12-01'
+            }
+            if(this.startTime == '') {
+                this.startTime = '00:00'
+            }
+            if(this.endDate == '') {
+                this.endDate = '2019-12-01'
+            }
+            if(this.endTime == '') {
+                this.endTime = '12:00'
+            }
+            if(this.type == "Point") {
+                let data1 = {
+                    year:   this.startDate.substring(0, 4), 
+                    month:  this.startDate.substring(5, 7), 
+                    day:    this.startDate.substring(8, 10), 
+                    hour:   this.startTime.substring(0, 2),
+                    minute: this.startTime.substring(3, 5),
+                    targetRA:   (this.form.rightAscension.hours * 15.0 + this.form.rightAscension.minutes * 0.25), 
+                    targetDec:  this.form.declination.value
+                };
+                ApiDriver.visualize(data1);
+                /*
+                this.imageSrc = 
+                    "src/assets/RTAstronomicalAPI/skyview-"+
+                    data1.year+"-"+
+                    data1.month+"-"+
+                    data1.day+"-"+
+                    "0-0--76-40-390-152-10.png"
+                */ // THIS ISN'T A VIABLE SOLUTION. I CAN'T JUST PRETEND IT WORKS LIKE LAST MILESTONE
+            }
+            else if(this.type == "Celestial Body") {
+                
+            }
+            else if(this.type == "Drift Scan") {
+                
+            }
+            else if(this.type == "Raster Scan") {
 
-            var today = new Date();
-            var time = today.getFullYear() + "-" + (today.getMonth()+1) + "-" +  (today.getDay()+20) + "-" + today.getHours() + "-" + today.getMinutes();
-
-            // this.imageSrc0 = "src/assets/skyview/SkyViewAPI/SkyViewAPI/bin/Debug/netcoreapp3.0/images/skyview-2019-10-22-" + 0 + "-" + 0 +"-0-0-0-0-0.png";
-            this.imageSrc = "src/assets/skyview/SkyViewAPI/SkyViewAPI/bin/Debug/netcoreapp3.0/images/skyview-" + time + "--76-40-395-0-0.png";
-
-            // TODO: pull image from API
-            /*
-            $.ajax({
-                type: 'POST',
-                url: 'C:/Users/Marie Kiley/Documents/RT-Workspace/SkyviewAPIWork/AAAPI/AAAPI/bin/Debug/netcoreapp3.0/AAAPI.dll/SaveImage',
-                data: JSON.stringify(),
-                success: function(data) {
-                    onSuccess(data);
-                }
-            });
-            */
+            }
+                
         }, 
         // Method to submit to back end
         submit() {
