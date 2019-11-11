@@ -6,7 +6,7 @@
   "compilationOptions": {
     "defines": [
       "TRACE",
-      "RELEASE",
+      "DEBUG",
       "NETCOREAPP",
       "NETCOREAPP3_0"
     ],
@@ -14,7 +14,7 @@
     "platform": "",
     "allowUnsafe": false,
     "warningsAsErrors": false,
-    "optimize": true,
+    "optimize": false,
     "keyFile": "",
     "emitEntryPoint": true,
     "xmlDoc": false,
