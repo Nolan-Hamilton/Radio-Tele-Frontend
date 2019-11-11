@@ -105,7 +105,6 @@ C:\Users\Marie Kiley\Documents\RT-Workspace\git\Radio-Tele-Frontend\vue-front-en
 C:\Users\Marie Kiley\Documents\RT-Workspace\git\Radio-Tele-Frontend\vue-front-end\src\assets\RTAstronomicalAPI\scr\RTAstronomicalAPI\bin\Release\netcoreapp3.0\DrawSky.dll
 C:\Users\Marie Kiley\Documents\RT-Workspace\git\Radio-Tele-Frontend\vue-front-end\src\assets\RTAstronomicalAPI\scr\RTAstronomicalAPI\bin\Release\netcoreapp3.0\AASharp.pdb
 C:\Users\Marie Kiley\Documents\RT-Workspace\git\Radio-Tele-Frontend\vue-front-end\src\assets\RTAstronomicalAPI\scr\RTAstronomicalAPI\bin\Release\netcoreapp3.0\DrawSky.pdb
-C:\Users\Marie Kiley\Documents\RT-Workspace\git\Radio-Tele-Frontend\vue-front-end\src\assets\RTAstronomicalAPI\scr\RTAstronomicalAPI\obj\Release\netcoreapp3.0\RTAstronomicalAPI.csprojAssemblyReference.cache
 C:\Users\Marie Kiley\Documents\RT-Workspace\git\Radio-Tele-Frontend\vue-front-end\src\assets\RTAstronomicalAPI\scr\RTAstronomicalAPI\obj\Release\netcoreapp3.0\staticwebassets\RTAstronomicalAPI.StaticWebAssets.Manifest.cache
 C:\Users\Marie Kiley\Documents\RT-Workspace\git\Radio-Tele-Frontend\vue-front-end\src\assets\RTAstronomicalAPI\scr\RTAstronomicalAPI\obj\Release\netcoreapp3.0\staticwebassets\RTAstronomicalAPI.StaticWebAssets.xml
 C:\Users\Marie Kiley\Documents\RT-Workspace\git\Radio-Tele-Frontend\vue-front-end\src\assets\RTAstronomicalAPI\scr\RTAstronomicalAPI\obj\Release\netcoreapp3.0\RTAstronomicalAPI.MvcApplicationPartsAssemblyInfo.cache
@@ -115,3 +114,4 @@ C:\Users\Marie Kiley\Documents\RT-Workspace\git\Radio-Tele-Frontend\vue-front-en
 C:\Users\Marie Kiley\Documents\RT-Workspace\git\Radio-Tele-Frontend\vue-front-end\src\assets\RTAstronomicalAPI\scr\RTAstronomicalAPI\obj\Release\netcoreapp3.0\RTAstronomicalAPI.csproj.CopyComplete
 C:\Users\Marie Kiley\Documents\RT-Workspace\git\Radio-Tele-Frontend\vue-front-end\src\assets\RTAstronomicalAPI\scr\RTAstronomicalAPI\obj\Release\netcoreapp3.0\RTAstronomicalAPI.dll
 C:\Users\Marie Kiley\Documents\RT-Workspace\git\Radio-Tele-Frontend\vue-front-end\src\assets\RTAstronomicalAPI\scr\RTAstronomicalAPI\obj\Release\netcoreapp3.0\RTAstronomicalAPI.pdb
+C:\Users\Marie Kiley\Documents\RT-Workspace\git\Radio-Tele-Frontend\vue-front-end\src\assets\RTAstronomicalAPI\scr\RTAstronomicalAPI\obj\Release\netcoreapp3.0\RTAstronomicalAPI.csprojAssemblyReference.cache

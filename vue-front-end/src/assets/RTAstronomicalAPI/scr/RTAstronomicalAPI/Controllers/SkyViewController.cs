@@ -37,7 +37,7 @@ namespace RTAstronomicalAPI.Controllers
 
             Image image = easel.sky;
 
-            image.Save("../images/"+filename, ImageFormat.Png);
+            image.Save("../images/" + filename, ImageFormat.Png);
 
             return filename;
         }
@@ -61,12 +61,13 @@ namespace RTAstronomicalAPI.Controllers
         }
 
         [HttpGet]
-        public String Get(int year, int month, int day, int hour, int minute, float targetRA, float targetDec)
+        public String Get(int year, int month, int day, int hour, int minute, float targetRA, float targetDec, float longitude, float latitude, int altitude)
         {
+            Console.WriteLine("altitude: " + altitude);
             SkyView view = new SkyView();
-            float longitude = -76.704564F;
-            float laditude = 40.024409F;
-            view.filepath = GenerateImage(year, month, day, hour, minute, longitude, laditude, 390, targetRA, targetDec);
+            // float longitude = -76.704564F;
+            // float laditude = 40.024409F;
+            view.filepath = GenerateImage(year, month, day, hour, minute, longitude, latitude, altitude, targetRA, targetDec);
             return view.filepath;
         }
     }

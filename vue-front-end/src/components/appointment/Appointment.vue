@@ -578,9 +578,12 @@ export default {
                     hour:   this.startTime.substring(0, 2),
                     minute: this.startTime.substring(3, 5),
                     targetRA:   (this.form.rightAscension.hours * 15.0 + this.form.rightAscension.minutes * 0.25), 
-                    targetDec:  this.form.declination.value
+                    targetDec:  this.form.declination.value,
+                    longitude: -76.704564,
+                    latitude:  40.024409,
+                    altitude: 395 // TODO: make longitude, latitude, and altitude dependant on the selected telescope.
                 };
-                ApiDriver.visualize(data1);
+                console.log(ApiDriver.visualize(data1));
                 /*
                 this.imageSrc = 
                     "src/assets/RTAstronomicalAPI/skyview-"+

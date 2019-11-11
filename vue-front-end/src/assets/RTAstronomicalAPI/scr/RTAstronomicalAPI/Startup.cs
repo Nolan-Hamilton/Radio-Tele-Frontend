@@ -20,11 +20,25 @@ namespace RTAstronomicalAPI
             Configuration = configuration;
         }
 
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(MyAllowSpecificOrigins,
+                builder =>
+                {
+                    builder.WithOrigins("http://localhost:8081",
+                                        "https://ycpradiotelescope.com");
+                    // IF WE GET A NEW URL, YOU WILL NEED TO UPDATE THIS.
+                    // https://docs.microsoft.com/en-us/aspnet/core/security/cors?view=aspnetcore-3.0
+                });
+            });
+
             services.AddControllers();
         }
 
@@ -35,6 +49,8 @@ namespace RTAstronomicalAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseHttpsRedirection();
 
