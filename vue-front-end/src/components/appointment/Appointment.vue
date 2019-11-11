@@ -415,7 +415,8 @@
                     >Schedule</v-btn>
                 </v-card-actions>
                 </v-form>
-                <img class="image-style" v-bind:src="imageSrc" v-if="showImage === 'yes'">
+                <img class="image-style" v-bind:src="imageSrc0" v-if="showImage === 'yes'">
+                <img class="image-style" v-bind:src="imageSrc1" v-if="showImage === 'yes'">
             </v-card>
     </v-dialog>
 </template>
@@ -482,7 +483,8 @@ export default {
             endDate: '',
             endTime: '',
             showImage: 'no',
-            imageSrc: 'https://ak8.picdn.net/shutterstock/videos/13288688/thumb/1.jpg',
+            imageSrc0: 'https://ak8.picdn.net/shutterstock/videos/13288688/thumb/1.jpg',
+            imageSrc1: 'https://ak8.picdn.net/shutterstock/videos/13288688/thumb/1.jpg',
 
             // Variables to keep track of chosen Appointment type
             type: 'Point',
@@ -571,7 +573,7 @@ export default {
                 this.endTime = '12:00'
             }
             if(this.type == "Point") {
-                let data1 = {
+                let data0 = {
                     year:   this.startDate.substring(0, 4), 
                     month:  this.startDate.substring(5, 7), 
                     day:    this.startDate.substring(8, 10), 
@@ -583,15 +585,36 @@ export default {
                     latitude:  40.024409,
                     altitude: 395 // TODO: make longitude, latitude, and altitude dependant on the selected telescope.
                 };
-                console.log(ApiDriver.visualize(data1));
-                /*
-                this.imageSrc = 
-                    "src/assets/RTAstronomicalAPI/skyview-"+
-                    data1.year+"-"+
-                    data1.month+"-"+
-                    data1.day+"-"+
-                    "0-0--76-40-390-152-10.png"
-                */ // THIS ISN'T A VIABLE SOLUTION. I CAN'T JUST PRETEND IT WORKS LIKE LAST MILESTONE
+                var call0 = ApiDriver.visualize(data0);
+                // console.log(call);
+                call0
+                    .then(response => {
+                        console.log(response.data);
+                        this.imageSrc0 = "src/assets/RTAstronomicalAPI/images/"+response.data;
+                    })
+                    .catch(error => {console.log(error);});
+
+                let data1 = {
+                    year:   this.endDate.substring(0, 4), 
+                    month:  this.endDate.substring(5, 7), 
+                    day:    this.endDate.substring(8, 10), 
+                    hour:   this.endTime.substring(0, 2),
+                    minute: this.endTime.substring(3, 5),
+                    targetRA:   (this.form.rightAscension.hours * 15.0 + this.form.rightAscension.minutes * 0.25), 
+                    targetDec:  this.form.declination.value,
+                    longitude: -76.704564,
+                    latitude:  40.024409,
+                    altitude: 395 // TODO: make longitude, latitude, and altitude dependant on the selected telescope.
+                };
+                var call1 = ApiDriver.visualize(data1);
+                // console.log(call);
+                call1
+                    .then(response => {
+                        console.log(response.data);
+                        this.imageSrc1 = "src/assets/RTAstronomicalAPI/images/"+response.data;
+                    })
+                    .catch(error => {console.log(error);});
+                
             }
             else if(this.type == "Celestial Body") {
                 
