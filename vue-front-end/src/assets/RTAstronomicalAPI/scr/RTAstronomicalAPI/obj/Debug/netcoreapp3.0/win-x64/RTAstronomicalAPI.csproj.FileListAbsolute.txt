@@ -449,7 +449,6 @@ C:\Users\Marie Kiley\Documents\RT-Workspace\git\Radio-Tele-Frontend\vue-front-en
 C:\Users\Marie Kiley\Documents\RT-Workspace\git\Radio-Tele-Frontend\vue-front-end\src\assets\RTAstronomicalAPI\scr\RTAstronomicalAPI\bin\Debug\netcoreapp3.0\win-x64\DrawSky.dll
 C:\Users\Marie Kiley\Documents\RT-Workspace\git\Radio-Tele-Frontend\vue-front-end\src\assets\RTAstronomicalAPI\scr\RTAstronomicalAPI\bin\Debug\netcoreapp3.0\win-x64\AASharp.pdb
 C:\Users\Marie Kiley\Documents\RT-Workspace\git\Radio-Tele-Frontend\vue-front-end\src\assets\RTAstronomicalAPI\scr\RTAstronomicalAPI\bin\Debug\netcoreapp3.0\win-x64\DrawSky.pdb
-C:\Users\Marie Kiley\Documents\RT-Workspace\git\Radio-Tele-Frontend\vue-front-end\src\assets\RTAstronomicalAPI\scr\RTAstronomicalAPI\obj\Debug\netcoreapp3.0\win-x64\RTAstronomicalAPI.csprojAssemblyReference.cache
 C:\Users\Marie Kiley\Documents\RT-Workspace\git\Radio-Tele-Frontend\vue-front-end\src\assets\RTAstronomicalAPI\scr\RTAstronomicalAPI\obj\Debug\netcoreapp3.0\win-x64\staticwebassets\RTAstronomicalAPI.StaticWebAssets.Manifest.cache
 C:\Users\Marie Kiley\Documents\RT-Workspace\git\Radio-Tele-Frontend\vue-front-end\src\assets\RTAstronomicalAPI\scr\RTAstronomicalAPI\obj\Debug\netcoreapp3.0\win-x64\staticwebassets\RTAstronomicalAPI.StaticWebAssets.xml
 C:\Users\Marie Kiley\Documents\RT-Workspace\git\Radio-Tele-Frontend\vue-front-end\src\assets\RTAstronomicalAPI\scr\RTAstronomicalAPI\obj\Debug\netcoreapp3.0\win-x64\RTAstronomicalAPI.MvcApplicationPartsAssemblyInfo.cache

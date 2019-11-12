@@ -415,6 +415,16 @@
                     >Schedule</v-btn>
                 </v-card-actions>
                 </v-form>
+                <v-flex xs12 sm4 v-if="notVisible">
+                    <v-text-field
+                    v-model="visibleText"
+                    :disabled="true"
+                    :validate-on-blur="true"
+                    color="blue darken-2"
+                    :error=notVisible.hasError
+                    :error-messages=notVisible.errorMessage
+                    ></v-text-field>
+                </v-flex>
                 <img class="image-style" v-bind:src="imageSrc0" v-if="showImage === 'yes'">
                 <img class="image-style" v-bind:src="imageSrc1" v-if="showImage === 'yes'">
             </v-card>
@@ -485,6 +495,8 @@ export default {
             showImage: 'no',
             imageSrc0: 'https://ak8.picdn.net/shutterstock/videos/13288688/thumb/1.jpg',
             imageSrc1: 'https://ak8.picdn.net/shutterstock/videos/13288688/thumb/1.jpg',
+            notVisible: false,
+            visibleText: 'Warning, at least the start or end includes a target that is not visible at that time.',
 
             // Variables to keep track of chosen Appointment type
             type: 'Point',
@@ -551,6 +563,7 @@ export default {
             this.selectedBody = null;
             this.clearErrors();
             this.$emit('close-modal');
+            this.notVisible = false,
             this.showImage = 'no';
         },
         // shows the skyview
@@ -559,6 +572,7 @@ export default {
             // ApiDriver.visualize(); // add params
             // needs to account for each type
             // image is from => vue-front-end\src\assets\RTAstronomicalAPI\images
+            // this.notVisible = true;
             this.showImage = 'yes';
             if(this.startDate == '') {
                 this.startDate = '2019-12-01'
@@ -614,7 +628,6 @@ export default {
                         this.imageSrc1 = "src/assets/RTAstronomicalAPI/images/"+response.data;
                     })
                     .catch(error => {console.log(error);});
-                
             }
             else if(this.type == "Celestial Body") {
                 let data0 = {
@@ -763,6 +776,57 @@ export default {
 
             // Handles making the selected Appointment Type string compatible with the back-end
             this.handleType();
+
+            // validate that target is visible at beginning and end of appointment
+            var startVisible = true;
+            var endVisible = true;
+            if(this.type == "Point") {
+                let data0 = {
+                    year:   this.startDate.substring(0, 4), 
+                    month:  this.startDate.substring(5, 7), 
+                    day:    this.startDate.substring(8, 10), 
+                    hour:   this.startTime.substring(0, 2),
+                    minute: this.startTime.substring(3, 5),
+                    targetRA:   (this.form.rightAscension.hours * 15.0 + this.form.rightAscension.minutes * 0.25), 
+                    targetDec:  this.form.declination.value,
+                    longitude: -76.704564,
+                    latitude:  40.024409,
+                    altitude: 395 // TODO: make longitude, latitude, and altitude dependant on the selected telescope.
+                };
+                var call0 = ApiDriver.targetVisible(data0);
+                // console.log(call);
+                call0
+                    .then(response => {
+                        startVisible = response.data.visible;
+                        console.log(response.data.visible);
+                        if(!response.data.visible)
+                            this.notVisible = true;
+                    })
+                    .catch(error => {console.log(error);});
+
+                let data1 = {
+                    year:   this.endDate.substring(0, 4), 
+                    month:  this.endDate.substring(5, 7), 
+                    day:    this.endDate.substring(8, 10), 
+                    hour:   this.endTime.substring(0, 2),
+                    minute: this.endTime.substring(3, 5),
+                    targetRA:   (this.form.rightAscension.hours * 15.0 + this.form.rightAscension.minutes * 0.25), 
+                    targetDec:  this.form.declination.value,
+                    longitude: -76.704564,
+                    latitude:  40.024409,
+                    altitude: 395 // TODO: make longitude, latitude, and altitude dependant on the selected telescope.
+                };
+                var call1 = ApiDriver.targetVisible(data1);
+                // console.log(call);
+                call1
+                    .then(response => {
+                        endVisible = response.data.visible;
+                        console.log(response.data.visible);
+                        if(!response.data.visible)
+                            this.notVisible = true;
+                    })
+                    .catch(error => {console.log(error);});
+            }
 
             // set up form to send to back end with data from form obj
             let form = {
