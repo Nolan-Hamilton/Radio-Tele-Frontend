@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <PublishSingleFile>true</PublishSingleFile> <!-- https://www.talkingdotnet.com/create-trimmed-self-contained-executable-in-net-core-3-0/ -->
-    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier> 
   </PropertyGroup>
 
   <ItemGroup>
