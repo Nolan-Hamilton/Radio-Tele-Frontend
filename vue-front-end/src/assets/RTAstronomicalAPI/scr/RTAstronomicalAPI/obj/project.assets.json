@@ -11607,19 +11607,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\nolan\\.nuget\\packages\\": {}
+    "C:\\Users\\Marie Kiley\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\nolan\\Files\\Repos\\Radio-Tele-Frontend\\vue-front-end\\src\\assets\\RTAstronomicalAPI\\scr\\RTAstronomicalAPI\\RTAstronomicalAPI.csproj",
+      "projectUniqueName": "C:\\Users\\Marie Kiley\\Documents\\RT-Workspace\\git\\Radio-Tele-Frontend\\vue-front-end\\src\\assets\\RTAstronomicalAPI\\scr\\RTAstronomicalAPI\\RTAstronomicalAPI.csproj",
       "projectName": "RTAstronomicalAPI",
-      "projectPath": "C:\\Users\\nolan\\Files\\Repos\\Radio-Tele-Frontend\\vue-front-end\\src\\assets\\RTAstronomicalAPI\\scr\\RTAstronomicalAPI\\RTAstronomicalAPI.csproj",
-      "packagesPath": "C:\\Users\\nolan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\nolan\\Files\\Repos\\Radio-Tele-Frontend\\vue-front-end\\src\\assets\\RTAstronomicalAPI\\scr\\RTAstronomicalAPI\\obj\\",
+      "projectPath": "C:\\Users\\Marie Kiley\\Documents\\RT-Workspace\\git\\Radio-Tele-Frontend\\vue-front-end\\src\\assets\\RTAstronomicalAPI\\scr\\RTAstronomicalAPI\\RTAstronomicalAPI.csproj",
+      "packagesPath": "C:\\Users\\Marie Kiley\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Marie Kiley\\Documents\\RT-Workspace\\git\\Radio-Tele-Frontend\\vue-front-end\\src\\assets\\RTAstronomicalAPI\\scr\\RTAstronomicalAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\nolan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Marie Kiley\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
