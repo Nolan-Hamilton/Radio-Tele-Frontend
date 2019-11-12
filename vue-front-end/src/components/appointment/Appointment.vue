@@ -415,7 +415,7 @@
                     >Schedule</v-btn>
                 </v-card-actions>
                 </v-form>
-                <v-flex xs12 sm4 v-if="notVisible">
+                <v-flex xs12 sm8 v-if="notVisible">
                     <v-text-field
                     v-model="visibleText"
                     :disabled="true"
@@ -780,6 +780,7 @@ export default {
             // validate that target is visible at beginning and end of appointment
             var startVisible = true;
             var endVisible = true;
+            this.notVisible = false;
             if(this.type == "Point") {
                 let data0 = {
                     year:   this.startDate.substring(0, 4), 
