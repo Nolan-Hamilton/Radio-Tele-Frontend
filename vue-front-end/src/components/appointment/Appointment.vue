@@ -24,7 +24,7 @@
                 color="success">
                 <span>Appointment Created</span>
                 <v-icon dark>check_circle</v-icon>
-                </v-snackbar>
+                </v-snackbar> 
                 <v-form ref="form" @submit.prevent="submit" refs="form">
                 <v-container grid-list-xl fluid>
                     <v-layout wrap>
@@ -109,7 +109,7 @@
                         required
                         ></v-select>
                     </v-flex>
-                    <v-flex xs12 sm3 v-if="type === 'Point'">
+                    <v-flex xs12 sm4 v-if="type === 'Point'">
                         <v-text-field
                         v-model="form.rightAscension.hours"
                         :rules="[rules.rightAscHours]"
@@ -127,7 +127,7 @@
                      <!--
                         Same as Right Ascension Hours, except checks for minutes error handling
                     -->
-                    <v-flex xs12 sm3 v-if="type === 'Point'">
+                    <v-flex xs12 sm4 v-if="type === 'Point'">
                         <v-text-field
                         v-model="form.rightAscension.minutes"
                         :rules="[rules.rightAscMinutes]"
@@ -145,6 +145,7 @@
                      <!--
                         Same as Right Ascension Hours, except checks for seconds error handling
                     -->
+                    <!-- removed seconds form
                     <v-flex xs12 sm3 v-if="type === 'Point'">
                         <v-text-field
                         v-model="form.rightAscension.seconds"
@@ -158,13 +159,14 @@
                         type="number"
                         required
                         ></v-text-field>
-                    </v-flex>
+                    </v-flex> 
+                    -->
                      <!-- Pretty much same as Right Ascension 
                      
                         onkeypress='return event.charCode == 45 || (event.charCode >= 48 && event.charCode <= 57)'
                             Only allow numerical inputs and - (minus) as input can be negative
                      -->
-                    <v-flex xs12 sm3 v-if="type === 'Point'">
+                    <v-flex xs12 sm4 v-if="type === 'Point'">
                         <v-text-field
                         v-model="form.declination.value"
                         :rules="[rules.numRequired]"
@@ -245,7 +247,7 @@
                         Conditionally display two sets of Coordinate fields
                         (Hours, Minutes, Seconds, Right Ascension, Declination)
                     -->
-                        <v-flex xs12 sm2 row v-if="type === 'Raster Scan'">
+                        <v-flex xs12 sm3 row v-if="type === 'Raster Scan'">
                         <v-text-field
                         v-model="form.firstCoordinate.hours"
                         :rules="[rules.rightAscHours]"
@@ -261,7 +263,7 @@
                         ></v-text-field>
                     </v-flex>
 
-                    <v-flex xs12 sm2 v-if="type === 'Raster Scan'">
+                    <v-flex xs12 sm3 v-if="type === 'Raster Scan'">
                         <v-text-field
                         v-model="form.firstCoordinate.minutes"
                         :rules="[rules.rightAscMinutes]"
@@ -276,7 +278,7 @@
                         required
                         ></v-text-field>
                     </v-flex>
-                     
+                     <!-- removed seconds form
                     <v-flex xs12 sm2 v-if="type === 'Raster Scan'">
                         <v-text-field
                         v-model="form.firstCoordinate.seconds"
@@ -291,7 +293,7 @@
                         required
                         ></v-text-field>
                     </v-flex>
-                    
+                    -->
                     
 
                     <v-flex xs12 sm6 v-if="type === 'Raster Scan'">
@@ -311,7 +313,7 @@
 
                     <v-spacer></v-spacer>
 
-                    <v-flex xs12 sm2 v-if="type === 'Raster Scan'">
+                    <v-flex xs12 sm3 v-if="type === 'Raster Scan'">
                         <v-text-field
                         v-model="form.secondCoordinate.hours"
                         :rules="[rules.rightAscHours]"
@@ -327,7 +329,7 @@
                         ></v-text-field>
                     </v-flex>
 
-                    <v-flex xs12 sm2 v-if="type === 'Raster Scan'">
+                    <v-flex xs12 sm3 v-if="type === 'Raster Scan'">
                         <v-text-field
                         v-model="form.secondCoordinate.minutes"
                         :rules="[rules.rightAscMinutes]"
@@ -342,7 +344,7 @@
                         required
                         ></v-text-field>
                     </v-flex>
-                     
+                     <!-- removed seconds form
                     <v-flex xs12 sm2 v-if="type === 'Raster Scan'">
                         <v-text-field
                         v-model="form.secondCoordinate.seconds"
@@ -357,7 +359,7 @@
                         required
                         ></v-text-field>
                     </v-flex>
-                    
+                    -->
 
                     <v-flex xs12 sm6 v-if="type === 'Raster Scan'">
                         <v-text-field
@@ -397,6 +399,13 @@
                     <!-- Cancel resets form and closes Modal -->
                     <v-btn flat @click="resetForm">Cancel</v-btn>
                     <v-spacer></v-spacer>
+                    <v-btn 
+                    :disabled="!formIsValid"
+                    flat 
+                    color="primary"
+                    @click="visualize"
+                    >Visualize</v-btn>
+                    <v-spacer></v-spacer>
                     <!-- Submit sends the form to backend to be verified -->
                     <v-btn
                     :disabled="!formIsValid"
@@ -406,6 +415,8 @@
                     >Schedule</v-btn>
                 </v-card-actions>
                 </v-form>
+                <img class="image-style" v-bind:src="imageSrc0" v-if="showImage === 'yes'">
+                <img class="image-style" v-bind:src="imageSrc1" v-if="showImage === 'yes'">
             </v-card>
     </v-dialog>
 </template>
@@ -439,7 +450,7 @@ export default {
                 rightAscension: {
                     hours: null,
                     minutes: null,
-                    seconds: null,
+                    // seconds: null,
                     hasError: false
                 },
                 declination: {
@@ -455,14 +466,14 @@ export default {
                 firstCoordinate: {
                     hours: null,
                     minutes: null,
-                    seconds: null,
+                    // seconds: null,
                     rightAscension: null,
                     declination: null
                 },
                 secondCoordinate: {
                     hours: null,
                     minutes: null,
-                    seconds: null,
+                    // seconds: null,
                     rightAscension: null,
                     declination: null
                 }
@@ -471,6 +482,9 @@ export default {
             startTime: '',
             endDate: '',
             endTime: '',
+            showImage: 'no',
+            imageSrc0: 'https://ak8.picdn.net/shutterstock/videos/13288688/thumb/1.jpg',
+            imageSrc1: 'https://ak8.picdn.net/shutterstock/videos/13288688/thumb/1.jpg',
 
             // Variables to keep track of chosen Appointment type
             type: 'Point',
@@ -515,18 +529,18 @@ export default {
             this.form.isPrivate.value = false;
             this.form.rightAscension.hours = null;
             this.form.rightAscension.minutes = null;
-            this.form.rightAscension.seconds = null;
+            // this.form.rightAscension.seconds = null;
             this.form.declination.value = null;
             this.form.azimuth.value = null;
             this.form.elevation.value = null;
             this.form.firstCoordinate.hours = null;
             this.form.firstCoordinate.minutes = null;
-            this.form.firstCoordinate.seconds = null;
+            // this.form.firstCoordinate.seconds = null;
             this.form.firstCoordinate.rightAscension = null;
             this.form.firstCoordinate.declination = null;
             this.form.secondCoordinate.hours = null;
             this.form.secondCoordinate.minutes = null;
-            this.form.secondCoordinate.seconds = null;
+            // this.form.secondCoordinate.seconds = null;
             this.form.secondCoordinate.rightAscension = null;
             this.form.secondCoordinate.declination = null;
             this.startTime='';
@@ -537,7 +551,206 @@ export default {
             this.selectedBody = null;
             this.clearErrors();
             this.$emit('close-modal');
+            this.showImage = 'no';
         },
+        // shows the skyview
+        visualize() {
+            // this.showImage = "yes"; // only show image when it's read
+            // ApiDriver.visualize(); // add params
+            // needs to account for each type
+            // image is from => vue-front-end\src\assets\RTAstronomicalAPI\images
+            this.showImage = 'yes';
+            if(this.startDate == '') {
+                this.startDate = '2019-12-01'
+            }
+            if(this.startTime == '') {
+                this.startTime = '00:00'
+            }
+            if(this.endDate == '') {
+                this.endDate = '2019-12-01'
+            }
+            if(this.endTime == '') {
+                this.endTime = '12:00'
+            }
+            if(this.type == "Point") {
+                let data0 = {
+                    year:   this.startDate.substring(0, 4), 
+                    month:  this.startDate.substring(5, 7), 
+                    day:    this.startDate.substring(8, 10), 
+                    hour:   this.startTime.substring(0, 2),
+                    minute: this.startTime.substring(3, 5),
+                    targetRA:   (this.form.rightAscension.hours * 15.0 + this.form.rightAscension.minutes * 0.25), 
+                    targetDec:  this.form.declination.value,
+                    longitude: -76.704564,
+                    latitude:  40.024409,
+                    altitude: 395 // TODO: make longitude, latitude, and altitude dependant on the selected telescope.
+                };
+                var call0 = ApiDriver.visualize(data0);
+                // console.log(call);
+                call0
+                    .then(response => {
+                        console.log(response.data);
+                        this.imageSrc0 = "src/assets/RTAstronomicalAPI/images/"+response.data;
+                    })
+                    .catch(error => {console.log(error);});
+
+                let data1 = {
+                    year:   this.endDate.substring(0, 4), 
+                    month:  this.endDate.substring(5, 7), 
+                    day:    this.endDate.substring(8, 10), 
+                    hour:   this.endTime.substring(0, 2),
+                    minute: this.endTime.substring(3, 5),
+                    targetRA:   (this.form.rightAscension.hours * 15.0 + this.form.rightAscension.minutes * 0.25), 
+                    targetDec:  this.form.declination.value,
+                    longitude: -76.704564,
+                    latitude:  40.024409,
+                    altitude: 395 // TODO: make longitude, latitude, and altitude dependant on the selected telescope.
+                };
+                var call1 = ApiDriver.visualize(data1);
+                // console.log(call);
+                call1
+                    .then(response => {
+                        console.log(response.data);
+                        this.imageSrc1 = "src/assets/RTAstronomicalAPI/images/"+response.data;
+                    })
+                    .catch(error => {console.log(error);});
+                
+            }
+            else if(this.type == "Celestial Body") {
+                let data0 = {
+                    year:   this.startDate.substring(0, 4), 
+                    month:  this.startDate.substring(5, 7), 
+                    day:    this.startDate.substring(8, 10), 
+                    hour:   this.startTime.substring(0, 2),
+                    minute: this.startTime.substring(3, 5),
+                    targetRA:   0, // TODO: make this the RA of the Celestial Body
+                    targetDec:  0, // TODO: make this the RA of the Celestial Body
+                    longitude: -76.704564,
+                    latitude:  40.024409,
+                    altitude: 395 // TODO: make longitude, latitude, and altitude dependant on the selected telescope.
+                };
+                var call0 = ApiDriver.visualize(data0);
+                // console.log(call);
+                call0
+                    .then(response => {
+                        console.log(response.data);
+                        this.imageSrc0 = "src/assets/RTAstronomicalAPI/images/"+response.data;
+                    })
+                    .catch(error => {console.log(error);});
+
+                let data1 = {
+                    year:   this.endDate.substring(0, 4), 
+                    month:  this.endDate.substring(5, 7), 
+                    day:    this.endDate.substring(8, 10), 
+                    hour:   this.endTime.substring(0, 2),
+                    minute: this.endTime.substring(3, 5),
+                    targetRA:   0, // TODO: make this the RA of the Celestial Body
+                    targetDec:  0, // TODO: make this the RA of the Celestial Body
+                    longitude: -76.704564,
+                    latitude:  40.024409,
+                    altitude: 395 // TODO: make longitude, latitude, and altitude dependant on the selected telescope.
+                };
+                var call1 = ApiDriver.visualize(data1);
+                // console.log(call);
+                call1
+                    .then(response => {
+                        console.log(response.data);
+                        this.imageSrc1 = "src/assets/RTAstronomicalAPI/images/"+response.data;
+                    })
+                    .catch(error => {console.log(error);});
+            }
+            else if(this.type == "Drift Scan") {
+                let data0 = {
+                    year:   this.startDate.substring(0, 4), 
+                    month:  this.startDate.substring(5, 7), 
+                    day:    this.startDate.substring(8, 10), 
+                    hour:   this.startTime.substring(0, 2),
+                    minute: this.startTime.substring(3, 5),
+                    targetRA:   0, // TODO: make this accept azimuth instead
+                    targetDec:  0, // TODO: make this accept elevation instead
+                    longitude: -76.704564,
+                    latitude:  40.024409,
+                    altitude: 395 // TODO: make longitude, latitude, and altitude dependant on the selected telescope.
+                };
+                var call0 = ApiDriver.visualize(data0);
+                // console.log(call);
+                call0
+                    .then(response => {
+                        console.log(response.data);
+                        this.imageSrc0 = "src/assets/RTAstronomicalAPI/images/"+response.data;
+                    })
+                    .catch(error => {console.log(error);});
+
+                let data1 = {
+                    year:   this.endDate.substring(0, 4), 
+                    month:  this.endDate.substring(5, 7), 
+                    day:    this.endDate.substring(8, 10), 
+                    hour:   this.endTime.substring(0, 2),
+                    minute: this.endTime.substring(3, 5),
+                    targetRA:   0, // TODO: make this accept azimuth instead
+                    targetDec:  0, // TODO: make this accept elevation instead
+                    longitude: -76.704564,
+                    latitude:  40.024409,
+                    altitude: 395 // TODO: make longitude, latitude, and altitude dependant on the selected telescope.
+                };
+                var call1 = ApiDriver.visualize(data1);
+                // console.log(call);
+                call1
+                    .then(response => {
+                        console.log(response.data);
+                        this.imageSrc1 = "src/assets/RTAstronomicalAPI/images/"+response.data;
+                    })
+                    .catch(error => {console.log(error);});
+            }
+            else if(this.type == "Raster Scan") {
+                // console.log((this.form.firstCoordinate.hours * 15.0 + this.form.firstCoordinate.minutes * 0.25));
+                let data0 = {
+                    year:   this.startDate.substring(0, 4), 
+                    month:  this.startDate.substring(5, 7), 
+                    day:    this.startDate.substring(8, 10), 
+                    hour:   this.startTime.substring(0, 2),
+                    minute: this.startTime.substring(3, 5),
+                    targetRA:   (this.form.firstCoordinate.hours * 15.0 + this.form.firstCoordinate.minutes * 0.25),
+                    targetDec:  this.form.firstCoordinate.declination,
+                    longitude: -76.704564,
+                    latitude:  40.024409,
+                    altitude: 395 // TODO: make longitude, latitude, and altitude dependant on the selected telescope.
+                };
+                var call0 = ApiDriver.visualize(data0);
+                // console.log(call);
+                call0
+                    .then(response => {
+                        console.log(response.data);
+                        this.imageSrc0 = "src/assets/RTAstronomicalAPI/images/"+response.data;
+                    })
+                    .catch(error => {
+                        // console.log("HIT");
+                        console.log(error);
+                    });
+
+                let data1 = {
+                    year:   this.endDate.substring(0, 4), 
+                    month:  this.endDate.substring(5, 7), 
+                    day:    this.endDate.substring(8, 10), 
+                    hour:   this.endTime.substring(0, 2),
+                    minute: this.endTime.substring(3, 5),
+                    targetRA:   (this.form.firstCoordinate.hours * 15.0 + this.form.firstCoordinate.minutes * 0.25),
+                    targetDec:  this.form.firstCoordinate.declination,
+                    longitude: -76.704564,
+                    latitude:  40.024409,
+                    altitude: 395 // TODO: make longitude, latitude, and altitude dependant on the selected telescope.
+                };
+                var call1 = ApiDriver.visualize(data1);
+                // console.log(call);
+                call1
+                    .then(response => {
+                        console.log(response.data);
+                        this.imageSrc1 = "src/assets/RTAstronomicalAPI/images/"+response.data;
+                    })
+                    .catch(error => {console.log(error);});
+            }
+                
+        }, 
         // Method to submit to back end
         submit() {
             // Clears the errors first to make sure that if backend sends back any errors we only display the current errors
@@ -560,14 +773,14 @@ export default {
                 isPublic: !this.form.isPrivate.value,
                 hours: this.form.rightAscension.hours,
                 minutes: this.form.rightAscension.minutes,
-                seconds: this.form.rightAscension.seconds,
+                // seconds: 0, // this.form.rightAscension.seconds,
                 declination: this.form.declination.value,
                 celestialBodyId: this.selectedBody,
                 azimuth: this.form.azimuth.value,
                 elevation: this.form.elevation.value,
                 coordinates: this.coordinates,
-                priority: 'PRIMARY'
-            };
+                priority: 'PRIMARY' // TODO: make this a selectable option!
+            }; // does this have the capability for Raster Scans to be submitted?
                         
             // Call appropriate API CALL and send form in json format
             ApiDriver.Appointment.create(JSON.stringify(form), this.selectedType).then((response) => {
@@ -702,7 +915,7 @@ export default {
                     this.endDate &&
                     this.form.rightAscension.hours,
                     this.form.rightAscension.minutes,
-                    this.form.rightAscension.seconds,
+                    // 0, // this.form.rightAscension.seconds,
                     this.form.declination.value
                 )
             }
@@ -733,12 +946,12 @@ export default {
                     this.endDate &&
                     this.form.firstCoordinate.hours,
                     this.form.firstCoordinate.minutes,
-                    this.form.firstCoordinate.seconds,
+                    // 0, // this.form.firstCoordinate.seconds,
                     this.form.firstCoordinate.rightAscension,
                     this.form.firstCoordinate.declination,
                     this.form.secondCoordinate.hours,
                     this.form.secondCoordinate.minutes,
-                    this.form.secondCoordinate.seconds,
+                    // 0, // this.form.secondCoordinate.seconds,
                     this.form.secondCoordinate.rightAscension,
                     this.form.secondCoordinate.declination
                 )
