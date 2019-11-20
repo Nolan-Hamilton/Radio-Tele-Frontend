@@ -11,7 +11,7 @@
             <v-flex xs6 sm4>
               <v-text-field
                 v-model="rightAscHours"
-                :disabled="!(mode === 'Right Ascension by Hours and Minutes')"
+                :disabled="!(mode === 'Right Ascension and Declination')"
                 :validate-on-blur="true"
                 color="blue darken-2"
                 :rules="[rules.rightAscHours]"
@@ -24,7 +24,7 @@
             <v-flex xs6 sm4>
               <v-text-field
                 v-model="rightAscMinutes"
-                :disabled="!(mode === 'Right Ascension by Hours and Minutes')"
+                :disabled="!(mode === 'Right Ascension and Declination')"
                 :validate-on-blur="true"
                 color="blue darken-2"
                 :rules="[rules.rightAscMinutes]"
@@ -33,24 +33,11 @@
                 class="number"
               ></v-text-field>
             </v-flex>
-            <!-- Right Asc in Dec -->
-            <v-flex xs6 sm4>
-              <v-text-field
-                v-model="rightAscDecimal"
-                :disabled="!(mode === 'Right Ascension by Decimal Value')"
-                :validate-on-blur="true"
-                color="blue darken-2"
-                :rules="[rules.azimuth]"
-                label="Right Ascension Decimals"
-                type="number"
-                class="number"
-              ></v-text-field>
-            </v-flex>
             <!-- Declination -->
             <v-flex xs6 sm4>
               <v-text-field
                 v-model="declination"
-                :disabled="!(mode === 'Right Ascension by Decimal Value' || mode === 'Right Ascension by Hours and Minutes' )"
+                :disabled="!(mode === 'Right Ascension and Declination')"
                 :validate-on-blur="true"
                 color="blue darken-2"
                 :rules="[rules.declination]"
@@ -89,7 +76,7 @@
             <!-- Jog Delta -->
             <v-flex xs6 sm4>
               <v-text-field
-                v-model="this.jogDelta"
+                v-model="jogDelta"
                 :disabled="mode == null"
                 :validate-on-blur="true"
                 color="blue darken-2"
@@ -157,7 +144,6 @@ export default {
     return {
       rightAscHours: null,
       rightAscMinutes: null,
-      rightAscDecimal: null,
       declination: null,
 
       azimuth: null,
@@ -169,8 +155,7 @@ export default {
       mode: null,
 
       modes: [
-        "Right Ascension by Hours and Minutes",
-        "Right Ascension by Decimal Value",
+        "Right Ascension and Declination",
         "Azimuth and Elevation"
       ],
 
@@ -215,7 +200,6 @@ export default {
     clearForm() {
         (this.rightAscHours = null),
         (this.rightAscMinutes = null),
-        (this.rightAscDecimal = null),
         (this.declination = null),
         (this.azimuth = null),
         (this.elevation = null),
@@ -225,63 +209,50 @@ export default {
 
         this.jogSubmits = false;
         this.jogDelta = 1;
-    },
+    }, /*
     updateRightAsc() {
       if (this.mode === "Right Ascension by Decimal Value") {
         var totalMinutes = this.rightAscDecimal * 4;
         this.rightAscHours = (totalMinutes - (totalMinutes % 60)) / 60;
         this.rightAscMinutes = totalMinutes % 60;
-      } else if (this.mode === "Right Ascension by Hours and Minutes") {
+      } else if (this.mode === "Right Ascension and Declination") {
         this.rightAscDecimal =
           this.rightAscHours * 15 + this.rightAscMinutes * 0.25;
       }
-    },
+    }, */
     update(val) {
       if (val == 0) {
         this.submit();
       } else if (val == 1) {
         // Right Asc Neg
-        if (this.mode === "Right Ascension by Decimal Value") {
-          this.rightAscDecimal =
-            parseFloat(this.rightAscDecimal) - parseFloat(this.jogDelta);
-        } else if (this.mode === "Right Ascension by Hours and Minutes") {
+        if (this.mode === "Right Ascension and Declination") {
           this.rightAscMinutes =
             parseInt(this.rightAscMinutes) - parseFloat(this.jogDelta);
           if (this.rightAscMinutes < 0) {
-            this.rightAscHours =
-              parseInt(this.rightAscHours) - parseFloat(this.jogDelta);
+            this.rightAscHours = parseInt(this.rightAscHours) - 1;
             this.rightAscMinutes = parseInt(this.rightAscMinutes) + 60;
           }
         }
       } else if (val == 2) {
         // Declination Pos
-        if (
-          this.mode === "Right Ascension by Decimal Value" ||
-          this.mode === "Right Ascension by Hours and Minutes"
-        ) {
+        if (this.mode === "Right Ascension and Declination") {
           this.declination =
             parseFloat(this.declination) + parseFloat(this.jogDelta);
         }
       } else if (val == 3) {
         // Declination Neg
-        if (
-          this.mode === "Right Ascension by Decimal Value" ||
-          this.mode === "Right Ascension by Hours and Minutes"
-        ) {
+        if (this.mode === "Right Ascension and Declination") {
           this.declination =
             parseFloat(this.declination) - parseFloat(this.jogDelta);
         }
       } else if (val == 4) {
         // Right Asc Pos
-        if (this.mode === "Right Ascension by Decimal Value") {
-          this.rightAscDecimal =
-            parseFloat(this.rightAscDecimal) + parseFloat(this.jogDelta);
-        } else if (this.mode === "Right Ascension by Hours and Minutes") {
+        if (this.mode === "Right Ascension and Declination") {
           this.rightAscMinutes =
             parseInt(this.rightAscMinutes) + parseFloat(this.jogDelta);
           if (this.rightAscMinutes >= 60) {
             this.rightAscHours =
-              parseInt(this.rightAscHours) + parseFloat(this.jogDelta);
+              parseInt(this.rightAscHours) + 1;
             this.rightAscMinutes = parseInt(this.rightAscMinutes) - 60;
           }
         }
