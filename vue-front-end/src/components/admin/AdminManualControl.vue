@@ -105,26 +105,32 @@
                 </v-flex>
             <v-card-actions>
                 <!-- Buttons to jog by Right Asc and Declination -->
-                <v-btn flat @click="update(1)">Right Asc Neg</v-btn>
-                <!-- H = left    -->
-                <v-btn flat @click="update(2)">Declination Pos</v-btn>
-                <!-- J = up      -->
-                <v-btn flat @click="update(3)">Declination Neg</v-btn>
-                <!-- K = down    -->
-                <v-btn flat @click="update(4)">Right Asc Pos</v-btn>
-                <!-- L = right   -->
+                <v-container>
+                  <v-btn flat @click="update(2)">Declination Pos</v-btn>
+                  <!-- J = up      -->
+                  <br />
+                  <v-btn flat @click="update(1)">Right Asc Neg</v-btn>
+                  <!-- H = left    -->
+                  <v-btn flat @click="update(3)">Declination Neg</v-btn>
+                  <!-- K = down    -->
+                  <v-btn flat @click="update(4)">Right Asc Pos</v-btn>
+                  <!-- L = right   -->
+                </v-container>
 
                 <v-spacer></v-spacer>
 
                 <!-- Buttons to jog by Azimuth and Elevation -->
-                <v-btn flat @click="update(5)">Azimuth Neg</v-btn>
-                <!-- H = left    -->
-                <v-btn flat @click="update(6)">Elevation Pos</v-btn>
-                <!-- J = up      -->
-                <v-btn flat @click="update(7)">Elevation Neg</v-btn>
-                <!-- K = down    -->
-                <v-btn flat @click="update(8)">Azimuth Pos</v-btn>
-                <!-- L = right   -->
+                <v-container>
+                  <v-btn flat @click="update(6)">Elevation Pos</v-btn>
+                  <!-- J = up      -->
+                  <br />
+                  <v-btn flat @click="update(5)">Azimuth Neg</v-btn>
+                  <!-- H = left    -->
+                  <v-btn flat @click="update(7)">Elevation Neg</v-btn>
+                  <!-- K = down    -->
+                  <v-btn flat @click="update(8)">Azimuth Pos</v-btn>
+                  <!-- L = right   -->
+                </v-container>
             </v-card-actions>
         </v-container>
       </v-card>
