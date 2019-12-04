@@ -294,9 +294,19 @@ export default {
       console.log("Submit Reached!");
       if(val == 0) {
           // COORDS
+          if(this.mode === "Right Ascension and Declination") {
+
+          } else if(this.mode === "Azimuth and Elevation") {
+            
+          }
       } else if(val == 1) {
           // SCRIPTS
+          if(this.selectedScript != null){
+            console.log("Script Submit!");
+          }
       }
+
+      // client.close();
     }
   },
   components: {
