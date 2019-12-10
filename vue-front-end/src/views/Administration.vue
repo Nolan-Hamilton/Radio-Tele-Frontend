@@ -66,6 +66,11 @@
         <v-tab-item>
           <admin-sensor-data></admin-sensor-data>
         </v-tab-item>
+        
+        <v-tab-item>
+          <admin-sensor-data></admin-sensor-data>
+        </v-tab-item>
+
       </v-tabs>
 
   </div>
@@ -82,7 +87,7 @@ import AdminUserApproval from '../components/admin/AdminUserApproval.vue';
 import AdminAppointmentApproval from '../components/admin/AdminAppointmentApproval.vue';
 import CelestialBodies from '../components/admin/CelestialBodies.vue';
 import Loading from "../components/utility/Loading";
-import WeatherStation from "../components/admin/WeatherStation.vue"
+import WeatherStation from "../components/admin/WeatherStation.vue";
 import AdminSensorData from '../components/admin/AdminSensorData.vue';
 
  export default {
