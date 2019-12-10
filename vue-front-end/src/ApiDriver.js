@@ -164,6 +164,13 @@ export default {
         return axios.get(this.namespace + "/" + "listBetweenCreatedDates?lowerDate=" + lowerDate + "&upperDate=" + upperDate, Headers.retrieveHeaders())
       }
     },
+    VideoFiles: {
+      namespace: baseUrl + "video-files",
+      viewVideoFiles: function(lowerDate, upperDate) {
+        return axios.get(this.namespace + "/" + "listBetweenCreatedDates?lowerDate=" + lowerDate + "&upperDate=" + upperDate, Headers.retrieveHeaders())
+      }
+    },
+
     login: function(data) {
       // return axios.post("http://localhost:8080/login?email=" + data.username.value + "&password=" + data.password.value, JSON.stringify(data))
       return axios.post("http://api.ycpradiotelescope.com:8080/login?email=" + data.username.value + "&password=" + data.password.value, JSON.stringify(data))

@@ -38,6 +38,10 @@
           Sensors
           <v-icon>rss_feed</v-icon>
         </v-tab>
+        <v-tab>
+          Security Footage
+          <v-icon>local_movies</v-icon>
+        </v-tab>
         
         <v-tab-item>
           <admin-log></admin-log>
@@ -68,9 +72,8 @@
         </v-tab-item>
         
         <v-tab-item>
-          <admin-sensor-data></admin-sensor-data>
+          <admin-security-footage></admin-security-footage>
         </v-tab-item>
-
       </v-tabs>
 
   </div>
@@ -89,6 +92,7 @@ import CelestialBodies from '../components/admin/CelestialBodies.vue';
 import Loading from "../components/utility/Loading";
 import WeatherStation from "../components/admin/WeatherStation.vue";
 import AdminSensorData from '../components/admin/AdminSensorData.vue';
+import AdminSecurityFootage from '../components/admin/AdminSecurityFootage.vue';
 
  export default {
     title: "Radio Telescope 1.1.0",
@@ -123,7 +127,8 @@ import AdminSensorData from '../components/admin/AdminSensorData.vue';
         AdminAppointmentApproval,
         CelestialBodies,
         WeatherStation,
-        AdminSensorData
+        AdminSensorData,
+        AdminSecurityFootage
     },
     mounted() {
       this.authenticate()
