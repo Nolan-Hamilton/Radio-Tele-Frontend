@@ -493,8 +493,8 @@ export default {
             endDate: '',
             endTime: '',
             showImage: 'no',
-            imageSrc0: 'https://ak8.picdn.net/shutterstock/videos/13288688/thumb/1.jpg',
-            imageSrc1: 'https://ak8.picdn.net/shutterstock/videos/13288688/thumb/1.jpg',
+            imageSrc0: 'src/assets/RTAstronomicalAPI/images/skyview-2019-12-13-19-0--76-40-395-152-10.png',
+            imageSrc1: 'src/assets/RTAstronomicalAPI/images/skyview-2019-12-13-19-0--76-40-395-152-10.png',
             notVisible: false,
             visibleText: 'Warning, at least the start or end includes a target that is not visible at that time.',
 
