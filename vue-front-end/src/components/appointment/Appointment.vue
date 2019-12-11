@@ -493,8 +493,8 @@ export default {
             endDate: '',
             endTime: '',
             showImage: 'no',
-            imageSrc0: 'https://ak8.picdn.net/shutterstock/videos/13288688/thumb/1.jpg',
-            imageSrc1: 'https://ak8.picdn.net/shutterstock/videos/13288688/thumb/1.jpg',
+            imageSrc0: 'src/assets/RTAstronomicalAPI/images/skyview-2019-12-13-19-0--76-40-395-152-10.png',
+            imageSrc1: 'src/assets/RTAstronomicalAPI/images/skyview-2019-12-13-19-0--76-40-395-152-10.png',
             notVisible: false,
             visibleText: 'Warning, at least the start or end includes a target that is not visible at that time.',
 
@@ -586,183 +586,71 @@ export default {
             if(this.endTime == '') {
                 this.endTime = '12:00'
             }
+            var tempTargetRA = 0;
+            var tempTargetDec = 0;
             if(this.type == "Point") {
-                let data0 = {
-                    year:   this.startDate.substring(0, 4), 
-                    month:  this.startDate.substring(5, 7), 
-                    day:    this.startDate.substring(8, 10), 
-                    hour:   this.startTime.substring(0, 2),
-                    minute: this.startTime.substring(3, 5),
-                    targetRA:   (this.form.rightAscension.hours * 15.0 + this.form.rightAscension.minutes * 0.25), 
-                    targetDec:  this.form.declination.value,
-                    longitude: -76.704564,
-                    latitude:  40.024409,
-                    altitude: 395 // TODO: make longitude, latitude, and altitude dependant on the selected telescope.
-                };
-                var call0 = ApiDriver.visualize(data0);
-                // console.log(call);
-                call0
-                    .then(response => {
-                        console.log(response.data);
-                        this.imageSrc0 = "src/assets/RTAstronomicalAPI/images/"+response.data;
-                    })
-                    .catch(error => {console.log(error);});
-
-                let data1 = {
-                    year:   this.endDate.substring(0, 4), 
-                    month:  this.endDate.substring(5, 7), 
-                    day:    this.endDate.substring(8, 10), 
-                    hour:   this.endTime.substring(0, 2),
-                    minute: this.endTime.substring(3, 5),
-                    targetRA:   (this.form.rightAscension.hours * 15.0 + this.form.rightAscension.minutes * 0.25), 
-                    targetDec:  this.form.declination.value,
-                    longitude: -76.704564,
-                    latitude:  40.024409,
-                    altitude: 395 // TODO: make longitude, latitude, and altitude dependant on the selected telescope.
-                };
-                var call1 = ApiDriver.visualize(data1);
-                // console.log(call);
-                call1
-                    .then(response => {
-                        console.log(response.data);
-                        this.imageSrc1 = "src/assets/RTAstronomicalAPI/images/"+response.data;
-                    })
-                    .catch(error => {console.log(error);});
+                tempTargetRA = (this.form.rightAscension.hours * 15.0 + this.form.rightAscension.minutes * 0.25);
+                tempTargetDec = this.form.declination.value;
             }
             else if(this.type == "Celestial Body") {
-                let data0 = {
-                    year:   this.startDate.substring(0, 4), 
-                    month:  this.startDate.substring(5, 7), 
-                    day:    this.startDate.substring(8, 10), 
-                    hour:   this.startTime.substring(0, 2),
-                    minute: this.startTime.substring(3, 5),
-                    targetRA:   0, // TODO: make this the RA of the Celestial Body
-                    targetDec:  0, // TODO: make this the RA of the Celestial Body
-                    longitude: -76.704564,
-                    latitude:  40.024409,
-                    altitude: 395 // TODO: make longitude, latitude, and altitude dependant on the selected telescope.
-                };
-                var call0 = ApiDriver.visualize(data0);
-                // console.log(call);
-                call0
-                    .then(response => {
-                        console.log(response.data);
-                        this.imageSrc0 = "src/assets/RTAstronomicalAPI/images/"+response.data;
-                    })
-                    .catch(error => {console.log(error);});
-
-                let data1 = {
-                    year:   this.endDate.substring(0, 4), 
-                    month:  this.endDate.substring(5, 7), 
-                    day:    this.endDate.substring(8, 10), 
-                    hour:   this.endTime.substring(0, 2),
-                    minute: this.endTime.substring(3, 5),
-                    targetRA:   0, // TODO: make this the RA of the Celestial Body
-                    targetDec:  0, // TODO: make this the RA of the Celestial Body
-                    longitude: -76.704564,
-                    latitude:  40.024409,
-                    altitude: 395 // TODO: make longitude, latitude, and altitude dependant on the selected telescope.
-                };
-                var call1 = ApiDriver.visualize(data1);
-                // console.log(call);
-                call1
-                    .then(response => {
-                        console.log(response.data);
-                        this.imageSrc1 = "src/assets/RTAstronomicalAPI/images/"+response.data;
-                    })
-                    .catch(error => {console.log(error);});
-            }
-            else if(this.type == "Drift Scan") {
-                let data0 = {
-                    year:   this.startDate.substring(0, 4), 
-                    month:  this.startDate.substring(5, 7), 
-                    day:    this.startDate.substring(8, 10), 
-                    hour:   this.startTime.substring(0, 2),
-                    minute: this.startTime.substring(3, 5),
-                    targetRA:   0, // TODO: make this accept azimuth instead
-                    targetDec:  0, // TODO: make this accept elevation instead
-                    longitude: -76.704564,
-                    latitude:  40.024409,
-                    altitude: 395 // TODO: make longitude, latitude, and altitude dependant on the selected telescope.
-                };
-                var call0 = ApiDriver.visualize(data0);
-                // console.log(call);
-                call0
-                    .then(response => {
-                        console.log(response.data);
-                        this.imageSrc0 = "src/assets/RTAstronomicalAPI/images/"+response.data;
-                    })
-                    .catch(error => {console.log(error);});
-
-                let data1 = {
-                    year:   this.endDate.substring(0, 4), 
-                    month:  this.endDate.substring(5, 7), 
-                    day:    this.endDate.substring(8, 10), 
-                    hour:   this.endTime.substring(0, 2),
-                    minute: this.endTime.substring(3, 5),
-                    targetRA:   0, // TODO: make this accept azimuth instead
-                    targetDec:  0, // TODO: make this accept elevation instead
-                    longitude: -76.704564,
-                    latitude:  40.024409,
-                    altitude: 395 // TODO: make longitude, latitude, and altitude dependant on the selected telescope.
-                };
-                var call1 = ApiDriver.visualize(data1);
-                // console.log(call);
-                call1
-                    .then(response => {
-                        console.log(response.data);
-                        this.imageSrc1 = "src/assets/RTAstronomicalAPI/images/"+response.data;
-                    })
-                    .catch(error => {console.log(error);});
+                tempTargetRA = (this.bodies[0].hours * 15.0 + this.bodies[0].minutes * 0.25); // THIS IS WRONG
+                tempTargetDec = this.bodies[0].declination;
+                console.log(this.bodies);
             }
             else if(this.type == "Raster Scan") {
-                // console.log((this.form.firstCoordinate.hours * 15.0 + this.form.firstCoordinate.minutes * 0.25));
-                let data0 = {
-                    year:   this.startDate.substring(0, 4), 
-                    month:  this.startDate.substring(5, 7), 
-                    day:    this.startDate.substring(8, 10), 
-                    hour:   this.startTime.substring(0, 2),
-                    minute: this.startTime.substring(3, 5),
-                    targetRA:   (this.form.firstCoordinate.hours * 15.0 + this.form.firstCoordinate.minutes * 0.25),
-                    targetDec:  this.form.firstCoordinate.declination,
-                    longitude: -76.704564,
-                    latitude:  40.024409,
-                    altitude: 395 // TODO: make longitude, latitude, and altitude dependant on the selected telescope.
-                };
-                var call0 = ApiDriver.visualize(data0);
-                // console.log(call);
-                call0
-                    .then(response => {
-                        console.log(response.data);
-                        this.imageSrc0 = "src/assets/RTAstronomicalAPI/images/"+response.data;
-                    })
-                    .catch(error => {
-                        // console.log("HIT");
-                        console.log(error);
-                    });
-
-                let data1 = {
-                    year:   this.endDate.substring(0, 4), 
-                    month:  this.endDate.substring(5, 7), 
-                    day:    this.endDate.substring(8, 10), 
-                    hour:   this.endTime.substring(0, 2),
-                    minute: this.endTime.substring(3, 5),
-                    targetRA:   (this.form.firstCoordinate.hours * 15.0 + this.form.firstCoordinate.minutes * 0.25),
-                    targetDec:  this.form.firstCoordinate.declination,
-                    longitude: -76.704564,
-                    latitude:  40.024409,
-                    altitude: 395 // TODO: make longitude, latitude, and altitude dependant on the selected telescope.
-                };
-                var call1 = ApiDriver.visualize(data1);
-                // console.log(call);
-                call1
-                    .then(response => {
-                        console.log(response.data);
-                        this.imageSrc1 = "src/assets/RTAstronomicalAPI/images/"+response.data;
-                    })
-                    .catch(error => {console.log(error);});
+                targetRA = (this.form.firstCoordinate.hours * 15.0 + this.form.firstCoordinate.minutes * 0.25);
+                targetDec = this.form.firstCoordinate.declination;
             }
-                
+            else if(this.type == "Drift Scan") {
+                // TODO: this
+            }
+
+            // console.log(tempTargetRA + " " + tempTargetDec);
+
+            let data0 = {
+                year:   this.startDate.substring(0, 4), 
+                month:  this.startDate.substring(5, 7), 
+                day:    this.startDate.substring(8, 10), 
+                hour:   this.startTime.substring(0, 2),
+                minute: this.startTime.substring(3, 5),
+                targetRA:   tempTargetRA,
+                targetDec:  tempTargetDec,
+                longitude: -76.704564,
+                latitude:  40.024409,
+                altitude: 395 // TODO: make longitude, latitude, and altitude dependant on the selected telescope.
+            };
+            var call0 = ApiDriver.visualize(data0);
+            // console.log(call);
+            call0
+                .then(response => {
+                    console.log(response.data);
+                    this.imageSrc0 = "src/assets/RTAstronomicalAPI/images/"+response.data;
+                })
+                .catch(error => {
+                    // console.log("HIT");
+                    console.log(error);
+                });
+
+            let data1 = {
+                year:   this.endDate.substring(0, 4), 
+                month:  this.endDate.substring(5, 7), 
+                day:    this.endDate.substring(8, 10), 
+                hour:   this.endTime.substring(0, 2),
+                minute: this.endTime.substring(3, 5),
+                targetRA:   tempTargetRA,
+                targetDec:  tempTargetDec,
+                longitude: -76.704564,
+                latitude:  40.024409,
+                altitude: 395 // TODO: make longitude, latitude, and altitude dependant on the selected telescope.
+            };
+            var call1 = ApiDriver.visualize(data1);
+            // console.log(JSON.stringify(data1));
+            call1
+                .then(response => {
+                    console.log(response.data);
+                    this.imageSrc1 = "src/assets/RTAstronomicalAPI/images/"+response.data;
+                })
+                .catch(error => {console.log(error);});
         }, 
         // Method to submit to back end
         submit() {
@@ -781,15 +669,32 @@ export default {
             var startVisible = true;
             var endVisible = true;
             this.notVisible = false;
-            if(this.type == "Point") {
+            if(this.type != "Drift Scan") {
+                var tempTargetRA = 0;
+                var tempTargetDec = 0;
+
+                if(this.type == "Point") {
+                    tempTargetRA = (this.form.rightAscension.hours * 15.0 + this.form.rightAscension.minutes * 0.25);
+                    tempTargetDec = this.form.declination.value;
+                }
+                else if(this.type == "Celestial Body") {
+                    tempTargetRA = (this.bodies[0].hours * 15.0 + this.bodies[0].minutes * 0.25); // THIS IS WRONG
+                    tempTargetDec = this.bodies[0].declination;
+                    console.log(this.bodies);
+                }
+                else if(this.type == "Raster Scan") {
+                    targetRA = (this.form.firstCoordinate.hours * 15.0 + this.form.firstCoordinate.minutes * 0.25);
+                    targetDec = this.form.firstCoordinate.declination;
+                }
+
                 let data0 = {
                     year:   this.startDate.substring(0, 4), 
                     month:  this.startDate.substring(5, 7), 
                     day:    this.startDate.substring(8, 10), 
                     hour:   this.startTime.substring(0, 2),
                     minute: this.startTime.substring(3, 5),
-                    targetRA:   (this.form.rightAscension.hours * 15.0 + this.form.rightAscension.minutes * 0.25), 
-                    targetDec:  this.form.declination.value,
+                    targetRA:   tempTargetRA, 
+                    targetDec:  tempTargetDec,
                     longitude: -76.704564,
                     latitude:  40.024409,
                     altitude: 395 // TODO: make longitude, latitude, and altitude dependant on the selected telescope.
@@ -811,8 +716,8 @@ export default {
                     day:    this.endDate.substring(8, 10), 
                     hour:   this.endTime.substring(0, 2),
                     minute: this.endTime.substring(3, 5),
-                    targetRA:   (this.form.rightAscension.hours * 15.0 + this.form.rightAscension.minutes * 0.25), 
-                    targetDec:  this.form.declination.value,
+                    targetRA:   tempTargetRA, 
+                    targetDec:  tempTargetDec,
                     longitude: -76.704564,
                     latitude:  40.024409,
                     altitude: 395 // TODO: make longitude, latitude, and altitude dependant on the selected telescope.
@@ -829,48 +734,50 @@ export default {
                     .catch(error => {console.log(error);});
             }
 
-            // set up form to send to back end with data from form obj
-            let form = {
-                userId: this.$store.state.currentUserId,
-                startTime: new Date(this.start).toUTCString(),
-                endTime: new Date(this.end).toUTCString(),
-                telescopeId: this.telescopes.indexOf(this.telescopeName) + 1,
-                isPublic: !this.form.isPrivate.value,
-                hours: this.form.rightAscension.hours,
-                minutes: this.form.rightAscension.minutes,
-                seconds: 0, // this.form.rightAscension.seconds,
-                declination: this.form.declination.value,
-                celestialBodyId: this.selectedBody,
-                azimuth: this.form.azimuth.value,
-                elevation: this.form.elevation.value,
-                coordinates: this.coordinates,
-                priority: 'PRIMARY' // TODO: make this a selectable option!
-            }; // does this have the capability for Raster Scans to be submitted?
+            if(!this.notVisible) {
+                // set up form to send to back end with data from form obj
+                let form = {
+                    userId: this.$store.state.currentUserId,
+                    startTime: new Date(this.start).toUTCString(),
+                    endTime: new Date(this.end).toUTCString(),
+                    telescopeId: this.telescopes.indexOf(this.telescopeName) + 1,
+                    isPublic: !this.form.isPrivate.value,
+                    hours: this.form.rightAscension.hours,
+                    minutes: this.form.rightAscension.minutes,
+                    // seconds: 0, // this.form.rightAscension.seconds,
+                    declination: this.form.declination.value,
+                    celestialBodyId: this.selectedBody,
+                    azimuth: this.form.azimuth.value,
+                    elevation: this.form.elevation.value,
+                    coordinates: this.coordinates,
+                    priority: 'PRIMARY' // TODO: make this a selectable option!
+                }; // does this have the capability for Raster Scans to be submitted?
+                            
+                // Call appropriate API CALL and send form in json format
+                ApiDriver.Appointment.create(JSON.stringify(form), this.selectedType).then((response) => {
+                    HttpResponse.then(response, (data) => {
+                        // If returns SUCCESS
+                        this.snackbar = true;
                         
-            // Call appropriate API CALL and send form in json format
-            ApiDriver.Appointment.create(JSON.stringify(form), this.selectedType).then((response) => {
-                HttpResponse.then(response, (data) => {
-                    // If returns SUCCESS
-                    this.snackbar = true;
-                    
-                    // Reset form before closing Modal as user can schedule multiple Appointments without leaving Scheduler Page
-                    this.resetForm()
-                        
-                    // Call the created-event method on Scheduler.vue page so it knows whether to display the newly created event or not without doing a backend call again
-                    this.$emit('created-event', form, data.data);
-                    this.$emit('close-modal');
-                    }, (status, errors) => {
-                        if (parseInt(status) === 403) {
-                            HttpResponse.accessDenied(this)
-                        } else {
-                            this.handleErrors(errors, form);
-                        }
-                    });
-            });
-            this.startTime=''
-            this.startDate=''
-            this.endDate=''
-            this.endTime=''
+                        // Reset form before closing Modal as user can schedule multiple Appointments without leaving Scheduler Page
+                        this.resetForm()
+                            
+                        // Call the created-event method on Scheduler.vue page so it knows whether to display the newly created event or not without doing a backend call again
+                        this.$emit('created-event', form, data.data);
+                        this.$emit('close-modal');
+                        }, (status, errors) => {
+                            if (parseInt(status) === 403) {
+                                HttpResponse.accessDenied(this)
+                            } else {
+                                this.handleErrors(errors, form);
+                            }
+                        });
+                });
+                this.startTime=''
+                this.startDate=''
+                this.endDate=''
+                this.endTime=''
+            }
         },
         handleErrors(errors, formObj) {
             for (var field in errors) {
