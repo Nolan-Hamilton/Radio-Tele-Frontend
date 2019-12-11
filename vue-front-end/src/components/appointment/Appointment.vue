@@ -838,7 +838,7 @@ export default {
                 isPublic: !this.form.isPrivate.value,
                 hours: this.form.rightAscension.hours,
                 minutes: this.form.rightAscension.minutes,
-                // seconds: 0, // this.form.rightAscension.seconds,
+                seconds: 0, // this.form.rightAscension.seconds,
                 declination: this.form.declination.value,
                 celestialBodyId: this.selectedBody,
                 azimuth: this.form.azimuth.value,

@@ -39,6 +39,10 @@
           <v-icon>rss_feed</v-icon>
         </v-tab>
         <v-tab>
+          Manual Control
+          <v-icon>settings_input_antenna</v-icon> 
+        </v-tab>
+        <v-tab>
           Security Footage
           <v-icon>local_movies</v-icon>
         </v-tab>
@@ -72,6 +76,10 @@
         </v-tab-item>
         
         <v-tab-item>
+          <admin-manual-control></admin-manual-control>
+        </v-tab-item>
+        
+        <v-tab-item>
           <admin-security-footage></admin-security-footage>
         </v-tab-item>
       </v-tabs>
@@ -92,6 +100,7 @@ import CelestialBodies from '../components/admin/CelestialBodies.vue';
 import Loading from "../components/utility/Loading";
 import WeatherStation from "../components/admin/WeatherStation.vue";
 import AdminSensorData from '../components/admin/AdminSensorData.vue';
+import AdminManualControl from "../components/admin/AdminManualControl.vue"
 import AdminSecurityFootage from '../components/admin/AdminSecurityFootage.vue';
 
  export default {
@@ -128,6 +137,7 @@ import AdminSecurityFootage from '../components/admin/AdminSecurityFootage.vue';
         CelestialBodies,
         WeatherStation,
         AdminSensorData,
+        AdminManualControl
         AdminSecurityFootage
     },
     mounted() {
