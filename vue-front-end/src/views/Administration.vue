@@ -137,7 +137,7 @@ import AdminSecurityFootage from '../components/admin/AdminSecurityFootage.vue';
         CelestialBodies,
         WeatherStation,
         AdminSensorData,
-        AdminManualControl
+        AdminManualControl,
         AdminSecurityFootage
     },
     mounted() {
