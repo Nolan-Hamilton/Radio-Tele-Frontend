@@ -267,6 +267,8 @@ export default {
                 this.futureAppointmentsRedirect()
             }else if(value === 'Update Allotted Time'){
                 this.UpdateTimeForm = true
+            }else if(value === 'Update Profile Picture'){
+                this.updateProfilePicture = true;
             }
         },
         editRedirect() {
@@ -556,6 +558,7 @@ export default {
             this.controls.push("Change Email")
             this.controls.push("Change Password")
             this.controls.push("Request New Role")
+            this.controls.push("Update Profile Picture")
         }
     }
 }

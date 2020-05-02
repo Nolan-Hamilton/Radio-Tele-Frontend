@@ -69,6 +69,12 @@ export default {
       approve: function(data) {
         return axios.put(baseUrl + "roles/validate", data, Headers.retrieveHeaders())
       },
+      reviewProfilePicture:function(userId, data) {
+        return axios.post(this.namespace + "/" + userId + "/profile-picture", data, Headers.retrieveHeaders())
+      },
+      updateProfilePicture: function(userId, profilePicture) {
+        return axios.put(this.namespace + "/" + userId + "/profile-picture" + "?file=" + profilePicture,{}, Headers.retrieveHeaders())
+      },
       Appointment: {
         namespace: baseUrl + "users",
         completedAppointments: function(userId, pageNumber, pageSize) {
