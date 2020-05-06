@@ -722,7 +722,7 @@ export default {
                 userId: this.$store.state.currentUserId,
                 startTime: new Date(this.start).toUTCString(),
                 endTime: new Date(this.end).toUTCString(),
-                telescopeId: 4, // this.telescopes.indexOf(this.telescopeName) + 1,
+                telescopeId: this.telescopes.indexOf(this.telescopeName) + 1,
                 isPublic: !this.form.isPrivate.value,
                 hours: this.form.rightAscension.hours,
                 minutes: this.form.rightAscension.minutes,
