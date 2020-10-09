@@ -165,6 +165,52 @@
                             </v-card>
                         </v-dialog>
 
+                        <!--
+                            Change Profile Picture Modal
+                        -->
+                        <v-dialog v-model="changeProfilePicture" v-if="showChangeProfilePictureButton" max-width="600px" dark>
+                            <v-card>
+                                <v-card-title class="justify-center">
+                                    <span class="headline">Change Your Profile Picture</span>
+                                </v-card-title>
+                                <v-card-text>
+                                    <v-container grid-list-md>
+                                        <v-flex xs12>
+                                            <v-text-field
+                                            name="newProfilePicture"
+                                            v-model="changeEmailForm.email.value"
+                                            :error=changeEmailForm.email.hasError
+                                            :rules="[rules.required]"
+                                            :error-messages=changeEmailForm.email.errorMessage
+                                            :validate-on-blur=true
+                                            label="Upload New Profile Picture"
+                                            v-on:keyup.enter="changeEmailRequest"
+                                            required
+                                            ></v-text-field>
+                                        </v-flex>
+                                        <br>
+                                        <v-flex xs12>
+                                            <v-text-field
+                                            name="newEmailConfirm"
+                                            v-model="changeEmailForm.emailConfirm.value"
+                                            :error=changeEmailForm.emailConfirm.hasError
+                                            :rules="[rules.required, rules.emailMatch]"
+                                            :error-messages=changeEmailForm.emailConfirm.errorMessage
+                                            :validate-on-blur=true
+                                            label="Confirm New Email Address"
+                                            v-on:keyup.enter="changeEmailRequest"
+                                            required
+                                            ></v-text-field>
+                                        </v-flex>
+                                        <v-spacer></v-spacer>
+                                        <br><br>
+                                        <v-btn color="primary darken-1" @click="changeEmailRequest">Submit</v-btn>
+                                        <v-btn color="red darken-1" @click="clearDialog">Cancel</v-btn>
+                                    </v-container>
+                                </v-card-text>
+                            </v-card>
+                        </v-dialog>
+
                         <!-- <v-btn color="primary darken-1" @click="completedAppointmentsRedirect">View Completed Observations</v-btn> -->
                         <!-- <v-btn color="primary darken-1" @click="futureAppointmentsRedirect">View Future Observations</v-btn> -->
                         
@@ -267,8 +313,8 @@ export default {
                 this.futureAppointmentsRedirect()
             }else if(value === 'Update Allotted Time'){
                 this.UpdateTimeForm = true
-            }else if(value === 'Update Profile Picture'){
-                this.updateProfilePicture = true;
+            }else if(value === 'Change Profile Picture'){
+                this.changeProfilePicture = true
             }
         },
         editRedirect() {
@@ -558,7 +604,7 @@ export default {
             this.controls.push("Change Email")
             this.controls.push("Change Password")
             this.controls.push("Request New Role")
-            this.controls.push("Update Profile Picture")
+            this.controls.push("Change Profile Picture")
         }
     }
 }
