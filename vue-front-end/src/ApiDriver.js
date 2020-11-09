@@ -45,6 +45,9 @@ export default {
       changePassword: function(userId) {
         return axios.put(this.namespace + "/" + userId + "/changePassword", data, Headers.retrieveHeaders())
       },
+      submitProfilePicture: function(userId, formData) {
+        return axios.put(this.namespace + "/" + userId + "/profile-picture", formData, Headers.retrieveHeaders())
+      },
       approveOrDenyProfilePicture: function(userId, isApprove) {
         return axios.post(baseUrl + "users/" + userId + "/profile-picture?isApprove=" + isApprove, {}, Headers.retrieveHeaders());
       },

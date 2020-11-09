@@ -7,10 +7,37 @@
             <v-layout row wrap>
                 <v-flex xs4>
                 <v-card class = "elevation-0" color = "transparent">
-                    <v-avatar size = "200">
-                            <img src="https://icdn3.digitaltrends.com/image/50395182-infinite-space-background-with-silhouette-of-telescope.jpg?ver=1" alt="Patrick">
-                        </v-avatar>
-                        <div class = "headline">{{ profile.firstName.value }} {{ profile.lastName.value }}</div>
+                        <div v-if="profilePicture == null">
+                            <v-avatar size = "200">
+                                <img src="https://icdn3.digitaltrends.com/image/50395182-infinite-space-background-with-silhouette-of-telescope.jpg?ver=1" alt="Default">
+                            </v-avatar>     
+                        </div>
+                        <div v-else>
+                            <v-avatar size = "200">
+                                <img id="pictureProfile" alt="Custom">
+                            </v-avatar>
+                        </div>
+                    <div class = "headline">{{ profile.firstName.value }} {{ profile.lastName.value }}</div>
+                </v-card>
+                <v-card class = "elevation-0" color = "transparent">
+                    <v-btn color="primary" @click="editProfilePicture = true">Edit Profile Picture</v-btn>
+                    <v-dialog v-model="editProfilePicture" width="500">
+                        <v-card>
+                            <v-card-title class="headline">Edit Profile Picture</v-card-title>
+                            <v-divider></v-divider>
+                            <input type="file" accept="image/*" @change="fileSelected" id="file-input">
+                            <v-divider></v-divider>
+                            <div v-if="selectedFile == null">
+                                <v-card-text> Please Select A File! </v-card-text>
+                            </div>
+
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn color="secondary" @click="cancelPicture();">Cancel</v-btn>
+                                <v-btn color="primary" @click="submitPicture();">Upload</v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-dialog>
                 </v-card>
                 </v-flex>
                 <v-flex xs8>
@@ -233,6 +260,9 @@ export default {
             },
             updateRole: false,
             UpdateTimeForm: false,
+            editProfilePicture: false,
+            selectedFile: null,
+            profilePicture: null,
         }
     },
 
@@ -437,9 +467,6 @@ export default {
                 let message = "An error occurred changing this user's password"
                 HttpResponse.generalError(this, message, false)
             });
-
-            
-            
         },
         /*
             This function is called when submit is called on RequestRole component
@@ -511,6 +538,75 @@ export default {
                 }
             }
             this.$forceUpdate();
+        },
+        fileSelected(event) {
+            this.selectedFile = event.target.files[0];
+            console.log("fileSelected");
+            console.log(event);
+            console.log(this.selectedFile);
+
+            var reader = new FileReader();
+            var imgtag = document.getElementById("pictureProfile");
+            imgtag.title = this.selectedFile.name;
+            reader.onload = function(event) {
+                imgtag.src = event.target.result;
+            }
+            reader.readAsDataURL(this.selectedFile);
+        },
+        cancelPicture() {
+            this.selectedFile = null;
+            this.editProfilePicture = false; 
+            console.log("cancelled");
+        },
+        submitPicture() {
+            if (this.selectedFile == null) {
+                console.log("select a file");
+            }
+            else {
+                this.profilePicture = this.selectedFile;
+                this.editProfilePicture = false; 
+                console.log("picture submitted");
+
+                //API to put profile picture in back end
+                var fd = new FormData();
+                fd.append("profile_picture", this.profilePicture, this.profilePicture.name);
+
+                ApiDriver.User.submitProfilePicture(this.profile.id.value, fd).then(response => {
+                    // Handle the response
+                    HttpResponse.then(response, data => {
+                        // Success alert
+                        this.$swal({
+                            title: '<span style="color:#f0ead6">Success!<span>',
+                            html: '<span style="color:#f0ead6">Your profile picture has been changed',
+                            type: 'success',
+                            background: '#302f2f'
+                        }).then(response => {
+                            // Clear out the modal's information
+                            //this.clearPassReset();
+                        });
+                    }, (status, errors) => {
+                        // Access Denied
+                        if (parseInt(status) === 403) {
+                            // Call the generic access denied handler
+                            HttpResponse.accessDenied(this)
+                        } 
+                        // Not Found
+                        else if (parseInt(status) === 404) {
+                            // Call the generic invalid resource id handler
+                            HttpResponse.notFound(that, errors)
+                        } 
+                        // Bad request
+                        else {
+                            // Handle errors
+                            this.passResetErrorHandler(errors)
+                        }
+                    })
+                }).catch(errors => {
+                    // Handle an erroneous API call
+                    let message = "An error occurred updating this user's profile picture."
+                    HttpResponse.generalError(this, message, false)
+                });
+            }
         },
         handleErrors(errors) {
             // Populate error messages for the form
