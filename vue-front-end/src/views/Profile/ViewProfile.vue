@@ -7,16 +7,11 @@
             <v-layout row wrap>
                 <v-flex xs4>
                 <v-card class = "elevation-0" color = "transparent">
-                        <div v-if="profilePicture == null">
+                        
                             <v-avatar size = "200">
-                                <img src="https://icdn3.digitaltrends.com/image/50395182-infinite-space-background-with-silhouette-of-telescope.jpg?ver=1" alt="Default">
+                                <img id="profilePic" src="https://icdn3.digitaltrends.com/image/50395182-infinite-space-background-with-silhouette-of-telescope.jpg?ver=1" alt="Default">
                             </v-avatar>     
-                        </div>
-                        <div v-else>
-                            <v-avatar size = "200">
-                                <img id="pictureProfile" alt="Custom">
-                            </v-avatar>
-                        </div>
+                        
                     <div class = "headline">{{ profile.firstName.value }} {{ profile.lastName.value }}</div>
                 </v-card>
                 <v-card class = "elevation-0" color = "transparent">
@@ -25,15 +20,29 @@
                         <v-card>
                             <v-card-title class="headline">Edit Profile Picture</v-card-title>
                             <v-divider></v-divider>
+                            <v-card class = "elevation-0" color = "transparent">
+                                <div v-if="selectedFile == null">
+                                    <v-avatar size = "100">
+                                        <img id="defaultPicture" src="https://icdn3.digitaltrends.com/image/50395182-infinite-space-background-with-silhouette-of-telescope.jpg?ver=1" alt="Default">
+                                    </v-avatar>     
+                                </div>
+                                <div v-else>
+                                    <v-avatar size = "100">
+                                        <img id="previewPicture" src="" alt="Custom">
+                                    </v-avatar>
+                                </div>
+                            </v-card>
+                            <v-divider></v-divider>
                             <input type="file" accept="image/*" @change="fileSelected" id="file-input">
                             <v-divider></v-divider>
                             <div v-if="selectedFile == null">
                                 <v-card-text> Please Select A File! </v-card-text>
                             </div>
-
+                            
                             <v-card-actions>
                                 <v-spacer></v-spacer>
-                                <v-btn color="secondary" @click="cancelPicture();">Cancel</v-btn>
+                                <v-btn color="default" @click="defaultPicture();">Default</v-btn>
+                                <v-btn color="red" @click="cancelPicture();">Cancel</v-btn>
                                 <v-btn color="primary" @click="submitPicture();">Upload</v-btn>
                             </v-card-actions>
                         </v-card>
@@ -263,6 +272,7 @@ export default {
             editProfilePicture: false,
             selectedFile: null,
             profilePicture: null,
+            imgSrc: null,
         }
     },
 
@@ -546,16 +556,25 @@ export default {
             console.log(this.selectedFile);
 
             var reader = new FileReader();
-            var imgtag = document.getElementById("pictureProfile");
+            var imgtag = document.getElementById("previewPicture");
             imgtag.title = this.selectedFile.name;
             reader.onload = function(event) {
                 imgtag.src = event.target.result;
             }
             reader.readAsDataURL(this.selectedFile);
         },
+        defaultPicture() {
+            this.selectedFile = null;
+            this.editProfilePicture = false; 
+            //clear file input file
+            document.getElementById("file-input").value = "";
+            console.log("default");
+        },
         cancelPicture() {
             this.selectedFile = null;
             this.editProfilePicture = false; 
+            //clear file input file
+            document.getElementById("file-input").value = "";
             console.log("cancelled");
         },
         submitPicture() {
@@ -563,15 +582,18 @@ export default {
                 console.log("select a file");
             }
             else {
+                
                 this.profilePicture = this.selectedFile;
                 this.editProfilePicture = false; 
                 console.log("picture submitted");
 
                 //API to put profile picture in back end
-                var fd = new FormData();
-                fd.append("profile_picture", this.profilePicture, this.profilePicture.name);
+                // var fd = new FormData();
+                // fd.append("profile_picture", this.profilePicture, this.profilePicture.name);
+                // console.log(this.profilePicture);
+                // console.log(fd);
 
-                ApiDriver.User.submitProfilePicture(this.profile.id.value, fd).then(response => {
+                ApiDriver.User.submitProfilePicture(this.profile.id.value, this.profilePicture).then(response => {
                     // Handle the response
                     HttpResponse.then(response, data => {
                         // Success alert
@@ -598,7 +620,7 @@ export default {
                         // Bad request
                         else {
                             // Handle errors
-                            this.passResetErrorHandler(errors)
+                            this.handleErrors(errors)
                         }
                     })
                 }).catch(errors => {
@@ -606,6 +628,10 @@ export default {
                     let message = "An error occurred updating this user's profile picture."
                     HttpResponse.generalError(this, message, false)
                 });
+
+                //clear file input file
+                document.getElementById("file-input").value = "";
+                this.selectedFile = null;
             }
         },
         handleErrors(errors) {

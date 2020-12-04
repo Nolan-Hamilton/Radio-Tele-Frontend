@@ -4,6 +4,12 @@
       <v-toolbar-side-icon @click="showDrawer=!showDrawer; loadStore()"></v-toolbar-side-icon>    
       <v-toolbar-title class="title-style" @click="homeRedirect">YCAS Radio Telescope</v-toolbar-title>
       <v-spacer></v-spacer>
+      <v-card class = "elevation-0" color = "transparent">
+                <v-avatar size = "32">
+                    <img src="https://icdn3.digitaltrends.com/image/50395182-infinite-space-background-with-silhouette-of-telescope.jpg?ver=1" alt="Default">
+                </v-avatar>   
+      </v-card> 
+      <v-spacer></v-spacer>
       <v-icon dark class="help-style" @click="toggleFeedback">question_answer</v-icon>
       <v-icon dark class="help-style" @click="toggleInfo">help_outline</v-icon>
       <v-toolbar-items class="hidden-sm-and-down">
