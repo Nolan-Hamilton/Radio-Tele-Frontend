@@ -199,6 +199,21 @@ export default {
         return axios.post(this.namespace + "/" + sensorName + "/" + maximum, {}, Headers.retrieveHeaders())
       }
     },
+    FrontpagePictures: {
+      namespace: baseUrl + "frontpage-picture",
+      approvePicture: function() {
+        
+      },
+      retrieveAll: function() {
+        
+      },
+      retrieveApproved: function() {
+
+      },
+      submit: function(file, pictureTitle, pictureUrl, description) {
+        return axios.post(this.namespace + "/" + file + "/" + pictureTitle + "/" + pictureUrl + "/" + description, {}, Headers.retrieveHeaders())
+      }
+    },
     WeatherData: {
       namespace: baseUrl + "weather-data",
       listWeatherDataBetweenDates: function(lowerDate, upperDate) {
