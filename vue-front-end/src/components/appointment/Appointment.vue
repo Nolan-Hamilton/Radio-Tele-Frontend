@@ -662,6 +662,9 @@ export default {
                     latitude:  40.024409,
                     altitude: 395 // TODO: make longitude, latitude, and altitude dependant on the selected telescope.
                 };
+                //verify target is visable to allow observation to be scheduled, if not notify user
+                horizonCheck(data0);
+                horizonCheck(data1);
                 var call0 = ApiDriver.Astronomical.horizonCheck(data0);
                 call0.then(response => {
                     startVisible = response.data.visible;
@@ -716,6 +719,18 @@ export default {
                 }
             }
             console.log("Hit 3");
+        },
+        getLocalCoordinatesOfObject(data, equitorial, julianDay){
+            //get position of object
+            let topocentric = AAHelpers.transformEquatorialToTopocentric(equatorial.rightAscension, equatorial.declination, radiusVector, data.longitude, data.latitude, data.altitude, julianDay);
+            let AST = AAHelpers.apparentGreenwichSiderealTime(julianDay);
+            let localHourAngle = (AST - (data.longitude / 15) - topocentric.x);
+            let horizontal = AAHelpers.transformEquatorialToHorizontal(localHourAngle, topocentric.y, data.latitude);
+            horizontal.altitude += AAHelpers.refractionFromTrue(horizontal.altitude, 1013, 10);
+                return{
+                    azimuth: horizontal.azimuth,
+                    altitude: horizontal.altitude
+                }
         },
         makeSubmission() {
             // set up form to send to back end with data from form obj
@@ -851,21 +866,12 @@ export default {
                 this.showImage = true;
             }).catch(error => {console.log(error);}); */
         },
+        horizonCheck(data, equatorial, julianDay){
+            return getLocalCoordinatesOfObject(data, equitorial, julianDay).altitude > 0;
+        },
         drawSkyObject(canvas, data, equatorial, julianDay, radiusVector, size, color, letter = null) {
-            let topocentric = AAHelpers.transformEquatorialToTopocentric(equatorial.rightAscension, equatorial.declination, radiusVector, data.longitude, data.latitude, data.altitude, julianDay);
-            //console.log("Equatorial to Topocentric: ");
-            //console.log(topocentric);
-            //let AST = aa.julianday.localSiderealTime(julianDay, data.longitude);
-            let AST = AAHelpers.apparentGreenwichSiderealTime(julianDay);
-            let localHourAngle = (AST - (data.longitude / 15) - topocentric.x);
-            //console.log("LocalHourAngle:   " + localHourAngle);
-            //console.log("AST: " + AST);
-            let horizontal = AAHelpers.transformEquatorialToHorizontal(localHourAngle, topocentric.y, data.latitude);
-            //console.log("Equatorial to Horizontal:");
-            //console.log(horizontal);
-            horizontal.altitude += AAHelpers.refractionFromTrue(horizontal.altitude, 1013, 10);
-            //console.log("Horizontal after refraction: ");
-            //console.log(horizontal);
+
+            let horizontal = getLocalCoordinatesOfObject(data, equitorial, julianDay);
 
             if (horizontal.altitude > 0) {
                 if (canvas) {
