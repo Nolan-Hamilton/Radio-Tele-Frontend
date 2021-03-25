@@ -720,7 +720,7 @@ export default {
             }
             console.log("Hit 3");
         },
-        getLocalCoordinatesOfObject(data, equitorial, julianDay){
+        getLocalCoordinatesOfObject(data, equatorial, julianDay){
             //get position of object
             let topocentric = AAHelpers.transformEquatorialToTopocentric(equatorial.rightAscension, equatorial.declination, radiusVector, data.longitude, data.latitude, data.altitude, julianDay);
             let AST = AAHelpers.apparentGreenwichSiderealTime(julianDay);
@@ -867,11 +867,11 @@ export default {
             }).catch(error => {console.log(error);}); */
         },
         horizonCheck(data, equatorial, julianDay){
-            return getLocalCoordinatesOfObject(data, equitorial, julianDay).altitude > 0;
+            return getLocalCoordinatesOfObject(data, equatorial, julianDay).altitude > 0;
         },
         drawSkyObject(canvas, data, equatorial, julianDay, radiusVector, size, color, letter = null) {
 
-            let horizontal = getLocalCoordinatesOfObject(data, equitorial, julianDay);
+            let horizontal = getLocalCoordinatesOfObject(data, equatorial, julianDay);
 
             if (horizontal.altitude > 0) {
                 if (canvas) {
