@@ -496,6 +496,8 @@ export default {
                     declination: null
                 }
             },
+            data0Elevation: null,
+            data1Elevation: null,
             priority: '',
             startDate: '',
             startTime: '',
@@ -665,60 +667,60 @@ export default {
                 //verify target is visable to allow observation to be scheduled, if not notify user
                 horizonCheck(data0);
                 horizonCheck(data1);
-                var call0 = ApiDriver.Astronomical.horizonCheck(data0);
-                call0.then(response => {
-                    startVisible = response.data.visible;
-                    console.log(response.data);
-                    if(response.data.visible == false)
-                        this.notVisible = true;
-                    console.log(this.notVisible);})
-                    var call1 = ApiDriver.Astronomical.horizonCheck(data1);
-                    call1.then(response => {
-                        startVisible = response.data.visible;
-                        console.log(response.data);
-                        if(response.data.visible == false)
-                            this.notVisible = true;
-                        console.log(this.notVisible);
-                        if(this.type == "Raster Scan") {
-                            var call2 = ApiDriver.Astronomical.horizonCheck(data2);
-                            call2.then(response => {
-                                startVisible = response.data.visible;
-                                console.log(response.data);
-                                if(response.data.visible == false)
-                                    this.notVisible = true;
-                                var call3 = ApiDriver.Astronomical.horizonCheck(data3)
-                                call3.then(response => {
-                                    endVisible = response.data.visible;
-                                    console.log(response.data);
-                                    if(response.data.visible == false)
-                                        this.notVisible = true;
-                                    if(this.notVisible == true) {
-                                        this.handleNotVisible();
-                                    } else {
-                                        this.makeSubmission();
-                                    }
-                                })
-                                .catch(error => {console.log(error);});
-                            })
-                            .catch(error => {console.log(error);})
-                        } else {
-                            if(this.notVisible == true) {
-                                this.handleNotVisible();
-                            } else {
-                                this.makeSubmission();
-                            }
-                        }
-                }).catch(error => {console.log(error);})
-                .catch(error => {console.log(error);})
+                // var call0 = ApiDriver.Astronomical.horizonCheck(data0);
+                // call0.then(response => {
+                //     startVisible = response.data.visible;
+                //     console.log(response.data);
+                //     if(response.data.visible == false)
+                //         this.notVisible = true;
+                //     console.log(this.notVisible);})
+                //     var call1 = ApiDriver.Astronomical.horizonCheck(data1);
+                //     call1.then(response => {
+                //         startVisible = response.data.visible;
+                //         console.log(response.data);
+                //         if(response.data.visible == false)
+                //             this.notVisible = true;
+                //         console.log(this.notVisible);
+                //         if(this.type == "Raster Scan") {
+                //             var call2 = ApiDriver.Astronomical.horizonCheck(data2);
+                //             call2.then(response => {
+                //                 startVisible = response.data.visible;
+                //                 console.log(response.data);
+                //                 if(response.data.visible == false)
+                //                     this.notVisible = true;
+                //                 var call3 = ApiDriver.Astronomical.horizonCheck(data3)
+                //                 call3.then(response => {
+                //                     endVisible = response.data.visible;
+                //                     console.log(response.data);
+                //                     if(response.data.visible == false)
+                //                         this.notVisible = true;
+                //                     if(this.notVisible == true) {
+                //                         this.handleNotVisible();
+                //                     } else {
+                //                         this.makeSubmission();
+                //                     }
+                //                 })
+                //                 .catch(error => {console.log(error);});
+                //             })
+                //             .catch(error => {console.log(error);})
+                //         } else {
+                //             if(this.notVisible == true) {
+                //                 this.handleNotVisible();
+                //             } else {
+                //                 this.makeSubmission();
+                //             }
+                //         }
+                // }).catch(error => {console.log(error);})
+                // .catch(error => {console.log(error);})
             } else {
-                this.notVisible = this.form.elevation < 0.0
-                if(this.notVisible == true) {
-                    this.handleNotVisible();
-                } else {
-                    this.makeSubmission();
-                }
+                // this.notVisible = this.form.elevation < 0.0
+                // if(this.notVisible == true) {
+                //     this.handleNotVisible();
+                // } else {
+                //     this.makeSubmission();
+                // }
             }
-            console.log("Hit 3");
+            // console.log("Hit 3");
         },
         getLocalCoordinatesOfObject(data, equatorial, julianDay){
             //get position of object
@@ -844,13 +846,15 @@ export default {
             this.addEarthFeatures(document.getElementById("canvas0"), data0);
             this.addPlanets(document.getElementById("canvas0"), data0);
             this.addStars(document.getElementById("canvas0"), data0)
-            this.addTarget(document.getElementById("canvas0"), data0);
+            let data0Elevation = this.addTarget(document.getElementById("canvas0"), data0);
+            this.data0Elevation = data0Elevation;
             this.addMoon(document.getElementById("canvas0"), data0);
             this.addSun(document.getElementById("canvas0"), data0);
             this.addEarthFeatures(document.getElementById("canvas1"), data1);
             this.addPlanets(document.getElementById("canvas1"), data1);
             this.addStars(document.getElementById("canvas1"), data1)
-            this.addTarget(document.getElementById("canvas1"), data1);
+            let data1Elevation = this.addTarget(document.getElementById("canvas1"), data1);
+            this.data1Elevation = data1Elevation;
             this.addMoon(document.getElementById("canvas1"), data1);
             this.addSun(document.getElementById("canvas1"), data1);
 
@@ -1062,6 +1066,7 @@ export default {
             context.lineTo(horizontal.azimuth, horizontal.altitude + targetSize);
             context.strokeStyle = "green";
             context.stroke();
+            return horizontal.altitude;
         },
         addCoordinates() {
 
