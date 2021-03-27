@@ -19,6 +19,7 @@ import UpdateEmail from './views/User/UpdateEmail'
 import PublicAppointments from './views/Appointment/PublicAppointments'
 import SearchAppointments from './views/Appointment/SearchAppointments'
 import Contact from './views/Contact'
+import Gallery from './views/Gallery'
 import Credits from './views/Credits'
 
 Vue.use(Router)
@@ -128,6 +129,11 @@ const router = new Router({
       path: '/contactus',
       name: 'Contact',
       component: Contact
+    },
+    {
+      path: '/gallery',
+      name: 'Gallery',
+      component: Gallery
     },
     {
       path: '/credits',

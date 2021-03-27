@@ -14,6 +14,7 @@
       <v-icon dark class="help-style" @click="toggleInfo">help_outline</v-icon>
       <v-toolbar-items class="hidden-sm-and-down">
           <!-- New text links can be added to the navbar here, must be accompanied by a function with the router pushing to an appropriate url-->
+          <v-btn @click="gallery">Gallery</v-btn>
           <v-btn @click="credits">Credits</v-btn>
           <v-btn @click="contact">Contact Us</v-btn>
           <v-btn @click="viewProfile">Profile</v-btn>
@@ -104,6 +105,9 @@ export default {
         },
         submit() {
             ApiDriver.login(this.data);
+        },
+        gallery() {
+            router.push('/gallery')
         },
         credits() {
             router.push('/credits')

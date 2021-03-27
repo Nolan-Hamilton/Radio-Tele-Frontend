@@ -201,14 +201,14 @@ export default {
     },
     FrontpagePictures: {
       namespace: baseUrl + "frontpage-picture",
-      approvePicture: function() {
-        
+      approvePicture: function(frontpagePictureId, isApprove) {
+        return axios.post(this.namespace + "/" + frontpagePictureId + "/" + isApprove, {}, Headers.retrieveHeaders())
       },
       retrieveAll: function() {
-        
+        return axios.get(this.namespace + "/" + "list", Headers.retrieveHeaders())
       },
       retrieveApproved: function() {
-
+        return axios.get(this.namespace + "/" + "listApproved", Headers.retrieveHeaders())
       },
       submit: function(file, pictureTitle, pictureUrl, description) {
         return axios.post(this.namespace + "/" + file + "/" + pictureTitle + "/" + pictureUrl + "/" + description, {}, Headers.retrieveHeaders())
