@@ -1,6 +1,5 @@
 <template>
 <div>
-    <navigation-bar class="nav-style"></navigation-bar>
         <v-layout align-center>
             <v-card>
             <v-card-title primary-title>
@@ -100,14 +99,13 @@
 </template>
 
 <script>
-import NavigationBar from "../components/utility/NavigationBar.vue";
 import ApiDriver from "../ApiDriver";
 import router from '../router';
 import HttpResponse from '../utils/HttpResponse';
 import { error } from 'util';
 export default {
   title: "Radio Telescope 1.1.0",
-  name: "Gallery",
+  name: "FrontpagePictureApproval",
   data() {
     return {
       frontpagePictures: [
@@ -207,7 +205,7 @@ export default {
             console.log("Successfully set an approved frontpage picture!");
         
         }
-        console.log("Successfully set approved frontpage pictures!");
+        console.log("Successfully set frontpage pictures!");
         this.approvedPicturesRetrieved = true;
         console.log(this.approvedFrontpagePictures);                                                                                                                                                     
       },

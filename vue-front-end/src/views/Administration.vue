@@ -19,6 +19,10 @@
             <v-icon>check_circle</v-icon>
         </v-tab>
         <v-tab>
+            Frontpage Picture Approval
+            <v-icon>image</v-icon>
+        </v-tab>
+        <v-tab>
           Appointment Management
           <v-icon>event</v-icon>
         </v-tab>
@@ -54,6 +58,10 @@
         <v-tab-item>
             <admin-user-approval></admin-user-approval>
         </v-tab-item>
+        
+         <v-tab-item>
+            <frontpage-picture-approval></frontpage-picture-approval>
+        </v-tab-item> 
 
         <v-tab-item>
             <admin-appointment-approval></admin-appointment-approval>
@@ -96,6 +104,7 @@ import NavigationBar from '../components/utility/NavigationBar.vue';
 import router from '../router';
 import CurrentUserValidation from '../utils/CurrentUserValidation';
 import AdminUserApproval from '../components/admin/AdminUserApproval.vue';
+//import FrontpagePictureApproval from '../components/admin/FrontpagePictureApproval.vue';
 import AdminAppointmentApproval from '../components/admin/AdminAppointmentApproval.vue';
 import CelestialBodies from '../components/admin/CelestialBodies.vue';
 import AdminSecurityFootage from '../components/admin/AdminSecurityFootage.vue';
@@ -138,7 +147,9 @@ import Loading from "../components/utility/Loading";
         AdminSecurityFootage,
         AdminSensorData,
         WeatherStation,
-        AdminManualControl
+        AdminManualControl,
+        //FrontpagePictureApproval
+
     },
     mounted() {
       this.authenticate()
