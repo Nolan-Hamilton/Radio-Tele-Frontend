@@ -258,6 +258,12 @@ export default {
     },
     middlemanConnection(data) {
       //return axios.get("http://rtastronomicalapi-dev.us-east-2.elasticbeanstalk.com/MiddlemanConnection" + "?key="+SecretKey.getKey() + "&command=" + data.command);
-      return axios.get("https://localhost:5001/MiddlemanConnection/" + "?key="+SecretKey.getKey() + "&command=" + data.command) // testing locally
+      return axios.get("https://174.54.227.14:5000/" + "&command=" + data.command, {
+        auth: {
+          username: 'rt',
+          password: '$apr1$qEw92jsl$jV8t8nKNlXgTyR2W9YF1/'
+        }
+      });
+      
     }
 }
