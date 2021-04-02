@@ -1,7 +1,8 @@
 const axios = require('axios');
 import Headers from './utils/Headers';
-import SecretKey from './utils/SecretKey';
+// import SecretKey from './utils/SecretKey';
 let baseUrl = "http://localhost:8080/api/";
+let baseMiddlemanUrl = "https://prod-api.ycpradiotelescope.com:5000/";
 //let baseUrl = "http://api.ycpradiotelescope.com:8080/api/";
 
 export default {
@@ -258,7 +259,7 @@ export default {
     },
     middlemanConnection(data) {
       //return axios.get("http://rtastronomicalapi-dev.us-east-2.elasticbeanstalk.com/MiddlemanConnection" + "?key="+SecretKey.getKey() + "&command=" + data.command);
-      return axios.get("https://174.54.227.14:5000/" + "&command=" + data.command, {
+      return axios.get(baseMiddlemanUrl + "&command=" + data.command, {
         auth: {
           username: 'rt',
           password: '$apr1$qEw92jsl$jV8t8nKNlXgTyR2W9YF1/'
