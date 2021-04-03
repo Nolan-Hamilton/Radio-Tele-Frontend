@@ -3,88 +3,99 @@
         <v-layout align-center>
             <v-card>
             <v-card-title primary-title>
-                <div style="padding: 25px;">
+              <div style="padding: 25px;">
+
+                  <v-card>
+                    <div style="padding: 25px;">
+                      <div class="headline">Here you can submit new frontpage and gallery pictures </div>
+                    </div>
+                  </v-card>
+
+                  <v-container grid text-xs-center>
+                  <v-card class = "elevation-0" color = "transparent">
+                      <v-btn color="primary" @click="submitFrontpagePicture = true">Submit A Frontpage Picture</v-btn>
+                      <v-dialog v-model="submitFrontpagePicture" width="500">
+                          <v-card>
+                              <v-card-title class="headline">Submit Frontpage Picture</v-card-title>
+                              <v-divider></v-divider>
+                              <v-card class = "elevation-0" color = "transparent">
+                                  <div v-if="selectedFile == null">
+                                      <v-avatar size = "100">
+                                          <img id="defaultPicture" src="https://icdn3.digitaltrends.com/image/50395182-infinite-space-background-with-silhouette-of-telescope.jpg?ver=1" alt="Default">
+                                      </v-avatar>     
+                                  </div>
+                                  <div v-else>
+                                      <v-avatar size = "100">
+                                          <img id="previewPicture" src="" alt="Custom">
+                                      </v-avatar>
+                                  </div>
+                              </v-card>
+                              <v-divider></v-divider>
+                              <input type="file" accept="image/*" @change="fileSelected" id="file-input">
+                              <v-divider></v-divider>
+                              <div v-if="selectedFile == null">
+                                  <v-card-text> Please Select A File! </v-card-text>
+                              </div>
+                              
+                              <v-card-actions>
+                                  <v-spacer></v-spacer>
+                                  <v-btn color="red" @click="cancelPicture();">Cancel</v-btn>
+                                  <v-btn color="primary" @click="submitPicture();">Submit</v-btn>
+                              </v-card-actions>
+                          </v-card>
+                      </v-dialog>
+                  </v-card>
+                </v-container>
                 
                 <v-card>
                   <div style="padding: 25px;">
-                    <div class="headline">Here are some pictures of various aspects of the radio telescope </div>
+                    <div class="headline">These are the frontpage and gallery pictures that have been approved </div>
                   </div>
                 </v-card>
-              <v-container grid text-xs-center v-if="approvedPicturesRetrieved">
-                <div v-for="approvedFrontpagePicture in approvedFrontpagePictures" :key="approvedFrontpagePicture.id">
-                  <v-card dark class="ma-1 pa-2" hover="true" ripple="true" max-width="600px">
-                    <v-img height="500px" :src="approvedFrontpagePicture.pictureUrl" contain="true"></v-img>
-                    <v-card-text class="grey--text">
-                      Title: {{ approvedFrontpagePicture.pictureTitle }}
-                    </v-card-text>
-                    <v-divider></v-divider>
-                    <v-card-text class="grey--text">
-                      Description: {{ approvedFrontpagePicture.description }}
-                    </v-card-text>
-                  </v-card>
-                </div>
-              </v-container>
-              
-              <v-card>
-                  <div style="padding: 25px;">
-                    <div class="headline">These pictures have not yet been approved </div>
-                  </div>
-              </v-card>
 
-              <v-container grid text-xs-center v-if="picturesRetrieved">
-                <div v-for="frontpagePicture in frontpagePictures" :key="frontpagePicture.id">
-                  <v-card v-if="frontpagePicture.approved == 0" dark class="ma-1 pa-2" hover="true" ripple="true" max-width="600px">
-                    <v-img height="500px" :src="frontpagePicture.pictureUrl" contain="true"></v-img>
-                    <v-card-text class="grey--text">
-                      Title: {{ frontpagePicture.pictureTitle }}
-                    </v-card-text>
-                    <v-divider></v-divider>
-                    <v-card-text class="grey--text">
-                      Description: {{ frontpagePicture.description }}
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn color="green" @click="approveFrontpagePicture(frontpagePicture.id, true);">Approve</v-btn>
-                        <v-btn color="red" @click="approveFrontpagePicture(frontpagePicture.id, false);">Deny</v-btn>
-                    </v-card-actions>
-                  </v-card>
-                </div>
-              </v-container>
-              <v-container grid text-xs-center>
-                <v-card class = "elevation-0" color = "transparent">
-                    <v-btn color="primary" @click="submitFrontpagePicture = true">Submit A Frontpage Picture</v-btn>
-                    <v-dialog v-model="submitFrontpagePicture" width="500">
-                        <v-card>
-                            <v-card-title class="headline">Submit Frontpage Picture</v-card-title>
-                            <v-divider></v-divider>
-                            <v-card class = "elevation-0" color = "transparent">
-                                <div v-if="selectedFile == null">
-                                    <v-avatar size = "100">
-                                        <img id="defaultPicture" src="https://icdn3.digitaltrends.com/image/50395182-infinite-space-background-with-silhouette-of-telescope.jpg?ver=1" alt="Default">
-                                    </v-avatar>     
-                                </div>
-                                <div v-else>
-                                    <v-avatar size = "100">
-                                        <img id="previewPicture" src="" alt="Custom">
-                                    </v-avatar>
-                                </div>
-                            </v-card>
-                            <v-divider></v-divider>
-                            <input type="file" accept="image/*" @change="fileSelected" id="file-input">
-                            <v-divider></v-divider>
-                            <div v-if="selectedFile == null">
-                                <v-card-text> Please Select A File! </v-card-text>
-                            </div>
-                            
-                            <v-card-actions>
-                                <v-spacer></v-spacer>
-                                <v-btn color="red" @click="cancelPicture();">Cancel</v-btn>
-                                <v-btn color="primary" @click="submitPicture();">Submit</v-btn>
-                            </v-card-actions>
-                        </v-card>
-                    </v-dialog>
+                <v-container grid text-xs-center v-if="approvedPicturesRetrieved">
+                  <div v-for="approvedFrontpagePicture in approvedFrontpagePictures" :key="approvedFrontpagePicture.id">
+                    <v-card dark class="ma-1 pa-2" hover="true" ripple="true" max-width="600px">
+                      <v-img height="500px" :src="approvedFrontpagePicture.pictureUrl" contain="true"></v-img>
+                      <v-card-text class="grey--text">
+                        Title: {{ approvedFrontpagePicture.pictureTitle }}
+                      </v-card-text>
+                      <v-divider></v-divider>
+                      <v-card-text class="grey--text">
+                        Description: {{ approvedFrontpagePicture.description }}
+                      </v-card-text>
+                      <v-card-actions>
+                          <v-spacer></v-spacer>
+                          <v-btn color="red" @click="approveFrontpagePicture(frontpagePicture.id, false);">Remove</v-btn>
+                      </v-card-actions>
+                    </v-card>
+                  </div>
+                </v-container>
+              
+                <v-card>
+                    <div style="padding: 25px;">
+                      <div class="headline">These are the frontpage and gallery pictures that have not yet been approved </div>
+                    </div>
                 </v-card>
-              </v-container>
+
+                <v-container grid text-xs-center v-if="picturesRetrieved">
+                  <div v-for="frontpagePicture in frontpagePictures" :key="frontpagePicture.id">
+                    <v-card v-if="frontpagePicture.approved == 0" dark class="ma-1 pa-2" hover="true" ripple="true" max-width="600px">
+                      <v-img height="500px" :src="frontpagePicture.pictureUrl" contain="true"></v-img>
+                      <v-card-text class="grey--text">
+                        Title: {{ frontpagePicture.pictureTitle }}
+                      </v-card-text>
+                      <v-divider></v-divider>
+                      <v-card-text class="grey--text">
+                        Description: {{ frontpagePicture.description }}
+                      </v-card-text>
+                      <v-card-actions>
+                          <v-spacer></v-spacer>
+                          <v-btn color="green" @click="approveFrontpagePicture(frontpagePicture.id, true);">Approve</v-btn>
+                      </v-card-actions>
+                    </v-card>
+                  </div>
+                </v-container>
 
               </div>
             </v-card-title>
@@ -99,9 +110,9 @@
 </template>
 
 <script>
-import ApiDriver from "../ApiDriver";
-import router from '../router';
-import HttpResponse from '../utils/HttpResponse';
+import ApiDriver from "../../ApiDriver";
+import router from '../../router';
+import HttpResponse from '../../utils/HttpResponse';
 import { error } from 'util';
 export default {
   title: "Radio Telescope 1.1.0",
@@ -131,7 +142,6 @@ export default {
     };
   },
   components: {
-    NavigationBar
   },
   methods: {
       submit() {
