@@ -16,11 +16,6 @@ module.exports = {
           '/landingpage': {
             target: 'http://localhost:8080',
             secure: false
-          },
-          // this is a default fall back to make sure vue thinks this route (the middleman) is the same origin to fix CORS errors
-          '' : {
-            target: 'https://prod-api.ycpradiotelescope.com',
-            secure: true
           }
         }
     },

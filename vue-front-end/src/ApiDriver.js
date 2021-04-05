@@ -2,7 +2,7 @@ const axios = require('axios');
 import Headers from './utils/Headers';
 // import SecretKey from './utils/SecretKey';
 let baseUrl = "http://localhost:8080/api/";
-let baseMiddlemanUrl = "https://prod-api.ycpradiotelescope.com:5000/";
+let baseMiddlemanUrl = "https://middleman.ycpradiotelescope.com:5000/";
 //let baseUrl = "http://api.ycpradiotelescope.com:8080/api/";
 
 export default {
