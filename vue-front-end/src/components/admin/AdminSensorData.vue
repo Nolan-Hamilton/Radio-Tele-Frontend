@@ -15,7 +15,7 @@
     <v-container grid text-xs-center>
         <div v-for="sensor in sensors" :key="sensor.name">
             <v-layout row>
-                <v-flex md4>
+                <v-flex md8>
                         <v-card dark >
                                 <!-- <div class="sensor-name">{{ sensor.displayName }}</div> -->
                                 <v-btn block class="sensor-button" height=100 @click="sensor.thresholdToggle = true; getThresholds();">{{ sensor.displayName }}</v-btn>
@@ -92,19 +92,31 @@ export default {
             overallStatText: "OK",
 
             sensorList: [
+                'weatherStation',
                 'gate',
-                'proximity',
-                'azimuthMotor',
-                'elevationMotor',
-                'weatherStation'
+                'azimuthMotorTemperature',
+                'elevationMotorTemperature',
+                'elevationLimitSwitch0deg',
+                'elevationLimitSwitch90deg',
+                'azimuthAbsoluteEncoder',
+                'elevationAbsoluteEncoder',
+                'azimuthMotorAccelerometer',
+                'elevationMotorAccelerometer',
+                'counterbalanceAcceleromter'
             ],
 
             sensors: [
-                { id: 1, refName: 'NO_REF', displayName: 'Gate', name: 'gate', status: 0, statusColor: '', statusText: '', override: 0, thresholdToggle: false, windThreshold: null, tempThreshold: null, vibrationThreshold: null, currentThreshold: null },
-                { id: 2, refName: 'NO_REF', displayName: 'Proximity', name: 'proximity', status: 0, statusColor: '', statusText: '', override: 0, thresholdToggle: false, windThreshold: null, tempThreshold: null, vibrationThreshold: null, currentThreshold: null },
-                { id: 3, refName: 'AZ_MOTOR', displayName: 'Azimuth Motor', name: 'azimuthMotor', status: 0, statusColor: '', statusText: '', override: 0, thresholdToggle: false, windThreshold: null, tempThreshold: 81, vibrationThreshold: 2, currentThreshold: 7 },
-                { id: 4, refName: 'ELEV_MOTOR', displayName: 'Elevation Motor', name: 'elevationMotor', status: 0, statusColor: '', statusText: '', override: 0, thresholdToggle: false, windThreshold: null, tempThreshold: 81, vibrationThreshold: 2, currentThreshold: 7 },
-                { id: 5, refName: 'NO_REF', displayName: 'Weather Station', name: 'weatherStation', status: 0, statusColor: '', statusText: '', override: 0, thresholdToggle: false, windThreshold: 80, tempThreshold: null, vibrationThreshold: null, currentThreshold: null }
+                { id: 1, refName: 'WEATHER_STATION',    displayName: 'Weather Station',                 name: 'weatherStation', status: 0, statusColor: '', statusText: '', override: 0, thresholdToggle: false, windThreshold: 80, tempThreshold: null, vibrationThreshold: null, currentThreshold: null },
+                { id: 2, refName: 'MAIN_GATE',          displayName: 'Main Gate',                       name: 'gate', status: 0, statusColor: '', statusText: '', override: 0, thresholdToggle: false, windThreshold: null, tempThreshold: null, vibrationThreshold: null, currentThreshold: null },
+                { id: 3, refName: 'AZIMUTH_MOT_TEMP',   displayName: 'Azimuth Motor Temperature',       name: 'azimuthMotorTemperature', status: 0, statusColor: '', statusText: '', override: 0, thresholdToggle: false, windThreshold: null, tempThreshold: 81, vibrationThreshold: 2, currentThreshold: 7 },
+                { id: 4, refName: 'ELEVATION_MOT_TEMP', displayName: 'Elevation Motor Temperature',     name: 'elevationMotorTemperature', status: 0, statusColor: '', statusText: '', override: 0, thresholdToggle: false, windThreshold: null, tempThreshold: 81, vibrationThreshold: 2, currentThreshold: 7 },
+                { id: 5, refName: 'ELEVATION_LIMIT_0',  displayName: 'Elevation Limit Switch 0°',       name: 'elevationLimitSwitch0deg', status: 0, statusColor: '', statusText: '', override: 0, thresholdToggle: false, windThreshold: null, tempThreshold: 81, vibrationThreshold: 2, currentThreshold: 7 },
+                { id: 6, refName: 'ELEVATION_LIMIT_90', displayName: 'Elevation Limit Switch 90°',      name: 'elevationLimitSwitch90deg', status: 0, statusColor: '', statusText: '', override: 0, thresholdToggle: false, windThreshold: null, tempThreshold: 81, vibrationThreshold: 2, currentThreshold: 7 },
+                { id: 7, refName: 'AZ_ABS_ENC',         displayName: 'Azimuth Absolute Encoder',        name: 'azimuthAbsoluteEncoder', status: 0, statusColor: '', statusText: '', override: 0, thresholdToggle: false, windThreshold: null, tempThreshold: 81, vibrationThreshold: 2, currentThreshold: 7 },
+                { id: 8, refName: 'EL_ABS_ENC',         displayName: 'Elevation Absolute Encoder',      name: 'elevationAbsoluteEncoder', status: 0, statusColor: '', statusText: '', override: 0, thresholdToggle: false, windThreshold: null, tempThreshold: 81, vibrationThreshold: 2, currentThreshold: 7 },
+                { id: 9, refName: 'AZ_ACC',             displayName: 'Azimuth Motor Accelerometer',     name: 'azimuthMotorAccelerometer', status: 0, statusColor: '', statusText: '', override: 0, thresholdToggle: false, windThreshold: null, tempThreshold: 81, vibrationThreshold: 2, currentThreshold: 7 },
+                { id: 10, refName: 'EL_ACC',            displayName: 'Elevation Motor Accelerometer',   name: 'elevationMotorAccelerometer', status: 0, statusColor: '', statusText: '', override: 0, thresholdToggle: false, windThreshold: null, tempThreshold: 81, vibrationThreshold: 2, currentThreshold: 7 },
+                { id: 11, refName: 'CB_ACC',            displayName: 'Counterbalance Accelerometer',    name: 'counterbalanceAcceleromter', status: 0, statusColor: '', statusText: '', override: 0, thresholdToggle: false, windThreshold: null, tempThreshold: 81, vibrationThreshold: 2, currentThreshold: 7 }
             ],
 
             // status values
@@ -241,24 +253,7 @@ export default {
             this.retrieveStatuses();    // the statuses depend on the override states
         },
         overrideSensor(sensor) {
-            var s = "";
-            if (sensor.name == 'gate') {
-                s = "GATE";
-            }
-            else if (sensor.name == 'proximity') {
-                s = "PROXIMITY";
-            }
-            else if (sensor.name == 'azimuthMotor') {
-                s = "AZIMUTH_MOTOR";
-            }
-            else if (sensor.name == 'elevationMotor') {
-                s = "ELEVATION_MOTOR";
-            }
-            else if (sensor.name == 'weatherStation') {
-                s = "WEATHER_STATION";
-            }
-
-            ApiDriver.SensorOverrides.updateOverride(s, Boolean(sensor.override)).then((response) =>{
+            ApiDriver.SensorOverrides.updateOverride(sensor.refName, Boolean(sensor.override)).then((response) =>{
                 HttpResponse.then(response, (data) => {
                         this.$swal({
                         title: '<span style="color:#f0ead6">Sensor Overridden<span>',
@@ -482,21 +477,21 @@ export default {
 .sensor-name {
     text-align: center;
     color: white; 
-    font-size: 35px;
+    font-size: 22px;
     /* text-decoration: underline; */
     text-decoration-color: white;
 }
 .sensor-status {
     text-align: center;
     color: black; 
-    font-size: 35px;
+    font-size: 22px;
     /* text-decoration: underline; */
     text-decoration-color: white;
 }
 .sensor-button {
     text-align: center;
     /* display: block; */
-    font-size: 35px;
+    font-size: 22px;
     width: 100%;
     height: 100%;
     background-size: 100%;
