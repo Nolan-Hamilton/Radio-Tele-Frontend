@@ -180,11 +180,10 @@ export default {
                     if (dbIndex == localIndex.name){   
                         // console.log("Found: " + dbIndex);                               // We have found the matching sensor
                         localIndex.status = dbData[dbIndex];                                 // set the status value
-                        if (this.isOverride(localIndex.override)){
+                        if (this.isOverride(localIndex.override)) {
                             localIndex.statusColor = "orange";                             // set the status color to orange for override
                             localIndex.statusText = "OVERRIDE";                            // set the status text to OVERRIDE
-                        }
-                        else{
+                        } else {
                             localIndex.statusColor = this.getStatusColor(dbData[dbIndex]);   // set the status color using status value
                             localIndex.statusText = this.getStatusText(dbData[dbIndex]);     // set the status text using status value
                         }
@@ -203,7 +202,7 @@ export default {
                     // Populate the data and set the store's boolean back to false
                     // console.log("Data Returned: " + JSON.stringify(data.data));  // Logging for debugging purposes
                     this.setStatuses(data.data);
-                    this.$store.commit("loading", false)
+                    this.$store.commit("loading", false);
                 }, (status, errors) => {
                     // Access Denied
                     if (parseInt(status) === 403) {
@@ -226,7 +225,7 @@ export default {
                     // Populate the data and set the store's boolean back to false
                     // console.log("Data Returned: " + JSON.stringify(data.data));  // Logging for debugging purposes
                     this.setOverrides(data.data);
-                    this.$store.commit("loading", false)
+                    this.$store.commit("loading", false);
                 }, (status, errors) => {
                     // Access Denied
                     if (parseInt(status) === 403) {
@@ -264,14 +263,14 @@ export default {
                     this.$emit('input');
                 }, (status, errors) => {
                     if(parseInt(status)==403){
-                        HttpResponse.accessDenied(this)
+                        HttpResponse.accessDenied(this);
                     } else if(parseInt(status)==404){
                         HttpResponse.notFound(this, errors)
                     } else {
                         for(var field in errors) {
-                            let message = errors[field][0]
+                            let message = errors[field][0];
                         }
-                        HttpResponse.generalError(this, message, false)
+                        HttpResponse.generalError(this, message, false);
                     }
                 })
             }).catch((error) => {
@@ -283,7 +282,7 @@ export default {
 
             this.retrieveOverrides();
             this.retrieveStatuses();                                                                 // Update the front-end
-            console.log("Successfully retrieved new statuses for sensors!")
+            console.log("Successfully retrieved new statuses for sensors!");
         },
         isOverride(val){
             if (val == 1 || val == true){ return true; }
@@ -355,40 +354,40 @@ export default {
                     if (data[index].sensorName.includes("TEMP")){
                         // Set the Temperature thresholds for the Azimuth Motor
                         this.sensors[2].tempThreshold = data[index].maximum;
-                        console.log("Successfully retrieved azimuth motor temperature threshold!")
+                        console.log("Successfully retrieved azimuth motor temperature threshold!");
                     }
                     else if (data[index].sensorName.includes("VIBRATION")){
                         // Set the Temperature thresholds for the Azimuth Motor
                         this.sensors[2].vibrationThreshold = data[index].maximum;
-                        console.log("Successfully retrieved azimuth motor vibration threshold!")
+                        console.log("Successfully retrieved azimuth motor vibration threshold!");
                     }
                     else if (data[index].sensorName.includes("CURRENT")){
                         // Set the Temperature thresholds for the Azimuth Motor
                         this.sensors[2].currentThreshold = data[index].maximum;
-                        console.log("Successfully retrieved azimuth motor current threshold!")
+                        console.log("Successfully retrieved azimuth motor current threshold!");
                     }
                 }
                 if (data[index].sensorName.includes("ELEV_MOTOR")){
                     if (data[index].sensorName.includes("TEMP")){
                         // Set the Temperature thresholds for the Elevation Motor
                         this.sensors[3].tempThreshold = data[index].maximum;
-                        console.log("Successfully retrieved elevation motor temperature threshold")
+                        console.log("Successfully retrieved elevation motor temperature threshold");
                     }
                     else if (data[index].sensorName.includes("VIBRATION")){
                         // Set the Temperature thresholds for the Elevation Motor
                         this.sensors[3].vibrationThreshold = data[index].maximum;
-                        console.log("Successfully retrieved elevation motor vibration threshold!")
+                        console.log("Successfully retrieved elevation motor vibration threshold!");
                     }
                     else if (data[index].sensorName.includes("CURRENT")){
                         // Set the Temperature thresholds for the Elevation Motor
                         this.sensors[3].currentThreshold = data[index].maximum;
-                        console.log("Successfully retrieved elevation motor current threshold!")
+                        console.log("Successfully retrieved elevation motor current threshold!");
                     }   
                 }
                 if (data[index].sensorName.includes("WIND")){
                     // Set the Wind Threshold
                         this.sensors[4].windThreshold = data[index].maximum;
-                        console.log("Successfully retrieved wind threshold!")
+                        console.log("Successfully retrieved wind threshold!");
                 }
             }
         },
@@ -404,14 +403,14 @@ export default {
                 this.$emit('input');
             }, (status, errors) => {
                 if(parseInt(status)==403){
-                    HttpResponse.accessDenied(this)
+                    HttpResponse.accessDenied(this);
                 } else if(parseInt(status)==404){
-                    HttpResponse.notFound(this, errors)
+                    HttpResponse.notFound(this, errors);
                 } else {
                     for(var field in errors) {
-                        let message = errors[field][0]
+                        let message = errors[field][0];
                     }
-                    HttpResponse.generalError(this, message, false)
+                    HttpResponse.generalError(this, message, false);
                 }
             })
         })
@@ -422,35 +421,35 @@ export default {
             if (id == 3) {
                 if (thresholdNumber == 1) {
                     this.setThreshold("AZ_MOTOR_TEMP", this.sensors[id - 1].tempThreshold);
-                    console.log("Successfully set azimuth motor temperature threshold!")
+                    console.log("Successfully set azimuth motor temperature threshold!");
                 }
                 else if (thresholdNumber == 2) {
                     this.setThreshold("AZ_MOTOR_VIBRATION", this.sensors[id - 1].vibrationThreshold);
-                    console.log("Successfully set azimuth motor vibration threshold!")
+                    console.log("Successfully set azimuth motor vibration threshold!");
                 }
                 else if (thresholdNumber == 3) {
                     this.setThreshold("AZ_MOTOR_CURRENT", this.sensors[id - 1].currentThreshold);
-                    console.log("Successfully set azimuth motor current threshold!")
+                    console.log("Successfully set azimuth motor current threshold!");
                 }
             }
             else if (id == 4) {
                 if (thresholdNumber == 1) {
                     this.setThreshold("ELEV_MOTOR_TEMP", this.sensors[id - 1].tempThreshold);
-                    console.log("Successfully set elevation motor temperature threshold!")
+                    console.log("Successfully set elevation motor temperature threshold!");
                 }
                 else if (thresholdNumber == 2) {
                     this.setThreshold("ELEV_MOTOR_VIBRATION", this.sensors[id - 1].vibrationThreshold);
-                    console.log("Successfully set elevation motor vibration threshold!")
+                    console.log("Successfully set elevation motor vibration threshold!");
                 }
                 else if (thresholdNumber == 3) {
                     this.setThreshold("ELEV_MOTOR_CURRENT", this.sensors[id - 1].currentThreshold);
-                    console.log("Successfully set elevation motor current threshold!")
+                    console.log("Successfully set elevation motor current threshold!");
                 }
             }
             else if (id == 5) {
                 if (thresholdNumber == 0) {
                     this.setThreshold("WIND", this.sensors[id - 1].windThreshold);
-                    console.log("Successfully set wind threshold!")
+                    console.log("Successfully set wind threshold!");
                 }
             }
         },
