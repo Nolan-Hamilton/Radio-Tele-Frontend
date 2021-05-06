@@ -5,9 +5,12 @@
             <v-layout align-center wrap>
                 <v-flex xs6 v-for="dev in devInfo" :key="dev.id">
                     <v-card justify-center>
-                        <v-card-title class="headline">{{dev.name}} : {{dev.major}}</v-card-title>
-                        <v-card-text class="align-left subheading font-weight-thin">{{dev.work}}</v-card-text>
-                        <v-card-text class="align-left subheading font-weight-thin">One of the most interesting parts of the project was {{dev.liked}}</v-card-text>
+                        <v-card-title class="headline">{{dev.name}}</v-card-title>
+                        <v-card-text class="align-left subheading font-weight-thin">Major: {{dev.major}}</v-card-text>
+                        <v-card-text class="align-left subheading font-weight-thin">Team: {{dev.team}}</v-card-text>
+                        <v-card-text class="align-left subheading font-weight-thin">Active: {{dev.active}}</v-card-text>
+                        <v-card-text class="align-left subheading font-weight-thin">What I enjoyed working on: {{dev.work}}</v-card-text>
+                        <v-card-text class="align-left subheading font-weight-thin">One of the most interesting parts of the project was: {{dev.liked}}</v-card-text>
                     </v-card>
                 </v-flex>
             </v-layout>
@@ -29,6 +32,8 @@ export default {
                 {
                     name: "Alyssa McDevitt",
                     major: "Computer Science",
+                    team: "Mobile Application",
+                    active: "Fall 2020",
                     work: "The mobile application",
                     liked: "Working with AWS, learning the quirks of React Native, learning more about astronomy"
                 },
@@ -37,6 +42,12 @@ export default {
                     major: "Computer Sciennce",
                     work: "Control Room",
                     liked: "Control Room"
+                },
+                {
+                    name: "Anthony Beddia",
+                    major: "Computer Sciennce",
+                    work: "I really enjoyed working on the celestial body and horizon check implementation.",
+                    liked: " I think the most interesting part of the project was getting to work in a real world environment with actual clients."
                 },
                 {
                     name: "Chris Garrety",
@@ -57,6 +68,12 @@ export default {
                     liked: "Learning Vue.js, Node.js and working on a large team."
                 },
                 {
+                    name: "Dan Palmieri",
+                    major: "Computer Science",
+                    work: "I would say my favorite part was working on autonomous scripts like Snow Dump & Custom Orientation Movement.",
+                    liked: "An interesting part was learning about JSON to write the config file & script for the control room to run specific telescopes from the database."
+                },
+                {
                     name: "Darin Gordon",
                     major: "_",
                     work: "_",
@@ -67,6 +84,12 @@ export default {
                     major: "Computer Science",
                     work: "Liked playing with the scale model Radio Telescope",
                     liked: "being able to work on a great project with amazing people"
+                },
+                {
+                    name: "David McHugh",
+                    major: "Computer Science",
+                    work: "It's been a great experience being able to work on this team of talented programmers. I loved working on the control room but most specifically implementing the sensor network features.",
+                    liked: "It was really interesting learning how much work all teams need to put in for the simplest task to become a feature."
                 },
                 {
                     name: "Derek McClellan",
@@ -157,6 +180,12 @@ export default {
                     major: "_",
                     work: "_",
                     liked: "_"
+                },
+                {
+                    name: "Jonathan Steck",
+                    major: "Computer Science",
+                    work: "What I liked the most about working on the radio telescope project was being given the chance to work on something I've never worked on before. Before I joined the team I had zero knowledge about C# or Unity, but despite that I was given the opportunity to learn about these things and contribute to the project while I did.",
+                    liked: "Being able to work on something for a massive project that you have zero experience in isn't something you'd expect to have happen out in the real world, but here at York College I was given that opportunity to prove myself, and I believe that the opportunity to self-teach how to work on a complex project like this will be greatly beneficial going forward."
                 },
                 {
                     name: "Joseph Hopkins",
@@ -271,6 +300,12 @@ export default {
                     major: "Computer Engineering",
                     work: "Liked working on the control room software",
                     liked: "the interdisciplinary coordination"
+                },
+                {
+                    name: "Vincent Maresca",
+                    major: "Computer Science",
+                    work: "Back-end",
+                    liked: "I enjoyed learning how all of the parts would work together and getting to know how to use Postman."
                 },
                 {
                     name: "William Taylor",

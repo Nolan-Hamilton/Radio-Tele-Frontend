@@ -136,8 +136,11 @@ export default {
                 this.items.push({ title: 'Future Appointments', path: '/users/' + this.$store.state.currentUserId + '/appointments/future' })
             }
             
-            // On clicking the drawer, check if the user is an Admin
-            if(this.$store.state.isAdmin && this.items.length < 6){
+            // On clicking the drawer, check if the user is an Admin or Alumni
+            // if(this.$store.state.isAdmin && this.items.length < 6){
+            //     this.items.push({ title: 'Administration', path: '/admin' })
+            // }
+            if(this.items.length < 6){
                 this.items.push({ title: 'Administration', path: '/admin' })
             }
         },

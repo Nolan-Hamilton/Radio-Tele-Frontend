@@ -211,7 +211,7 @@ import CustomErrorHandler from "../../utils/CustomErrorHandler";
             passMatch: val => val === this.form.password.value || 'Passwords must match',
             emailMatch: val => val === this.form.email.value || 'Emails do not match'
         },
-        accountTypes: ['Guest', 'Member', 'Student', 'Researcher'],
+        accountTypes: ['Guest', 'Member', 'Student', 'Researcher', 'Alumni'],
         conditions: false,
         show1: false,
         show2: false,

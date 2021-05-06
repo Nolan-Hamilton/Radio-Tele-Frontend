@@ -44,7 +44,7 @@
                   </div>
                 </v-card>
                 
-              <v-container grid text-xs-center>
+              <!-- <v-container grid text-xs-center>
                 <v-layout row>
                     <v-flex>
                       <v-card dark class="ma-1 pa-2" hover="true" ripple="true" max-width="600px">
@@ -160,7 +160,7 @@
                     </v-card-text>
                   </v-card>
                 </div>
-              </v-container>
+              </v-container> -->
 
               </div>
             </v-card-title>

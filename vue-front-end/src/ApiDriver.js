@@ -202,7 +202,7 @@ export default {
     FrontpagePictures: {
       namespace: baseUrl + "frontpage-picture",
       approvePicture: function(frontpagePictureId, isApprove) {
-        return axios.post(this.namespace + "/" + frontpagePictureId + "/" + isApprove, {}, Headers.retrieveHeaders())
+        return axios.post(this.namespace + "/" + frontpagePictureId + "?isApprove=" + isApprove, {}, Headers.retrieveHeaders())
       },
       retrieveAll: function() {
         return axios.get(this.namespace + "/" + "list", Headers.retrieveHeaders())
@@ -211,7 +211,7 @@ export default {
         return axios.get(this.namespace + "/" + "listApproved", Headers.retrieveHeaders())
       },
       submit: function(file, pictureTitle, pictureUrl, description) {
-        return axios.post(this.namespace + "/" + file + "/" + pictureTitle + "/" + pictureUrl + "/" + description, {}, Headers.retrieveHeaders())
+        return axios.post(this.namespace + "/" + file + "?pictureTitle=" + pictureTitle + "?pictureUrl=" + pictureUrl + "?description=" + description, {}, Headers.retrieveHeaders())
       }
     },
     WeatherData: {

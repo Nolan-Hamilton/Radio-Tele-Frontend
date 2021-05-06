@@ -166,25 +166,26 @@ export default {
                 {header: 'Company'},
                 {header: 'Role'}
             ],
-             accountTypes: ['Guest', 'Member', 'Student', 'Researcher'],
+             accountTypes: ['Guest', 'Member', 'Student', 'Researcher', 'Alumni'],
         }
     },
     methods:{
         submit(){
-            let form = JSON.stringify({
-               id: this.form.roleId.value,
-               role: this.form.assignedRole.value.toUpperCase()
-            });
-            ApiDriver.User.approve(form).then((response) => {
-            }).catch(errors => {
-            })
-            for (var index in this.users) {
-                var user = this.users[index];
-                if (user.id === this.form.roleId.value) {
-                    this.users.splice(index, 1)
+            //if (this.authenticate()) {
+                let form = JSON.stringify({
+                id: this.form.roleId.value,
+                role: this.form.assignedRole.value.toUpperCase()
+                });
+                ApiDriver.User.approve(form).then((response) => {
+                }).catch(errors => {
+                })
+                for (var index in this.users) {
+                    var user = this.users[index];
+                    if (user.id === this.form.roleId.value) {
+                        this.users.splice(index, 1)
+                    }
                 }
-            }
-            
+            //}
         },
         getUnapprovedUsers(){
             ApiDriver.User.unapproved(this.pageNumber, this.pageSize).then((response) => {
@@ -217,7 +218,17 @@ export default {
             this.userStatus = user.userInfo.status 
             this.userRequestedRole =user.role.charAt(0) + user.role.slice(1).toLowerCase()
             this.form.roleId.value = user.id
-        }
+        },
+    //     authenticate() {
+    //     ApiDriver.Auth.Admin().then(response => {
+    //       HttpResponse.then(response, data => {
+    //         this.$store.commit("login", data.data);
+    //       }, (status, errors) => {
+    //         let message = "You must be an admin to change this data.";
+    //         HttpResponse.generalError(this, message, true)
+    //       })
+    //     })
+    //   }
     },
     mounted: function(){
         this.getUnapprovedUsers();

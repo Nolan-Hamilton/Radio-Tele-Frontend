@@ -13,7 +13,7 @@
                 </v-card>
                 <v-container grid text-xs-center v-if="approvedPicturesRetrieved">
                   <div v-for="approvedFrontpagePicture in approvedFrontpagePictures" :key="approvedFrontpagePicture.id">
-                    <v-card dark class="ma-1 pa-2" hover="true" ripple="true" max-width="600px">
+                    <v-card dark class="ma-1 pa-2" max-width="600px">
                       <v-img height="500px" :src="approvedFrontpagePicture.pictureUrl" contain="true"></v-img>
                       <v-card-text class="grey--text">
                         Title: {{ approvedFrontpagePicture.pictureTitle }}

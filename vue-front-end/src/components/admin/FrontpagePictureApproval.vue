@@ -33,6 +33,12 @@
                               <v-divider></v-divider>
                               <input type="file" accept="image/*" @change="fileSelected" id="file-input">
                               <v-divider></v-divider>
+                              <input v-model="pictureTitle" placeholder="Enter the picture title">
+                              <v-divider></v-divider>
+                              <input v-model="pictureUrl" placeholder="Enter the picture url">
+                              <v-divider></v-divider>
+                              <input v-model="description" placeholder="Enter the picture description">
+                              <v-divider></v-divider>
                               <div v-if="selectedFile == null">
                                   <v-card-text> Please Select A File! </v-card-text>
                               </div>
@@ -55,7 +61,7 @@
 
                 <v-container grid text-xs-center v-if="approvedPicturesRetrieved">
                   <div v-for="approvedFrontpagePicture in approvedFrontpagePictures" :key="approvedFrontpagePicture.id">
-                    <v-card dark class="ma-1 pa-2" hover="true" ripple="true" max-width="600px">
+                    <v-card dark class="ma-1 pa-2" max-width="600px">
                       <v-img height="500px" :src="approvedFrontpagePicture.pictureUrl" contain="true"></v-img>
                       <v-card-text class="grey--text">
                         Title: {{ approvedFrontpagePicture.pictureTitle }}
@@ -66,7 +72,7 @@
                       </v-card-text>
                       <v-card-actions>
                           <v-spacer></v-spacer>
-                          <v-btn color="red" @click="approveFrontpagePicture(frontpagePicture.id, false);">Remove</v-btn>
+                          <v-btn color="red" @click="approveFrontpagePicture(frontpagePicture.id, 0);">Remove</v-btn>
                       </v-card-actions>
                     </v-card>
                   </div>
@@ -80,7 +86,7 @@
 
                 <v-container grid text-xs-center v-if="picturesRetrieved">
                   <div v-for="frontpagePicture in frontpagePictures" :key="frontpagePicture.id">
-                    <v-card v-if="frontpagePicture.approved == 0" dark class="ma-1 pa-2" hover="true" ripple="true" max-width="600px">
+                    <v-card v-if="frontpagePicture.approved == 0" dark class="ma-1 pa-2" max-width="600px">
                       <v-img height="500px" :src="frontpagePicture.pictureUrl" contain="true"></v-img>
                       <v-card-text class="grey--text">
                         Title: {{ frontpagePicture.pictureTitle }}
@@ -91,7 +97,7 @@
                       </v-card-text>
                       <v-card-actions>
                           <v-spacer></v-spacer>
-                          <v-btn color="green" @click="approveFrontpagePicture(frontpagePicture.id, true);">Approve</v-btn>
+                          <v-btn color="green" @click="approveFrontpagePicture(frontpagePicture.id, 1);">Approve</v-btn>
                       </v-card-actions>
                     </v-card>
                   </div>
@@ -135,6 +141,9 @@ export default {
       selectedFile: null,
       submittedPicture: null,
       imgSrc: null,
+      pictureTitle: null,
+      pictureUrl: null, 
+      description: null,
 
       // imported data
       dbData: [
@@ -162,7 +171,7 @@ export default {
                 if (parseInt(status) === 403) {
                     // Call the generic access denied handler
                     HttpResponse.accessDenied(this);
-                    console.log("access denied");
+                    console.log("access denied.");
                 } 
                 // Not Found
                 else if (parseInt(status) === 404) {
@@ -288,7 +297,7 @@ export default {
                 // console.log(this.profilePicture);
                 // console.log(fd);
 
-                ApiDriver.FrontpagePictures.submit(this.submittedPicture).then(response => {
+                ApiDriver.FrontpagePictures.submit(this.submittedPicture, pictureTitle, pictureUrl, description).then(response => {
                     // Handle the response
                     HttpResponse.then(response, data => {
                         // Success alert

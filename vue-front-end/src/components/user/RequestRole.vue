@@ -47,7 +47,8 @@ export default {
             roles: [
                 "Member",
                 "Student",
-                "Researcher"
+                "Researcher",
+                "Alumni"
             ]
         }
     },
