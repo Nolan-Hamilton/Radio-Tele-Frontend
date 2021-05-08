@@ -10,8 +10,8 @@
 
         <v-container fluid grid-list-lg>
             <v-layout align-center wrap>
-                <v-flex xs6 v-for="dev in devInfo" :key="dev.id">
-                    <v-card justify-center>
+                <v-flex xs2 v-for="dev in devInfo" :key="dev.id">
+                    <v-card justify-center height="100%">
                         <v-card-title class="headline font-weight-bold">{{dev.name}}</v-card-title>
                         <v-divider></v-divider>
                         <v-card>

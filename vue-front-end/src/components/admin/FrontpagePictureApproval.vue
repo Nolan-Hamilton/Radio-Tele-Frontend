@@ -1,13 +1,13 @@
 <template>
   <div>
 
-    <v-card>
+    <v-card class="ma-1 pa-2">
       <v-card-title style="padding: 15px;" class="justify-center headline">
           Here you can submit new frontpage and gallery pictures
       </v-card-title>
     </v-card>
 
-    <v-card class = "elevation-0" color = "transparent">
+    <v-card style="padding: 15px;" class = "elevation-0" color = "transparent">
         <v-btn color="primary" @click="submitFrontpagePicture = true">Submit A Frontpage Picture</v-btn>
         <v-dialog v-model="submitFrontpagePicture" width="500">
           <v-card>
@@ -47,7 +47,7 @@
         </v-dialog>
     </v-card>
 
-    <v-card>
+    <v-card color="green darken-3" class="ma-1 pa-2">
       <v-card-title style="padding: 15px;" class="justify-center headline">
           These are the frontpage and gallery pictures that have been approved 
       </v-card-title>
@@ -55,7 +55,7 @@
 
     <v-container fluid grid-list-lg v-if="approvedPicturesRetrieved">
       <v-layout align-center wrap>
-          <v-flex xs6 v-for="approvedFrontpagePicture in approvedFrontpagePictures" :key="approvedFrontpagePicture.id">
+          <v-flex xs4 v-for="approvedFrontpagePicture in approvedFrontpagePictures" :key="approvedFrontpagePicture.id">
               <v-card dark class="ma-1 pa-2">
                 <v-img height="500px" :src="approvedFrontpagePicture.pictureUrl" contain="true"></v-img>
                 <v-card-text class="grey--text">
@@ -67,22 +67,22 @@
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn color="red" @click="approveFrontpagePicture(frontpagePicture.id, 0);">Remove</v-btn>
+                  <v-btn color="red darken-3" @click="approveFrontpagePicture(frontpagePicture.id, 0);">Remove</v-btn>
                 </v-card-actions>
               </v-card>
           </v-flex>
       </v-layout>
     </v-container>
 
-    <v-card>
+    <v-card color="red darken-3" class="ma-1 pa-2">
       <v-card-title style="padding: 15px;" class="justify-center headline">
-          These are the frontpage and gallery pictures that have no yet been approved 
+          These are the frontpage and gallery pictures that have not yet been approved 
       </v-card-title>
     </v-card>
 
     <v-container fluid grid-list-lg v-if="picturesRetrieved">
       <v-layout align-center wrap>
-          <v-flex xs6 v-for="frontpagePicture in frontpagePictures" :key="frontpagePicture.id">
+          <v-flex xs4 v-for="frontpagePicture in frontpagePictures" :key="frontpagePicture.id">
               <v-card v-if="frontpagePicture.approved == 0" dark class="ma-1 pa-2">
                 <v-img height="500px" :src="frontpagePicture.pictureUrl" contain="true"></v-img>
                 <v-card-text class="grey--text">
@@ -94,7 +94,7 @@
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn color="green" @click="approveFrontpagePicture(frontpagePicture.id, 1);">Appove</v-btn>
+                  <v-btn color="green darken-3" @click="approveFrontpagePicture(frontpagePicture.id, 1);">Approve</v-btn>
                 </v-card-actions>
               </v-card>
           </v-flex>

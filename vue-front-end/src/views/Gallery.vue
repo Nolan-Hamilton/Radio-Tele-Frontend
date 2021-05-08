@@ -2,7 +2,7 @@
   <div>
     <navigation-bar class="nav-style"></navigation-bar>
 
-    <v-card>
+    <v-card color="indigo darken-2">
       <v-card-title style="padding: 15px;" class="justify-center headline">
           Here are some pictures of various aspects of the radio telescope
       </v-card-title>
@@ -10,7 +10,7 @@
 
     <v-container fluid grid-list-lg v-if="approvedPicturesRetrieved">
       <v-layout align-center wrap>
-          <v-flex xs6 v-for="approvedFrontpagePicture in approvedFrontpagePictures" :key="approvedFrontpagePicture.id">
+          <v-flex xs4 v-for="approvedFrontpagePicture in approvedFrontpagePictures" :key="approvedFrontpagePicture.id">
               <v-card dark class="ma-1 pa-2">
                 <v-img height="500px" :src="approvedFrontpagePicture.pictureUrl" contain="true"></v-img>
                 <v-card-text class="grey--text">
