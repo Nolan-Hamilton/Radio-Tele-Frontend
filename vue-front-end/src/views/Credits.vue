@@ -2,7 +2,7 @@
     <v-app>
         <navigation-bar></navigation-bar>
        
-        <v-card >
+        <v-card>
             <v-card-title style="padding: 25px;" class="justify-center headline font-weight-bold">
                 Thanks to all of the members of the software and hardware teams that made this project a success.
             </v-card-title>
