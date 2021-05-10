@@ -314,7 +314,9 @@ export default {
         }
     },
     mounted: function(){
-        this.getUsers();
+        if (this.$store.state.isAdmin) {
+            this.getUsers();
+        }
     },
     components: {
         Loading,

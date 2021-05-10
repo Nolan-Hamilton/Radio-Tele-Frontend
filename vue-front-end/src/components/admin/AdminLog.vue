@@ -260,7 +260,9 @@ export default {
         
     },
     mounted: function(){
-        this.getLogs()
+        if (this.$store.state.isAdmin) {
+            this.getLogs()
+        }
     },
     components: {
         Loading

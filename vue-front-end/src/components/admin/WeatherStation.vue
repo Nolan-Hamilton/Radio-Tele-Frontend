@@ -275,7 +275,9 @@ export default {
     mounted: function(){
         this.selectedDataSet = 'Wind Speed';       // 'Wind Speed' is default
         this.selectedTimeScale = 'Past Week';       // 'Past Week' is default
-        this.retrieveData();                        // Populating without any valid data points results in dead graph
+        if (this.$store.state.isAdmin) {
+            this.retrieveData();                        // Populating without any valid data points results in dead graph
+        }
     },
     components: {
         Loading,

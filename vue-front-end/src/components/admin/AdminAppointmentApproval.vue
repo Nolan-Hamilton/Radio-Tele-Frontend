@@ -252,7 +252,9 @@ export default {
         },
     },
     mounted: function(){
-        this.getUnapprovedAppointments();
+        if (this.$store.state.isAdmin) {
+            this.getUnapprovedAppointments();
+        }
     },
     components: {
         Loading

@@ -461,8 +461,10 @@ export default {
         },
     },
     mounted: function(){
-        this.retrieveOverrides();       // Statuses are updated ofter override states are retrieved
-        this.getThresholds();
+        if (this.$store.state.isAdmin) {
+            this.retrieveOverrides();       // Statuses are updated ofter override states are retrieved
+            this.getThresholds();
+        }
     },
     //overrides and statuses need to be changed to persist on front end after page refresh
     beforeUpdate: function() {

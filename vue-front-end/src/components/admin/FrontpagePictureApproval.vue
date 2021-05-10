@@ -354,8 +354,10 @@ export default {
         },
   },
   created() {
+    if (this.$store.state.isAdmin) {
       this.retrieveFrontpagePictures();
       this.retrieveApprovedFrontpagePictures();
+    }
   },
   mounted() {
    

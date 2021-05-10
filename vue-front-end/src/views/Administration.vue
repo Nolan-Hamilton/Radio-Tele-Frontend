@@ -122,17 +122,34 @@ import Loading from "../components/utility/Loading";
         ],
         text: [
             'This is user management', 'This is logging', 'This is surveillance'
-        ]
+        ],
+        user_role: null,
       }
     },
     methods: {
+      authenticateAlumniOrAdmin() {
+        ApiDriver.Auth.User().then(response => {
+          HttpResponse.then(response, data => {
+            //console.log(data.data);
+            this.user_role = data.data.roles[1].authority;
+            console.log(this.user_role)
+            //if not admin or alumni deny access (change once their is backend alumni role instead of student)
+            if (this.user_role != "ROLE_ADMIN" && this.user_role != "ROLE_STUDENT") {
+              HttpResponse.accessDenied(this);
+            }
+            this.$store.commit("login", data.data);
+          }, (status, errors) => {
+            HttpResponse.accessDenied(this);
+          })                                                                                          
+        })
+      },
       authenticate() {
         ApiDriver.Auth.Admin().then(response => {
           HttpResponse.then(response, data => {
             this.$store.commit("login", data.data);
           }, (status, errors) => {
             HttpResponse.accessDenied(this);
-          })
+          })                                                                                          
         })
       }
     },
@@ -152,7 +169,8 @@ import Loading from "../components/utility/Loading";
 
     },
     mounted() {
-      this.authenticate()
+      //this.authenticate()
+      this.authenticateAlumniOrAdmin();
       this.$store.commit("updateInfo", {page: "Administration", info: "- User Management: On this page, individual user\n profiles can be viewed by clicking the account icon.\n Users can be banned with the gavel icon or unbanned\n with the lock icon.\n" + "\n" +
                                                                       "- Logging: On this page, all database transactions can\n be viewed with associated information. Click on an\n individual log in the table to get more detailed\n information.\n" + "\n" +
                                                                       "- User Approval: This page displays a list of users with\n unapproved roles. Upon clicking the approve button, a\n pop-up will appear that will allow you to select\n the role you wish to assign.\n" + "\n" +

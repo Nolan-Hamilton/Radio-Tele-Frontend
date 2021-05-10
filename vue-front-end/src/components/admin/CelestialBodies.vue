@@ -312,9 +312,11 @@ export default {
     }
   },
   mounted: function() {
-    this.getCelestialBodies();
+    if (this.$store.state.isAdmin) {
+      this.getCelestialBodies();
     //this.searchBodies();
     //this.create();
+    }
   },
   components: {
     Loading,

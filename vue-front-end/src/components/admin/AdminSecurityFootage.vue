@@ -167,7 +167,10 @@ export default {
         }
     },
     mounted: function(){
-        this.getVideos();   // Load video files on render
+        if (this.$store.state.isAdmin) {
+            this.getVideos();   // Load video files on render
+        }
+        
     },
     components: {
         Loading

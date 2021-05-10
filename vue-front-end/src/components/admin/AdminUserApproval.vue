@@ -231,7 +231,9 @@ export default {
     //   }
     },
     mounted: function(){
-        this.getUnapprovedUsers();
+        if (this.$store.state.isAdmin) {
+            this.getUnapprovedUsers();
+        }
     },
     components: {
         Loading
