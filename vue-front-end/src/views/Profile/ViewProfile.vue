@@ -588,12 +588,14 @@ export default {
                 console.log("picture submitted");
 
                 //API to put profile picture in back end
-                // var fd = new FormData();
-                // fd.append("profile_picture", this.profilePicture, this.profilePicture.name);
-                // console.log(this.profilePicture);
-                // console.log(fd);
+                var formData = new FormData();
+                formData.append("file", this.profilePicture, this.profilePicture.name);
+                console.log(this.profilePicture);
+                for(var pair of formData.entries()) {
+                  console.log(pair[0]+ ', '+ pair[1]); 
+                }
 
-                ApiDriver.User.submitProfilePicture(this.profile.id.value, this.profilePicture).then(response => {
+                ApiDriver.User.submitProfilePicture(this.profile.id.value, formData).then(response => {
                     // Handle the response
                     HttpResponse.then(response, data => {
                         // Success alert

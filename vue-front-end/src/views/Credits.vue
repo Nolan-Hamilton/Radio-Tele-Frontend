@@ -7,7 +7,6 @@
                 Thanks to all of the members of the software and hardware teams that made this project a success.
             </v-card-title>
         </v-card>
-
         <v-container fluid grid-list-lg>
             <v-layout align-center wrap>
                 <v-flex xs2 v-for="dev in devInfo" :key="dev.id">
@@ -15,16 +14,23 @@
                         <v-card-title class="headline font-weight-bold">{{dev.name}}</v-card-title>
                         <v-divider></v-divider>
                         <v-card>
-                            <div v-if="dev.pictureUrl == null">
+                            <div v-if="quintin">
                                 <v-avatar size = "150">
-                                    <img id="defaultPicture" class="pa-2" src="https://quintinherb.net/images/selfie.jpg" alt="Not found">
+                                    <img id="quintinPicture" class="pa-2" src="https://quintinherb.net/images/selfie.jpg" alt="Not found">
                                 </v-avatar> 
                             </div>
                             <div v-else>
-                                <v-avatar size = "150">
-                                    <img id="creditPicture" class="pa-2" :src="dev.pictureUrl" alt="Not found">
-                                </v-avatar> 
-                            </div>
+                                <div v-if="dev.pictureUrl == null">
+                                    <v-avatar size = "150">
+                                        <img id="defaultPicture" class="pa-2" src="https://toppng.com/uploads/preview/instagram-default-profile-picture-11562973083brycehrmyv.png" alt="Not found">
+                                    </v-avatar> 
+                                </div>    
+                                <div v-else>
+                                    <v-avatar size = "150">
+                                        <img id="creditPicture" class="pa-2" :src="dev.pictureUrl" alt="Not found">
+                                    </v-avatar> 
+                                </div>
+                            </div>  
                         </v-card>
                         <v-card>
                             <v-card-text class="align-left subheading font-weight-thin">Major: {{dev.major}}</v-card-text>
@@ -32,6 +38,9 @@
                             <v-card-text class="align-left subheading font-weight-thin">Active: {{dev.active}}</v-card-text>
                             <v-card-text class="align-left subheading font-weight-thin">What I enjoyed working on: {{dev.work}}</v-card-text>
                             <v-card-text class="align-left subheading font-weight-thin">One of the most interesting parts of the project was: {{dev.liked}}</v-card-text>
+                            <div v-if="dev.name == 'Quintin Herb'">
+                                <v-btn fab color="teal darken-3" @click="quintinAll();"><v-icon dark>coronavirus</v-icon></v-btn>
+                            </div>
                         </v-card>
                     </v-card>
                 </v-flex>
@@ -50,6 +59,7 @@ export default {
     },
     data() {
         return {
+            quintin: false,
             devInfo: [
                 {
                     name: "Alyssa McDevitt",
@@ -422,7 +432,7 @@ export default {
                 },
                 {
                     name: "Quintin Herb",
-                    pictureUrl: null,
+                    pictureUrl: "https://quintinherb.net/images/selfie.jpg",
                     major: "Computer Science",
                     team: "Back-End, Front-End",
                     active: "Spring 2020 - Fall 2020 - Spring 2021",
@@ -502,6 +512,11 @@ export default {
                     liked: "Getting to know and work with some really cool people"
                 },
             ]
+        }
+    },
+    methods: {
+        quintinAll() {
+            this.quintin = !this.quintin;
         }
     },
     mounted() {

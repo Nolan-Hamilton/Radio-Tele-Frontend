@@ -8,7 +8,7 @@
     </v-card>
 
     <v-card style="padding: 15px;" class = "elevation-0" color = "transparent">
-        <v-btn color="primary" @click="submitFrontpagePicture = true">Submit A Frontpage Picture</v-btn>
+        <v-btn block large color="primary" @click="submitFrontpagePicture = true">Submit A Frontpage Picture</v-btn>
         <v-dialog v-model="submitFrontpagePicture" width="500">
           <v-card>
             <v-card-title class="headline">Submit Frontpage Picture</v-card-title>
@@ -16,7 +16,7 @@
             <v-card class = "elevation-0" color = "transparent">
                 <div v-if="selectedFile == null">
                     <v-avatar size = "100">
-                        <img id="defaultPicture" src="https://icdn3.digitaltrends.com/image/50395182-infinite-space-background-with-silhouette-of-telescope.jpg?ver=1" alt="Default">
+                        <img id="defaultPicture" src=" " alt="Default">
                     </v-avatar>     
                 </div>
                 <div v-else>
@@ -28,11 +28,14 @@
             <v-divider></v-divider>
             <input type="file" accept="image/*" @change="fileSelected" id="file-input">
             <v-divider></v-divider>
-            <input v-model="pictureTitle" placeholder="Enter the picture title">
+            <label for="pictureTitle">Picture Title:</label>
+            <input type="text" v-model="pictureTitle" placeholder="Enter the picture title" id="pic-title">
             <v-divider></v-divider>
-            <input v-model="pictureUrl" placeholder="Enter the picture url">
+            <label type="text" for="pictureUrl">Picture Url:</label>
+            <input v-model="pictureUrl" placeholder="Enter the picture url" id="pic-url">
             <v-divider></v-divider>
-            <input v-model="description" placeholder="Enter the picture description">
+            <label type="text" for="pictureDescription">Picture Description:</label>
+            <input v-model="pictureDescription" placeholder="Enter the picture description" id="pic-desc">
             <v-divider></v-divider>
             <div v-if="selectedFile == null">
                 <v-card-text> Please Select A File! </v-card-text>
@@ -67,7 +70,7 @@
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn color="red darken-3" @click="approveFrontpagePicture(frontpagePicture.id, 0);">Remove</v-btn>
+                  <v-btn color="red darken-3" @click="approveFrontpagePicture(approvedFrontpagePicture.id, 0);">Remove</v-btn>
                 </v-card-actions>
               </v-card>
           </v-flex>
@@ -132,7 +135,7 @@ export default {
       imgSrc: null,
       pictureTitle: null,
       pictureUrl: null, 
-      description: null,
+      pictureDescription: null,
 
       // imported data
       dbData: [
@@ -264,16 +267,34 @@ export default {
             reader.readAsDataURL(this.selectedFile);
         },
         cancelPicture() {
+            //clear selected file and picture title, url, description
             this.selectedFile = null;
+            this.pictureTitle = null;
+            this.pictureUrl = null;
+            this.pictureDescription = null;
             this.submitFrontpagePicture = false; 
             //clear file input file
             document.getElementById("file-input").value = "";
             console.log("cancelled");
         },
         submitPicture() {
-            if (this.selectedFile == null) {
-                console.log("select a file");
+            
+            //if no picture is selected or picture title, url, or description is empty do not make API call
+            if (this.selectedFile == null || this.pictureTitle == null || this.pictureUrl == null || this.pictureDescription == null) {
+              if (this.selectedFile == null) {
+                console.log("A file is required");
+              }
+              if (this.pictureTitle == null) {
+                console.log("A picture title is required");
+              }
+              if (this.pictureUrl == null) {
+                console.log("A picture url is required");
+              }
+              if (this.pictureDescription == null) {
+                console.log("A picture description is required");
+              }
             }
+            //otherwise make API call
             else {
                 
                 this.submittedPicture = this.selectedFile;
@@ -281,12 +302,16 @@ export default {
                 console.log("picture submitted");
 
                 //API to put profile picture in back end
-                // var fd = new FormData();
-                // fd.append("profile_picture", this.profilePicture, this.profilePicture.name);
-                // console.log(this.profilePicture);
-                // console.log(fd);
+                var formData = new FormData();
+                formData.append("file", this.submittedPicture);
+                console.log(this.submittedPicture);
+                for(var pair of formData.entries()) {
+                  console.log(pair[0]+ ', '+ pair[1]); 
+                }
 
-                ApiDriver.FrontpagePictures.submit(this.submittedPicture, pictureTitle, pictureUrl, description).then(response => {
+                //console.log(this.pictureUrl);
+
+                ApiDriver.FrontpagePictures.submit(this.pictureTitle, this.pictureUrl, this.pictureDescription, formData).then(response => {
                     // Handle the response
                     HttpResponse.then(response, data => {
                         // Success alert

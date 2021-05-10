@@ -210,8 +210,8 @@ export default {
       retrieveApproved: function() {
         return axios.get(this.namespace + "/" + "listApproved", Headers.retrieveHeaders())
       },
-      submit: function(file, pictureTitle, pictureUrl, description) {
-        return axios.post(this.namespace + "/" + file + "?pictureTitle=" + pictureTitle + "?pictureUrl=" + pictureUrl + "?description=" + description, {}, Headers.retrieveHeaders())
+      submit: function(pictureTitle, pictureUrl, description, formData) {
+        return axios.post(this.namespace + "?pictureTitle=" + pictureTitle + "&pictureUrl=" + pictureUrl + "&description=" + description, formData, {}, Headers.retrieveHeaders())
       }
     },
     WeatherData: {
