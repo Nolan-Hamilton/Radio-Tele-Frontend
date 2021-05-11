@@ -279,38 +279,44 @@ export default {
             }
         },
         approveOrDenyProfilePicture(userId, isApprove){
-            ApiDriver.User.approveOrDenyProfilePicture(userId, isApprove).then((response) => {
-                if(response.status === 200){
-                    for(var i in this.users){
-                        if(this.users[i].id === userId){
-                            this.users[i].profilePictureApproved = isApprove
+            if (this.$store.state.isAdmin) {
+                ApiDriver.User.approveOrDenyProfilePicture(userId, isApprove).then((response) => {
+                    if(response.status === 200){
+                        for(var i in this.users){
+                            if(this.users[i].id === userId){
+                                this.users[i].profilePictureApproved = isApprove
+                            }
                         }
                     }
-                }
-                router.push("/admin");
-            })
+                    router.push("/admin");
+                })
+            }
         },
         banUser(userId, message){
-            ApiDriver.User.ban(userId, message).then((response) => {
-                if(response.status === 200){
-                    for(var i in this.users){
-                        if(this.users[i].id === userId){
-                            this.users[i].status = "Banned"
+            if (this.$store.state.isAdmin) {
+                ApiDriver.User.ban(userId, message).then((response) => {
+                    if(response.status === 200){
+                        for(var i in this.users){
+                            if(this.users[i].id === userId){
+                                this.users[i].status = "Banned"
+                            }
                         }
                     }
-                }
-            })
+                })
+            }
         },
         unbanUser(userId){
-            ApiDriver.User.unban(userId).then((response) => {
-                if(response.status === 200){
-                    for(var i in this.users){
-                        if(this.users[i].id === userId){
-                            this.users[i].status = "Active"
+            if (this.$store.state.isAdmin) {
+                ApiDriver.User.unban(userId).then((response) => {
+                    if(response.status === 200){
+                        for(var i in this.users){
+                            if(this.users[i].id === userId){
+                                this.users[i].status = "Active"
+                            }
                         }
                     }
-                }
-            })
+                })
+            }
         }
     },
     mounted: function(){

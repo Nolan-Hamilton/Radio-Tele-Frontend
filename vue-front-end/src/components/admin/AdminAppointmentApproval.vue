@@ -200,7 +200,7 @@ export default {
                 {header: 'Company'},
                 {header: 'Role'}
             ],
-             accountTypes: ['Guest', 'Member', 'Student', 'Researcher'],
+             accountTypes: ['Guest', 'Member', 'Student', 'Researcher', 'Alumni'],
         }
     },
     methods:{
@@ -210,10 +210,12 @@ export default {
             });
             var isApprove = this.approved
             var aptId = this.id
-            ApiDriver.Appointment.approveRequest(aptId, isApprove).then((response) => {
+            if (this.$store.state.isAdmin) {
+                ApiDriver.Appointment.approveRequest(aptId, isApprove).then((response) => {
 
-            }).catch(errors => {
-            })
+                }).catch(errors => {
+                })
+            }
             for (var index in this.appointments) {
                 var appointment = this.appointments[index];
                 if (appointment.id === this.id) {

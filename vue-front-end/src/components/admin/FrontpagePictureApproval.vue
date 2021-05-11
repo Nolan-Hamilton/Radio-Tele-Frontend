@@ -221,33 +221,36 @@ export default {
         console.log(this.approvedFrontpagePictures);                                                                                                                                                     
       },
       approveFrontpagePicture(frontpagePictureId, isApprove) {
+        if (this.$store.state.isAdmin) {
           ApiDriver.FrontpagePictures.approvePicture(frontpagePictureId, isApprove).then((response) =>{
-                HttpResponse.then(response, (data) => {
-                        this.$swal({
-                        title: '<span style="color:#f0ead6">Successful Operation<span>',
-                        html: '<span style="color:#f0ead6">The frontpage picture has been approved or denied <span>',
-                        type: 'success',
-                        background: '#302f2f'
-                    });
-                    this.$emit('input');
-                }, (status, errors) => {
-                    if(parseInt(status)==403){
-                        HttpResponse.accessDenied(this)
-                    } else if(parseInt(status)==404){
-                        HttpResponse.notFound(this, errors)
-                    } else {
-                        for(var field in errors) {
-                            let message = errors[field][0]
-                        }
-                        HttpResponse.generalError(this, message, false)
-                    }
-                })
-            }).catch((error) => {
-            // Handle an erroneous API call
-                console.log(error)
-                let message = "An error occurred when attempting to approve or deny picture";
-                HttpResponse.generalError(this, message, true);
-            });
+              HttpResponse.then(response, (data) => {
+                      this.$swal({
+                      title: '<span style="color:#f0ead6">Successful Operation<span>',
+                      html: '<span style="color:#f0ead6">The frontpage picture has been approved or denied <span>',
+                      type: 'success',
+                      background: '#302f2f'
+                  });
+                  this.$emit('input');
+              }, (status, errors) => {
+                  if(parseInt(status)==403){
+                      HttpResponse.accessDenied(this)
+                  } else if(parseInt(status)==404){
+                      HttpResponse.notFound(this, errors)
+                  } else {
+                      for(var field in errors) {
+                          let message = errors[field][0]
+                      }
+                      HttpResponse.generalError(this, message, false)
+                  }
+              })
+          }).catch((error) => {
+          // Handle an erroneous API call
+              console.log(error)
+              let message = "An error occurred when attempting to approve or deny picture";
+              HttpResponse.generalError(this, message, true);
+          });
+        }
+          
 
             //this.retrieveOverrides();                                                           // Update the front-end
             console.log("Successfully approved or denied frontpage picture!")
@@ -311,7 +314,8 @@ export default {
 
                 //console.log(this.pictureUrl);
 
-                ApiDriver.FrontpagePictures.submit(this.pictureTitle, this.pictureUrl, this.pictureDescription, formData).then(response => {
+                if (this.$store.state.isAdmin) {
+                  ApiDriver.FrontpagePictures.submit(this.pictureTitle, this.pictureUrl, this.pictureDescription, formData).then(response => {
                     // Handle the response
                     HttpResponse.then(response, data => {
                         // Success alert
@@ -341,11 +345,12 @@ export default {
                             this.handleErrors(errors)
                         }
                     })
-                }).catch(errors => {
-                    // Handle an erroneous API call
-                    let message = "An error occurred while submitting a frontpage picture."
-                    HttpResponse.generalError(this, message, false)
-                });
+                  }).catch(errors => {
+                      // Handle an erroneous API call
+                      let message = "An error occurred while submitting a frontpage picture."
+                      HttpResponse.generalError(this, message, false)
+                  });
+                }
 
                 //clear file input file
                 document.getElementById("file-input").value = "";

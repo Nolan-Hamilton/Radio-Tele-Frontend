@@ -176,9 +176,11 @@ export default {
                 id: this.form.roleId.value,
                 role: this.form.assignedRole.value.toUpperCase()
                 });
-                ApiDriver.User.approve(form).then((response) => {
-                }).catch(errors => {
-                })
+                if (this.$store.state.isAdmin) {
+                    ApiDriver.User.approve(form).then((response) => {
+                    }).catch(errors => {
+                    })
+                }
                 for (var index in this.users) {
                     var user = this.users[index];
                     if (user.id === this.form.roleId.value) {

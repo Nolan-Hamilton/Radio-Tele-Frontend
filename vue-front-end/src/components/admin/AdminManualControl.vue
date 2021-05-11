@@ -349,14 +349,17 @@ export default {
         let data = {
           command: selectedCommand
         };
-        var call = ApiDriver.middlemanConnection(data);
-        call.then(response => {
-          console.log(response);
-          this.middlemanReply = response.data;
-        }).catch(error => {
-          console.log(error);
-          this.middlemanReply = "Something went wrong! Oh no!";
-        });
+
+        if (this.$store.state.isAdmin) {
+          var call = ApiDriver.middlemanConnection(data);
+          call.then(response => {
+            console.log(response);
+            this.middlemanReply = response.data;
+          }).catch(error => {
+            console.log(error);
+            this.middlemanReply = "Something went wrong! Oh no!";
+          });
+        }
       }
 
 

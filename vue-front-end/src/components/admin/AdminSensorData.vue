@@ -258,36 +258,38 @@ export default {
                 s = "WEATHER_STATION";
             }
 
-            ApiDriver.SensorOverrides.updateOverride(s, Boolean(sensor.override)).then((response) =>{
-                HttpResponse.then(response, (data) => {
-                        this.$swal({
-                        title: '<span style="color:#f0ead6">Sensor Overridden<span>',
-                        html: '<span style="color:#f0ead6">The sensor has been overridden <span>',
-                        type: 'success',
-                        background: '#302f2f'
-                    });
-                    this.$emit('input');
-                }, (status, errors) => {
-                    if(parseInt(status)==403){
-                        HttpResponse.accessDenied(this)
-                    } else if(parseInt(status)==404){
-                        HttpResponse.notFound(this, errors)
-                    } else {
-                        for(var field in errors) {
-                            let message = errors[field][0]
+            if (this.$store.state.isAdmin) {
+                ApiDriver.SensorOverrides.updateOverride(s, Boolean(sensor.override)).then((response) =>{
+                    HttpResponse.then(response, (data) => {
+                            this.$swal({
+                            title: '<span style="color:#f0ead6">Sensor Overridden<span>',
+                            html: '<span style="color:#f0ead6">The sensor has been overridden <span>',
+                            type: 'success',
+                            background: '#302f2f'
+                        });
+                        this.$emit('input');
+                    }, (status, errors) => {
+                        if(parseInt(status)==403){
+                            HttpResponse.accessDenied(this)
+                        } else if(parseInt(status)==404){
+                            HttpResponse.notFound(this, errors)
+                        } else {
+                            for(var field in errors) {
+                                let message = errors[field][0]
+                            }
+                            HttpResponse.generalError(this, message, false)
                         }
-                        HttpResponse.generalError(this, message, false)
-                    }
-                })
-            }).catch((error) => {
-            // Handle an erroneous API call
-                console.log(error)
-                let message = "An error occurred when loading this observation";
-                HttpResponse.generalError(this, message, true);
-            });
+                    })
+                }).catch((error) => {
+                // Handle an erroneous API call
+                    console.log(error)
+                    let message = "An error occurred when loading this observation";
+                    HttpResponse.generalError(this, message, true);
+                });
 
-            this.retrieveOverrides();
-            this.retrieveStatuses();                                                                 // Update the front-end
+                this.retrieveOverrides();
+                this.retrieveStatuses();                                                                 // Update the front-end
+            }
             console.log("Successfully retrieved new statuses for sensors!")
         },
         isOverride(val){
@@ -398,28 +400,30 @@ export default {
             }
         },
         setThreshold(thresholdName, thresholdValue) {
-            ApiDriver.Thresholds.updateThresholdByName(thresholdName, thresholdValue).then((response) =>{
-            HttpResponse.then(response, (data) => {
-                    this.$swal({
-                    title: '<span style="color:#f0ead6">Threshold Set<span>',
-                    html: '<span style="color:#f0ead6">The threshold has been updated with the new maximum <span>',
-                    type: 'success',
-                    background: '#302f2f'
-                });
-                this.$emit('input');
-            }, (status, errors) => {
-                if(parseInt(status)==403){
-                    HttpResponse.accessDenied(this)
-                } else if(parseInt(status)==404){
-                    HttpResponse.notFound(this, errors)
-                } else {
-                    for(var field in errors) {
-                        let message = errors[field][0]
+            if (this.$store.state.isAdmin) {
+                ApiDriver.Thresholds.updateThresholdByName(thresholdName, thresholdValue).then((response) =>{
+                HttpResponse.then(response, (data) => {
+                        this.$swal({
+                        title: '<span style="color:#f0ead6">Threshold Set<span>',
+                        html: '<span style="color:#f0ead6">The threshold has been updated with the new maximum <span>',
+                        type: 'success',
+                        background: '#302f2f'
+                    });
+                    this.$emit('input');
+                }, (status, errors) => {
+                    if(parseInt(status)==403){
+                        HttpResponse.accessDenied(this)
+                    } else if(parseInt(status)==404){
+                        HttpResponse.notFound(this, errors)
+                    } else {
+                        for(var field in errors) {
+                            let message = errors[field][0]
+                        }
+                        HttpResponse.generalError(this, message, false)
                     }
-                    HttpResponse.generalError(this, message, false)
-                }
-            })
-        })
+                })
+                })
+            }
         },
         submitThreshold(id, thresholdNumber){
             console.log("Threshold ID: " + id);
