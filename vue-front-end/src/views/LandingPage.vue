@@ -1,37 +1,30 @@
 <template>
 <div>
-    <v-img height="300px"  src="https://images.pexels.com/photos/110854/pexels-photo-110854.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
+    <v-img height="100px"  src="https://images.pexels.com/photos/110854/pexels-photo-110854.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
         <v-layout row>
           <v-flex>
-            <v-img height="300px" position="left" style="opacity:.25" src="http://www.astroyork.com/img/YCAS2018b.jpg" contain="true"></v-img>
+            <v-img height="200px" position="left" style="opacity:.25" src="http://www.astroyork.com/img/YCAS2018b.jpg" contain="true"></v-img>
           </v-flex>
           <v-flex>
-            <v-img height="300px" position="right" style="opacity:.25" src="http://www.astroyork.com/img/YCAS2018b.jpg" contain="true"></v-img>
+            <v-img height="500px" position="right" style="opacity:.25" src="http://www.astroyork.com/img/YCAS2018b.jpg" contain="true"></v-img>
           </v-flex>
         </v-layout>
     </v-img>
         <v-layout align-center>
             <v-card>
             <v-card-title primary-title>
-                <div style="padding: 25px;">
-                <div class="headline">Welcome to the York County Astronomical Society Radio Telescope!</div>
-                <v-card-text class="grey--text">The York County Astronomical Society, Inc, is a non-profit organization dedicated to the advancement of the science of astronomy.
-
-                The York County Astronomical Society was started in 1989, and currently has about 30 members in 4 counties in Pennsylvania.
-
-                The Society also has special programs to showcase eclipses, meteor showers, comets, and other special events.
-
-                The Society operates the York Learning Center Planetarium bringing astronomy to the public, presenting astronomical shows and related astronomy programs of the night sky.
-
-                The Society hosts numerous groups for private star parties, from Boy and Girl Scout troops, church groups, school classes, and company groups. We also hold two Introduction to Astronomy classes each year.
-
-                The Society owns 6 optical telescopes:
-
-                An 18” Dobsonian,
-                a 14” Dobsonian and a 12” Computerized GoTo Telescope,
-                a 10” SCT Telescope,
-                a 4.5” Newtonian Telescope,
-                and a 4” Astro-Physics Refractor Telescope
+                <div style="padding: 50px;">
+                <div class="headline">Welcome to my front end practice progress</div>
+                <v-card-text class="orange--text">THIS IS MY FRONT END PRACTICE
+                  THIS IS MY FRONT END PRACTICE
+                  THIS IS MY FRONT END PRACTICE
+                  THIS IS MY FRONT END PRACTICE
+                  THIS IS MY FRONT END PRACTICE
+                  THIS IS MY FRONT END PRACTICE
+                  THIS IS MY FRONT END PRACTICE
+                  THIS IS MY FRONT END PRACTICE
+                  THIS IS MY FRONT END PRACTICE
+                  THIS IS MY FRONT END PRACTICE
                 </v-card-text>
                 <v-card-text class="grey--text">
                   <!--  
@@ -62,7 +55,7 @@
                 </v-card-text>
 
                 <v-flex>
-                    <v-btn large block color="deep-purple" @click="submit">LOGIN</v-btn>
+                    <v-btn large block color="orange" @click="submit">LOGIN</v-btn>
                 </v-flex>
 
                 <v-card>
@@ -76,7 +69,7 @@
                     <v-flex>
                       <v-card dark class="ma-1 pa-2" hover="true" ripple="true" max-width="600px">
                           <v-img height="500px" src="http://www.astroyork.com/img/JS/9.jpg" contain="true"></v-img>
-                          <v-card-text class="grey--text">
+                          <v-card-text class="blue--text">
                            YCAS member Jim Smailing has taken some excellent pictures of the eclipsing Moon. 
                            These pictures were taken with the combination of a Motorola E5 plus cellphone, 
                            a Vankey cellphone telescope adapter mount, and an Orion ultrascopic 5mm eyepiece 
@@ -89,7 +82,7 @@
                     <v-flex>
                       <v-card dark class="ma-1 pa-2" hover="true" ripple="true" max-width="600px">
                           <v-img height="500px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSnIpIFMmJvFvQUv6wWmBCxdFFBVdC2SjBgR0lTJwFp-QJBi6Mr" contain="true"></v-img>
-                          <v-card-text class="grey--text">
+                          <v-card-text class="yellow--text">
                            This is a placeholder image. This is a placeholder image. This is a placeholder image.
                            This is a placeholder image. This is a placeholder image. This is a placeholder image.
                            This is a placeholder image. This is a placeholder image. This is a placeholder image.

@@ -12,24 +12,8 @@
   
           <v-card-title primary-title>
             <div style="padding: 25px;">
-              <div class="headline">Welcome to the York County Astronomical Society Radio Telescope!</div>
-              <v-card-text class="grey--text">The York County Astronomical Society, Inc, is a non-profit organization dedicated to the advancement of the science of astronomy.
-
-              The York County Astronomical Society was started in 1989, and currently has about 30 members in 4 counties in Pennsylvania.
-
-              The Society also has special programs to showcase eclipses, meteor showers, comets, and other special events.
-
-              The Society operates the York Learning Center Planetarium bringing astronomy to the public, presenting astronomical shows and related astronomy programs of the night sky.
-
-              The Society hosts numerous groups for private star parties, from Boy and Girl Scout troops, church groups, school classes, and company groups. We also hold two Introduction to Astronomy classes each year.
-
-              The Society owns 6 optical telescopes:
-
-              An 18” Dobsonian,
-              a 14” Dobsonian and a 12” Computerized GoTo Telescope,
-              a 10” SCT Telescope,
-              a 4.5” Newtonian Telescope,
-              and a 4” Astro-Physics Refractor Telescope
+              <div class="headline">Headline change test</div>
+              <v-card-text class="grey--text">Intro Paragraph Test Change
               </v-card-text>
             </div>
           </v-card-title>

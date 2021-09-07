@@ -8,6 +8,7 @@
       <v-icon dark class="help-style" @click="toggleInfo">help_outline</v-icon>
       <v-toolbar-items class="hidden-sm-and-down">
           <!-- New text links can be added to the navbar here, must be accompanied by a function with the router pushing to an appropriate url-->
+          <v-btn @click="testPage">Test</v-btn>
           <v-btn @click="credits">Credits</v-btn>
           <v-btn @click="contact">Contact Us</v-btn>
           <v-btn @click="viewProfile">Profile</v-btn>
@@ -84,6 +85,7 @@ export default {
               { title: 'Scheduling Calendar', icon: 'dashboard', path: '/scheduler' },
               { title: 'Search Appointments', path: '/appointments/search' },
               { title: 'Public Appointments', path: '/appointments/public' },
+              { title: 'Test Page', path: '/test'},
             ]
         }
     },
@@ -104,6 +106,9 @@ export default {
         },
         contact() {
             router.push('/contactus')
+        },
+        testPage() {
+            router.push('/test')
         },
         viewProfile() {
             router.push('/users/' + this.$store.state.currentUserId + '/view')

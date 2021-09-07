@@ -33,11 +33,11 @@ export default {
 
 #nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: #133c66;
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: #21925f;
 }
 
 .v-parallax {

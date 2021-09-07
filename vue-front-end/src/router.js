@@ -20,6 +20,7 @@ import PublicAppointments from './views/Appointment/PublicAppointments'
 import SearchAppointments from './views/Appointment/SearchAppointments'
 import Contact from './views/Contact'
 import Credits from './views/Credits'
+import Test from './views/Test'
 
 Vue.use(Router)
 
@@ -133,6 +134,11 @@ const router = new Router({
       path: '/credits',
       name: 'Credits',
       component: Credits
+    },
+    {
+      path: '/test',
+      name: 'Test',
+      component: Test
     }
   ]
 })
