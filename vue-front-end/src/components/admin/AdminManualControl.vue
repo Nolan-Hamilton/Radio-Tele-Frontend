@@ -103,36 +103,7 @@
                 <v-flex xs6 sm4>
                     <v-select v-model="selectedScript" :items="scripts" color="blue darken-2" label="Script" required></v-select>
                 </v-flex>
-            <v-card-actions>
-                <!-- Buttons to jog by Right Asc and Declination -->
-                <v-container>
-                  <v-btn flat @click="update(2)">Declination Pos</v-btn>
-                  <!-- J = up      -->
-                  <br />
-                  <v-btn flat @click="update(1)">Right Asc Neg</v-btn>
-                  <!-- H = left    -->
-                  <v-btn flat @click="update(3)">Declination Neg</v-btn>
-                  <!-- K = down    -->
-                  <v-btn flat @click="update(4)">Right Asc Pos</v-btn>
-                  <!-- L = right   -->
-                </v-container>
-
-                <v-spacer></v-spacer>
-
-                <!-- Buttons to jog by Azimuth and Elevation -->
-                <v-container>
-                  <v-btn flat @click="update(6)">Elevation Pos</v-btn>
-                  <!-- J = up      -->
-                  <br />
-                  <v-btn flat @click="update(5)">Azimuth Neg</v-btn>
-                  <!-- H = left    -->
-                  <v-btn flat @click="update(7)">Elevation Neg</v-btn>
-                  <!-- K = down    -->
-                  <v-btn flat @click="update(8)">Azimuth Pos</v-btn>
-                  <!-- L = right   -->
-                </v-container>
-            </v-card-actions>
-            <v-text-field
+              <v-text-field
                 v-model="middlemanReply"
                 :disabled="true"
                 :validate-on-blur="true"
@@ -321,29 +292,31 @@ export default {
             } else if(this.mode === "Azimuth and Elevation") {
               if(this.azimuth >= 0 && this.azimuth < 360 && this.elevation >= 0 && this.elevation <= 90) {
                 console.log("Valid Azimuth and Elavation Jog Move input! Submitting: " + this.azimuth + " " + this.elevation );
-                selectedCommand = "AZIMUTH " + this.azimuth + " ELEVATION " + this.elevation; // TODO: get final format
+                selectedCommand = "1.0|ORIENTATION_MOVE| AZ " + this.azimuth + "| EL " + this.elevation + "| TIME"; // TODO: get final format
+                ApiDriver.webSocket(selectedCommand);
               }            
             }
         } else if (val == 1) {
             // SCRIPTS
             if(this.selectedScript != null){
               if(this.selectedScript == "Stow") {
-                selectedCommand = "SCRIPT: STOW";
+                selectedCommand = "1.0 | SCRIPT | STOW | TIME";
               } else if (this.selectedScript == "Snow Dump") {
-                selectedCommand = "SCRIPT: DUMP";
+                selectedCommand = "1.0 | SCRIPT | DUMP | TIME";
               } else if (this.selectedScript == "Full Elevation Move") {
-                selectedCommand = "SCRIPT: FULL_EV";
+                selectedCommand = "1.0 | SCRIPT | FULL_EV | TIME";
               } else if (this.selectedScript == "Full 360 Move, Clockwise") {
-                selectedCommand = "SCRIPT: CLOCK";
+                selectedCommand = "1.0 | SCRIPT | FULL_CLOCK | TIME";
               } else if (this.selectedScript == "Full 360 Move, Counterclockwise") {
-                selectedCommand = "SCRIPT: COUNTER";
+                selectedCommand = "1.0 | SCRIPT | FULL_COUNTER | TIME";
               } else if (this.selectedScript == "Calibration") {
-                selectedCommand = "SCRIPT: CALIBRATE";
+                selectedCommand = "1.0 | SCRIPT | CALIBRATE | TIME";
               }
+              ApiDriver.webSocket(selectedCommand);
               console.log("Script Submit! submitting... " + this.selectedScript);
             }
         } else if (val == 2) {
-          selectedCommand = "STOP_RT";
+          selectedCommand = "1.0 | STOP_RT | TIME";
           console.log("STOP TELESCOPE! submitting... " + selectedCommand);
         }
         let data = {

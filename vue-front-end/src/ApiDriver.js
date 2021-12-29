@@ -223,5 +223,19 @@ export default {
     },
     middlemanConnection(data) {
       return axios.get("http://rtastronomicalapi-dev.us-east-2.elasticbeanstalk.com/MiddlemanConnection" + "?key="+SecretKey.getKey() + "&command=" + data.command);
+    },
+    webSocket(message){
+      // Create WebSocket connection.
+      const socket = new WebSocket('ws://localhost:2222');
+
+      // Connection opened
+      socket.addEventListener('open', function (event) {
+        socket.send(message);
+      });
+
+      // Listen for messages
+      socket.addEventListener('message', function (event) {
+        console.log('Message from server ', event.data);
+      });
     }
 }
